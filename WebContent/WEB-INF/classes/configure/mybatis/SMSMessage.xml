@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SMSMessage">
+
+	<insert id="insert" useGeneratedKeys="true"
+		parameterType="mm.aeon.com.ass.base.dto.smsRegister.SMSMessageInsertReqDto">
+		INSERT INTO SMS_INFO
+		<trim prefix="(" suffixOverrides="," suffix=")">
+			<if test="customerId != null">
+				CUSTOMER_ID,
+			</if>
+			<if test="messageContent != null and messageContent !=''">
+				MESSAGE_CONTENT,
+			</if>
+			<if test="category != null">
+				CATEOGRY,
+			</if>
+			<if test="sendTime != null">
+				SEND_TIME,
+			</if>
+			<if test="delFlag != null">
+				DEL_FLAG,
+			</if>
+			<if test="createdBy != null and createdBy != ''">
+				CREATED_BY,
+			</if>
+			<if test="createdTime != null">
+				CREATED_TIME,
+			</if>
+			<if test="updatedBy != null and updatedBy != ''">
+				UPDATED_BY,
+			</if>
+			<if test="updatedTime != null">
+				UPDATED_TIME,
+			</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffixOverrides="," suffix=")">
+			<if test="customerId != null">
+				#{customerId},
+			</if>
+			<if test="messageContent != null and messageContent !=''">
+				#{messageContent},
+			</if>
+			<if test="category != null">
+				#{category},
+			</if>
+			<if test="sendTime != null">
+				#{sendTime},
+			</if>
+			<if test="delFlag != null">
+				#{delFlag},
+			</if>
+			<if test="createdBy != null and createdBy != ''">
+				#{createdBy},
+			</if>
+			<if test="createdTime != null">
+				#{createdTime},
+			</if>
+			<if test="updatedBy != null and updatedBy != ''">
+				#{updatedBy},
+			</if>
+			<if test="updatedTime != null">
+				#{updatedTime},
+			</if>
+		</trim>
+	</insert>
+	
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.storeCount.CouopnSearchByStoreReqDto"
+		resultMap="couopnSearchByStoreResDto">
+		SELECT COUPON_INFO.DEL_FLAG FROM COUPON_INFO
+		INNER JOIN SHOP_COUPON 
+		ON COUPON_INFO.COUPON_ID = SHOP_COUPON.COUPON_ID 
+		<where>
+			<if test="shop_id != null and shop_id != ''">
+				SHOP_ID = #{shop_id}
+			</if>
+		</where>
+	</select>
+	
+	<resultMap id="couopnSearchByStoreResDto"
+		type="mm.aeon.com.ass.base.dto.storeCount.CouopnSearchByStoreResDto">
+		<result property="del_flag" column="DEL_FLAG" />
+	</resultMap>
+	
+</mapper>

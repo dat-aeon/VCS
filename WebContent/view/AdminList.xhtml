@@ -1,0 +1,124 @@
+<!--***********************************************************************
+ * $Date: 2018-06-20$
+ * $Author: Swe Hsu Mon $
+ * $Rev:  $
+ * 2018 AEON Microfinance (Myanmar) Company	Limited. All Rights Reserved.
+ ***********************************************************************-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:rich="http://richfaces.org/rich"
+	xmlns:pt="http://presto.dat.com/tag" template="/layout/template.xhtml">
+	<ui:define name="title">
+		<title><h:outputText value="#{displayItemBean.getDisplayItemName('adminList')}" /></title>
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="adminSearchform">
+			<p:defaultCommand target="searchButton" />
+			<div class="ui-fluid">
+				<div class="ui-g">
+					<div class="ui-g-12" style="color: #302873; font-size: 10pt; text-align: center;">
+						<H1>
+							<p:outputLabel value="#{displayItemBean.getDisplayItemName('adminList')}" />
+						</H1>
+					</div>
+				</div>
+				<!-- <div class="ui-g">
+					<div style="width: 930px;padding-left: 10px;" class="message-block">
+					</div>
+					<div>
+						<p:commandButton
+							value="#{displayItemBean.getDisplayItemName('createNewAdmin')}"
+							style="width:140px!important" ajax="false"
+							action="#{adminListFormBean.prepareRegister()}"
+							id="createNewButton" styleClass="button" />
+					</div>
+				</div> -->
+				<div class="ui-g">
+					<div class="ui-g-6">
+						<!-- <p:fieldset styleClass="import-fieldset"
+							legend="#{displayItemBean.getDisplayItemName('adminList')}"> -->
+						<p:panelGrid styleClass="status-panel-grid" style="margin-top: 0%;">
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:110px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('adminName')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:170px;">
+									<p:inputText id="adminName" style="width:100%;" value="#{adminListFormBean.searchHeaderBean.adminName}" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:110px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('loginId')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:170px;">
+									<p:inputText id="adminLoginId" style="width:100%;" value="#{adminListFormBean.searchHeaderBean.adminLoginId}" />
+								</p:column>
+							</p:row>
+							<p:row style="border: none;">
+								<p:column style="border: none;background:#f4f7fc;" colspan="2">
+									<p:commandButton id="searchButton" styleClass="button" value="#{displayItemBean.getDisplayItemName('search')}" style="margin: 3px 0px 0px -10px;" ajax="false"
+										action="#{adminListFormBean.search()}" />
+									<p:commandButton id="clearButton" styleClass="button" value="#{displayItemBean.getDisplayItemName('clear')}" style="margin: 3px 0px 0px 5px;" ajax="false"
+										action="#{adminListFormBean.reset()}" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+						<!-- <p:commandButton id="searchButton" styleClass="button"
+								value="#{displayItemBean.getDisplayItemName('search')}"
+								style="margin: 3px 0px 0px 10px;" ajax="false"
+								action="#{adminListFormBean.search()}" /> -->
+						<!-- </p:fieldset> -->
+					</div>
+					<div class="ui-g-6" style="text-align: right;">
+						<p:commandButton value="#{displayItemBean.getDisplayItemName('createNewAdmin')}" style="width:140px!important;height: 35px;" ajax="false"
+							action="#{adminListFormBean.prepareRegister()}" id="createNewButton" styleClass="button" />
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="space-block"></div>
+				</div>
+				<div class="ui-g">
+					<div style="padding-left: 10px;" class="message-block">
+						<pt:messages />
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="ui-g-12">
+						<f:view encoding="utf-8">
+							<p:dataTable var="lineBean" first="#{adminListFormBean.pageFirst}" value="#{adminListFormBean.lazyModel}" rows="50" lazy="true" paginator="true" rowIndexVar="rowIndex"
+								paginatorPosition="both" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="50,100" styleClass="resultTable" id="adminResultTable">
+								<p:column style="width:20px" styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('no')}">
+									<h:outputText value="#{rowIndex+1}" />
+								</p:column>
+								<p:column style="width:300px" sortBy="#{lineBean.adminName}" headerText="#{displayItemBean.getDisplayItemName('name')}">
+									<h:outputText value="#{lineBean.adminName}" />
+								</p:column>
+								<p:column style="width:300px" sortBy="#{lineBean.adminLoginId}" headerText="#{displayItemBean.getDisplayItemName('loginId')}">
+									<h:outputText value="#{lineBean.adminLoginId}" />
+								</p:column>
+								<p:column id="actions" styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('operation')}" style="width:100px">
+									<p:commandLink id="update" styleClass="management-link" action="#{adminListFormBean.prepareUpdate(lineBean)}" value="#{displayItemBean.getDisplayItemName('update')}" />
+									<p:commandLink id="delete" action="#{adminListFormBean.delete()}" update="adminResultTable" styleClass="management-link"
+										value="#{displayItemBean.getDisplayItemName('delete')}">
+										<p:confirm header="Confirmation" message="Are you sure to delete?" icon="ui-icon-alert" />
+										<f:setPropertyActionListener value="#{lineBean}" target="#{adminListFormBean.lineBean}" />
+									</p:commandLink>
+								</p:column>
+							</p:dataTable>
+						</f:view>
+					</div>
+				</div>
+			</div>
+		</h:form>
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="confirmBox" closable="false" style="background-color:#302873">
+			<div class="ui-g-12">
+				<div class="ui-g-6">
+					<p:commandButton value="Yes" styleClass="ui-confirmdialog-yes button" icon="ui-icon-check" />
+				</div>
+				<div class="ui-g-6">
+					<p:commandButton value="No" styleClass="ui-confirmdialog-no button" icon="ui-icon-close" />
+				</div>
+			</div>
+		</p:confirmDialog>
+	</ui:define>
+</ui:composition>

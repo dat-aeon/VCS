@@ -1,0 +1,44 @@
+@charset "utf-8";
+
+.info_message {
+	color: blue;
+	font-size: 13pt;
+	font-weight: bold;
+	font-family: "Calibri";
+	display: inline;
+	word-wrap: break-word;
+	/* white-space: pre-wrap; */
+}
+
+.warn_message {
+	color: orange;
+	font-size: 13pt;
+	font-weight: bold;
+	font-family: "Calibri";
+	display: inline;
+	word-wrap: break-word;
+	white-space: pre-wrap;
+}
+
+.error_message {
+	color: red;
+	font-size: 13pt;
+	font-weight: bold;
+	font-family: "Calibri";
+	display: inline;
+	word-wrap: break-word;
+	white-space: pre-wrap;
+}
+
+.info_message_backcolor {
+	background-color: #B0E2FF !important;
+}
+
+.warn_message_backcolor {
+	background-color: #FFD700 !important;
+}
+
+.error_message_backcolor {
+	background-image: none !important;
+	background-color: #FFC0CB !important;
+}

@@ -1,0 +1,129 @@
+<!--***********************************************************************
+ * $Date: 2018-06-20$
+ * $Author: Swe Hsu Mon $
+ * $Rev:  $
+ * 2018 AEON Microfinance (Myanmar) Company	Limited. All Rights Reserved.
+ ***********************************************************************-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:rich="http://richfaces.org/rich"
+	xmlns:pt="http://presto.dat.com/tag" template="/layout/template.xhtml">
+	<ui:define name="title">
+		<title><h:outputText value="#{displayItemBean.getDisplayItemName('companyInfo')}" /></title>
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="companyInfoSearchform">
+			<div class="ui-fluid">
+				<div class="ui-g">
+					<div class="ui-g-12" style="color: #302873; font-size: 10pt; text-align: center;">
+						<H1>
+							<p:outputLabel value="#{displayItemBean.getDisplayItemName('abtComInfo')}" />
+						</H1>
+					</div>
+				</div>
+			</div>
+			<div class="ui-fluid">
+				<div class="ui-g" style="padding-left: 25%;">
+					<div class="ui-g-12" style="width: 700px !important;">
+						<!-- <p:fieldset styleClass="import-fieldset"
+							style="width: 700px !important;"
+							legend="#{displayItemBean.getDisplayItemName('abtComInfo')}"> -->
+						<span class="message-style">
+							<pt:messages />
+						</span>
+						<p:panelGrid styleClass="status-panel-grid" style="margin-top: 0%;">
+							<p:row>
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:250px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('addressMyanmar')}" />
+									<h:outputText styleClass="star" value=" *" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:400px;">
+									<p:inputTextarea id="addressMyanmar" style="width:100%;" value="#{companyInfoManagementFormBean.companyInfoBean.address_mya}"
+										placeholder="#{displayItemBean.getDisplayItemName('address')}" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:250px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('addressEnglish')}" />
+									<h:outputText styleClass="star" value=" *" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:400px;">
+									<p:inputTextarea id="addressEnglish" style="width:100%;" value="#{companyInfoManagementFormBean.companyInfoBean.address_eng}"
+										placeholder="#{displayItemBean.getDisplayItemName('address')}" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:250px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('hotLine')}" />
+									<h:outputText styleClass="star" value=" *" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:400px;">
+									<p:inputText id="phoneNo" style="width:100%;" value="#{companyInfoManagementFormBean.companyInfoBean.hotLine}" maxlength="13">
+									</p:inputText>
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:250px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('webAddress')}" />
+									<h:outputText styleClass="star" value=" *" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:400px;">
+									<p:inputText id="webAddress" style="width:100%;" value="#{companyInfoManagementFormBean.companyInfoBean.webAddress}"
+										placeholder="#{displayItemBean.getDisplayItemName('webAddress')}" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:250px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('socialMedia')}" />
+									<h:outputText styleClass="star" value=" *" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:400px;">
+									<p:inputText id="socialMedia" style="width:100%;" value="#{companyInfoManagementFormBean.companyInfoBean.socialMedia}"
+										placeholder="#{displayItemBean.getDisplayItemName('socialMedia')}" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:250px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('descriptionMyanmar')}" />
+									<h:outputText styleClass="star" value=" *" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:400px;">
+									<p:inputTextarea id="descriptionMyanmar" maxlength="1499" value="#{companyInfoManagementFormBean.companyInfoBean.aboutCompanyMya}"
+										placeholder="#{displayItemBean.getDisplayItemName('descriptionMyanmar')}" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:250px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('descriptionEnglish')}" />
+									<h:outputText styleClass="star" value=" *" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:400px;">
+									<p:inputTextarea id="descriptionEnglish" maxlength="1499" value="#{companyInfoManagementFormBean.companyInfoBean.aboutCompanyEng}"
+										placeholder="#{displayItemBean.getDisplayItemName('descriptionEnglish')}" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:250px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('chatAutoReplyMessage')}" />
+									<h:outputText styleClass="star" value=" *" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:400px;">
+									<p:inputTextarea id="chatAutoReplyMessage" maxlength="1499" value="#{companyInfoManagementFormBean.companyInfoBean.chatAutoReplyMessage}"
+										placeholder="#{displayItemBean.getDisplayItemName('chatAutoReplyMessage')}" />
+								</p:column>
+							</p:row>
+							<p:row style="border:0px">
+								<p:column style="width:45%;background:#f4f7fc;border:0px;padding-left:0%;">
+									<p:commandButton value="#{displayItemBean.getDisplayItemName('update')}" action="#{companyInfoManagementFormBean.update()}" id="actionButton" style="margin-top: 2%;"
+										ajax="false" styleClass="button" update="appSettingform" />
+									<p:commandButton value="#{displayItemBean.getDisplayItemName('reset')}" action="#{companyInfoManagementFormBean.reset()}" id="resetButton" style="margin-top: 2%;"
+										ajax="false" styleClass="button" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+						<!-- </p:fieldset> -->
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

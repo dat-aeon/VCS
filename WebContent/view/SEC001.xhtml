@@ -1,0 +1,77 @@
+
+<!--***********************************************************************
+ * $Date: 2018-06-20$
+ * $Author: Swe Hsu Mon $
+ * $Rev:  $
+ * 2018 AEON Microfinance (Myanmar) Company	Limited. All Rights Reserved.
+ ***********************************************************************-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:rich="http://richfaces.org/rich"
+	xmlns:pt="http://presto.dat.com/tag" template="/layout/template.xhtml">
+	<ui:define name="title">
+		<title><h:outputText value="#{displayItemBean.getDisplayItemName('securityList')}" /></title>
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="securitySearchform">
+			<div class="ui-fluid">
+				<div class="ui-g">
+					<div class="ui-g-12" style="color: #302873; font-size: 10pt; text-align: center;">
+						<H1>
+							<p:outputLabel value="#{displayItemBean.getDisplayItemName('securityList')}" />
+						</H1>
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="ui-g-12" style="text-align: right;">
+						<p:commandButton value="#{displayItemBean.getDisplayItemName('createNewSec')}" style="width:140px!important;height:auto!important;" ajax="false"
+							action="#{securityListFormBean.prepareRegister()}" id="createNewButton" styleClass="button" />
+					</div>
+				</div>
+				<div class="ui-g">
+					<div style="width: 933px; padding-left: 13px;" class="message-block">
+						<pt:messages />
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="ui-g-12">
+						<f:view encoding="utf-8">
+							<p:dataTable var="lineBean" first="#{securityListFormBean.pageFirst}" value="#{securityListFormBean.lazyModel}" rows="50" lazy="true" paginator="true" rowIndexVar="rowIndex"
+								paginatorPosition="both" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="50,100" styleClass="resultTable" id="securityResultTable">
+								<p:column style="width:20px" styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('no')}">
+									<h:outputText value="#{rowIndex+1}" />
+								</p:column>
+								<p:column style="width:300px" sortBy="#{lineBean.questionEng}" headerText="#{displayItemBean.getDisplayItemName('questionEng')}">
+									<h:outputText value="#{lineBean.questionEng}" />
+								</p:column>
+								<p:column style="width:300px" sortBy="#{lineBean.questionMyan}" headerText="#{displayItemBean.getDisplayItemName('questionMyan')}">
+									<h:outputText value="#{lineBean.questionMyan}" />
+								</p:column>
+								<p:column id="actions" styleClass="unsort-column" style="width:150px;" headerText="#{displayItemBean.getDisplayItemName('operation')}">
+									<p:commandLink id="update" styleClass="management-link" ajax="true" action="#{securityListFormBean.prepareUpdate(lineBean)}"
+										value="#{displayItemBean.getDisplayItemName('update')}" />
+									<p:commandLink id="changeValid" styleClass="management-link" action="#{securityListFormBean.toggleValidStatus(lineBean)}"
+										value="#{displayItemBean.getDisplayItemName((lineBean.delFlag == 0)?'disable':'enable')}" update="actions">
+										<p:confirm header="Confirmation" message="Are you sure to #{(lineBean.delFlag == 0)?'disable':'enable'}?" icon="ui-icon-alert" />
+										<f:setPropertyActionListener value="#{lineBean}" target="#{securityListFormBean.lineBean}" />
+									</p:commandLink>
+									<p:commandLink id="detail" styleClass="management-link" action="#{securityListFormBean.detail(lineBean)}" value="#{displayItemBean.getDisplayItemName('detail')}" />
+								</p:column>
+							</p:dataTable>
+						</f:view>
+					</div>
+				</div>
+			</div>
+		</h:form>
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="confirmBox" closable="false" style="background-color:#302873">
+			<div class="ui-g-12">
+				<div class="ui-g-6">
+					<p:commandButton value="Yes" styleClass="ui-confirmdialog-yes button" icon="ui-icon-check" />
+				</div>
+				<div class="ui-g-6">
+					<p:commandButton value="No" styleClass="ui-confirmdialog-no button" icon="ui-icon-close" />
+				</div>
+			</div>
+		</p:confirmDialog>
+	</ui:define>
+</ui:composition>

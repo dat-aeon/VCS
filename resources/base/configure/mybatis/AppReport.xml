@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AppReport">
+
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.ApplicationReportSearch.ApplicationSearchReqDto"
+		resultMap="applicationSearchResDto">
+		SELECT
+			DISTINCT(CI.CUSTOMER_NO),
+			MAX(AUD.END_USAGE_DATE_TIME) As LAST_DATE,
+			COUNT(AUD.START_USAGE_DATE_TIME) As TOTAL_OF_LOGIN,
+			CI.NAME,
+			AUI.OS_TYPE,
+			AUI.REGISTRATION_DATE_TIME,
+			AUI.APP_USAGE_ID,
+			COUNT(AUD.START_USAGE_DATE_TIME) / COUNT(DISTINCT(date(AUD.START_USAGE_DATE_TIME))) as AVG_LOGIN_PER_DAY
+		FROM 
+			APP_USAGE_INFO AUI
+		INNER JOIN 
+			CUSTOMER_INFO CI
+		ON
+			AUI.CUSTOMER_ID = CI.CUSTOMER_ID
+		INNER JOIN 
+			APP_USAGE_DETAIL AUD
+		ON 
+			AUI.APP_USAGE_ID = AUD.APP_USAGE_ID
+		<where>
+			<if test="customer_no != null and customer_no != ''">
+				CI.CUSTOMER_NO LIKE #{customer_no}
+			</if>
+			<if test="name != null and name != ''">
+				AND LOWER(CI.NAME) LIKE '%' || LOWER(#{name}) || '%'
+			</if>
+			<if test="rptStrFrom != null">
+				AND AUI.REGISTRATION_DATE_TIME >=
+				#{rptStrFrom}
+			</if>
+			<if test="rptStrTo != null">
+				AND AUI.REGISTRATION_DATE_TIME &lt;=
+				#{rptStrTo}
+			</if>
+			<if test="lstUseFrom != null">
+				AND AUD.END_USAGE_DATE_TIME >= #{lstUseFrom}
+			</if>
+			<if test="lstUseTo != null">
+				AND AUD.END_USAGE_DATE_TIME &lt;=
+				#{lstUseTo}
+			</if>
+			<if test="osType != null and osType != ''">
+				AND AUI.OS_TYPE LIKE #{osType}
+			</if>
+
+		</where>
+		GROUP BY
+		CI.CUSTOMER_NO,CI.NAME,AUI.OS_TYPE,AUI.REGISTRATION_DATE_TIME,AUI.APP_USAGE_ID
+		<if test="sortField != null and sortField != '' and sortField == 'customer_no' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY CI.CUSTOMER_NO ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY CI.CUSTOMER_NO DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'name'">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY CI.NAME ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY CI.NAME DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'os_type'">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY AUI.OS_TYPE ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY AUI.OS_TYPE DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'startTime'">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY AUI.REGISTRATION_DATE_TIME ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY AUI.REGISTRATION_DATE_TIME DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'latestUsingTime'">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY LAST_DATE ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY LAST_DATE DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'avgOfLogPerDay'">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY AVG_LOGIN_PER_DAY ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY AVG_LOGIN_PER_DAY DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'noOfUsgTol'">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY TOTAL_OF_LOGIN ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY TOTAL_OF_LOGIN DESC
+			</if>
+		</if>
+		<if test="sortField == null or sortField == ''">
+			ORDER BY CI.CUSTOMER_NO DESC
+		</if>
+		<if test="offset != null and limit != null">
+			OFFSET #{offset} LIMIT #{limit}
+		</if>
+	</select>
+
+	<resultMap id="applicationSearchResDto"
+		type="mm.aeon.com.ass.base.dto.ApplicationReportSearch.ApplicationSearchResDto">
+		<result property="customer_no" column="CUSTOMER_NO" />
+		<result property="name" column="NAME" />
+		<result property="os_type" column="OS_TYPE" />
+		<result property="start_time" column="REGISTRATION_DATE_TIME" />
+		<result property="lst_used_time" column="LAST_DATE" />
+		<result property="noOfUsgTol" column="TOTAL_OF_LOGIN" />
+		<result property="app_usage_id" column="APP_USAGE_ID" />
+		<result property="avgOfLogPerDay" column="AVG_LOGIN_PER_DAY" />
+	</resultMap>
+
+	<select id="count"
+		parameterType="mm.aeon.com.ass.base.dto.ApplicationReportRefer.ApplicationReferReqDto"
+		resultType="int">
+		SELECT COUNT(DISTINCT(date(START_USAGE_DATE_TIME))) FROM
+		APP_USAGE_DETAIL
+		<where>
+			<if test="app_usage_id != null and app_usage_id != ''">
+				APP_USAGE_ID = #{app_usage_id}
+			</if>
+		</where>
+	</select>
+
+	<!-- <resultMap id="applicationReferResDto" type="mm.aeon.com.ass.base.dto.ApplicationReportRefer.ApplicationReferResDto"> 
+		<result property="count" column="DC" /> <if test="end_usgae_date_time != 
+		null"> AND END_USAGE_DATE_TIME &lt;= #{end_usgae_date_time} </if> </resultMap> -->
+
+</mapper>

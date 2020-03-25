@@ -1,0 +1,86 @@
+<!--***********************************************************************
+ * $Date: 2019-01-24$
+ * $Author: Aung Ko Lin$
+ * $Rev:  $
+ * 2019 AEON Microfinance (Myanmar) Company	Limited. All Rights Reserved.
+ ***********************************************************************-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:rich="http://richfaces.org/rich"
+	xmlns:pt="http://presto.dat.com/tag" template="/layout/template.xhtml">
+	<ui:define name="title">
+		<title><h:outputText value="#{displayItemBean.getDisplayItemName('faqList')}" /></title>
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="faqSearchform">
+			<div class="ui-fluid">
+				<div class="ui-g">
+					<div class="ui-g-12" style="padding-left: 49%; color: #302873; font-size: 10pt;">
+						<H1>
+							<p:outputLabel value="#{displayItemBean.getDisplayItemName('faqList')}" />
+						</H1>
+					</div>
+				</div>
+			</div>
+			<div class="ui-g">
+				<div class="ui-g-12" style="text-align: right;">
+					<p:commandButton action="#{faqListFormBean.prepareRegister()}" value="#{displayItemBean.getDisplayItemName('createNewFaq')}" styleClass="button"
+						style="width: 140px!important;height: 35px;" />
+				</div>
+			</div>
+			<div class="ui-g">
+				<div style="width: 933px; padding-left: 13px;" class="message-block">
+					<pt:messages />
+				</div>
+			</div>
+			<div class="ui-fluid">
+				<div class="ui-g" style="width: 100%;">
+					<div class="ui-g-12">
+						<f:view encoding="utf-8">
+							<p:dataTable var="lineBean" first="#{faqListFormBean.pageFirst}" value="#{faqListFormBean.lazyModel}" rows="50" lazy="true" paginator="true" rowIndexVar="rowIndex"
+								paginatorPosition="both" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="50,100" styleClass="resultTable" id="faqResultTable">
+								<p:column style="width:20px" styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('no')}">
+									<h:outputText value="#{rowIndex+1}" />
+								</p:column>
+								<p:column style="width:50%" sortBy="#{lineBean.questionEng}" headerText="#{displayItemBean.getDisplayItemName('questionEng')}">
+									<h:outputText value="#{lineBean.questionEng}" />
+								</p:column>
+								<p:column style="width:50%" sortBy="#{lineBean.answerEng}" headerText="#{displayItemBean.getDisplayItemName('answerEng')}">
+									<h:outputText value="#{lineBean.answerEng}" />
+								</p:column>
+								<p:column style="width:50%" sortBy="#{lineBean.questionMyan}" headerText="#{displayItemBean.getDisplayItemName('questionMyan')}">
+									<h:outputText value="#{lineBean.questionMyan}" />
+								</p:column>
+								<p:column style="width:50%" sortBy="#{lineBean.answerMyan}" headerText="#{displayItemBean.getDisplayItemName('answerMyan')}">
+									<h:outputText value="#{lineBean.answerMyan}" />
+								</p:column>
+								<p:column style="width:50%" sortBy="#{lineBean.categoryName}" headerText="#{displayItemBean.getDisplayItemName('category')}">
+									<h:outputText value="#{lineBean.categoryName}" />
+								</p:column>
+								<p:column id="actions" styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('operation')}" style="width:200px">
+									<p:commandLink id="update" disabled="#{lineBean.delFlag == 1}" styleClass="management-link" action="#{faqListFormBean.prepareUpdate(lineBean)}" value="#{displayItemBean.getDisplayItemName('update')}" />
+									<p:commandLink id="changeValid" styleClass="management-link" action="#{faqListFormBean.toggleValidStatus(lineBean)}"
+										value="#{displayItemBean.getDisplayItemName((lineBean.delFlag == 0)?'disable':'enable')}" update="actions">
+										<p:confirm header="Confirmation" message="Are you sure to #{(lineBean.delFlag == 0)?'disable':'enable'}?" icon="ui-icon-alert" />
+										<f:setPropertyActionListener value="#{lineBean}" target="#{faqListFormBean.lineBean}" />
+									</p:commandLink>
+									<p:commandLink id="detail" styleClass="management-link" action="#{faqListFormBean.detail(lineBean)}" value="#{displayItemBean.getDisplayItemName('detail')}" />
+								</p:column>
+							</p:dataTable>
+						</f:view>
+					</div>
+				</div>
+			</div>
+		</h:form>
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="confirmBox" closable="false" style="background-color:#302873">
+			<div class="ui-g-12">
+				<div class="ui-g-6">
+					<p:commandButton value="Yes" styleClass="ui-confirmdialog-yes button" icon="ui-icon-check" />
+				</div>
+				<div class="ui-g-6">
+					<p:commandButton value="No" styleClass="ui-confirmdialog-no button" icon="ui-icon-close" />
+				</div>
+			</div>
+		</p:confirmDialog>
+	</ui:define>
+</ui:composition>

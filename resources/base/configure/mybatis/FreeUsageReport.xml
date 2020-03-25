@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FreeUsageReport">
+
+	<select id="count"
+		parameterType="mm.aeon.com.ass.base.dto.freeUsageReportSearch.FreeUsageReportSelectCountReqDto"
+		resultType="java.lang.Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			free_customer_info FCI
+		WHERE
+			FCI.DEL_FLAG = 0
+			<if test="phoneNo != null and phoneNo != ''">
+				AND LOWER(FCI.PHONE_NO) LIKE '%' || LOWER(#{phoneNo,jdbcType=VARCHAR}) || '%'
+			</if>
+			<if test="startDate != null">
+				AND TO_CHAR(FCI.CREATED_TIME, 'YYYYMMDD') <![CDATA[ >= ]]> TO_CHAR(#{startDate,jdbcType=DATE}::DATE,'YYYYMMDD')
+			</if>
+			<if test="endDate != null">
+				AND TO_CHAR(FCI.CREATED_TIME, 'YYYYMMDD') <![CDATA[ <= ]]> TO_CHAR(#{endDate,jdbcType=DATE}::DATE,'YYYYMMDD')
+			</if>
+	</select>
+	
+	<resultMap id="freeUsageReportSearchReqResultMap"
+		type="mm.aeon.com.ass.base.dto.freeUsageReportSearch.FreeUsageReportSearchResDto">
+		<id column="FREE_CUSTOMER_INFO_ID" jdbcType="INTEGER" property="freeCustomerInfoId" />
+		<result column="PHONE_NO" jdbcType="VARCHAR" property="phoneNo" />
+		<result column="CREATED_TIME" jdbcType="DATE" property="joinDate" />
+	</resultMap>
+	
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.freeUsageReportSearch.FreeUsageReportSearchReqDto"
+		resultMap="freeUsageReportSearchReqResultMap">
+		SELECT
+			FCI.FREE_CUSTOMER_INFO_ID,
+			FCI.PHONE_NO,
+			FCI.CREATED_TIME
+		FROM
+			free_customer_info FCI
+		WHERE
+			FCI.DEL_FLAG = 0
+			<if test="phoneNo != null and phoneNo != ''">
+				AND LOWER(FCI.PHONE_NO) LIKE '%' || LOWER(#{phoneNo,jdbcType=VARCHAR}) || '%'
+			</if>
+			<if test="startDate != null">
+				AND TO_CHAR(FCI.CREATED_TIME, 'YYYYMMDD') <![CDATA[ >= ]]> TO_CHAR(#{startDate,jdbcType=DATE}::DATE,'YYYYMMDD')
+			</if>
+			<if test="endDate != null">
+				AND TO_CHAR(FCI.CREATED_TIME, 'YYYYMMDD') <![CDATA[ <= ]]> TO_CHAR(#{endDate,jdbcType=DATE}::DATE,'YYYYMMDD')
+			</if>
+			<if test="sortField != null and sortField != '' and sortField == 'phoneNo' ">
+				<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+					ORDER BY FCI.PHONE_NO ASC
+				</if>
+				<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+					ORDER BY FCI.PHONE_NO DESC
+				</if>
+			</if>
+			<if test="sortField != null and sortField != '' and sortField == 'joinDate'">
+				<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+					ORDER BY FCI.CREATED_TIME ASC
+				</if>
+				<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+					ORDER BY FCI.CREATED_TIME DESC
+				</if>
+			</if>
+			<if test="sortField == null or sortField == ''">
+				ORDER BY FCI.CREATED_TIME DESC
+			</if>
+			<if test="offset != null and limit != null">
+				OFFSET #{offset} LIMIT #{limit}
+			</if>
+	</select>
+
+</mapper>

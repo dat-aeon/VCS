@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j">
+
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%p] %d{dd MMM hh:mm:ss aa} %t [%l] %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="APPLICATION_BASE_LOG" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="${jboss.server.log.dir}/vcs-application-base.log" />
+		<param name="MaxBackupIndex" value="10" />
+		<param name="Encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="[TimeStamp]%d{yyyy-MM-dd HH:mm:ss,SSS} [LogLevel]%-5p [%c] %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="APPLICATION_FRONT_LOG" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="${jboss.server.log.dir}/vcs-application-front.log" />
+		<param name="MaxBackupIndex" value="10" />
+		<param name="Encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="[TimeStamp]%d{yyyy-MM-dd HH:mm:ss,SSS} [LogLevel]%-5p [%c] %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="SERVER_LOG" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="${jboss.server.log.dir}/jboss_vcs_server.log" />
+		<param name="MaxBackupIndex" value="10" />
+		<param name="Encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{HH\:mm\:ss,SSS} %-5p [%c] (%t) %m%n" />
+		</layout>
+	</appender>
+
+	<logger name="Admin" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="AdminGroup" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+
+	<logger name="AgencyDetail" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+
+	<logger name="AgencyInfo" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+
+	<logger name="AgencyName" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+
+	<logger name="AgencyOutlet" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+
+	<logger name="AgencyOutletDetail" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="AgencyRole" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+		
+	<logger name="AgencyTeam" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="AgencyUser" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="AgencyUserDetail" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="AgencyUserId" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="AgencyUserLoginId" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="APKUpload" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="ApplicationAcceptedSituation" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="ApplicationAcceptedTotal" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="ApplicationStatus" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="AppLoginInfo" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="AppStatusSummary" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="GroupInfo" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="JudgementStatus" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="LeadTimeReport" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="LeadTimeAverageReport" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="LoginInfo" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="ManagementUserInfo" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="Message" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="Operator" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="OperatorTeam" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="Outlet" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="OutletAgency" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="OutletDetail" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="OutletName" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="ReceivedList" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+
+	<logger name="ReceivingFileList" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+
+	<logger name="RegisteredList" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="SMSMessage" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="Team" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="TeamAgency" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+
+	<logger name="TeamAgent" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="TeamOperator" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="AppReport" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="ActualAppUsageRpt2" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="AppConfig" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="BranchList" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="CategoryList" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="CompanyInfo" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="Coupon" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="CouponInfo" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="CusCouponInfo" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="Customer" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="CustomerType" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="FaqInfo" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="ManagementUserInfo" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="ShopBranch" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="SMSMessage" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="StoreCoupon" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="StoreInfo" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="StoreListForUpdate" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<logger name="StoreListInfo" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</logger>
+	
+	<category name="APPLICATION_FRONT">
+		<priority value="DEBUG" />
+		<appender-ref ref="APPLICATION_FRONT_LOG" />
+	</category>
+
+	<category name="java.sql.Connection">
+		<priority value="DEBUG" />
+		<appender-ref ref="APPLICATION_BASE_LOG" />
+	</category>
+
+	<category name="SERVER">
+		<priority value="DEBUG" />
+		<appender-ref ref="SERVER_LOG" />
+	</category>
+
+	<appender name="async" class="org.apache.log4j.AsyncAppender">
+		<param name="BufferSize" value="2048" />
+		<appender-ref ref="SERVER_LOG" />
+		<appender-ref ref="CONSOLE" />
+	</appender>
+</log4j:configuration>

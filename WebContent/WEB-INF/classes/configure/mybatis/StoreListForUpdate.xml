@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="StoreListForUpdate">
+	
+
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.storeSelectUpdate.StoreSelectAllForUpdateReqDto"
+		resultMap="storeSelectAllForUpdateResDto">
+			SELECT SB.BRANCH_ID,SB.BRANCH_CODE,SB.BRANCH_NAME,SB.ADDRESS,SI.ADDRESS as SHOP_ADDRESS,
+				SI.SHOP_ID,SI.SHOP_NAME,SI.SHOP_CODE,
+				SI.ADDRESS,SI.DEL_FLAG,SI.UPDATED_BY,SI.CREATED_TIME,
+				SI.UPDATED_TIME
+			FROM SHOP_INFO AS SI
+			INNER JOIN SHOP_BRANCH  AS SB
+			ON SI.SHOP_ID = SB.SHOP_ID
+		<where>
+			<if test="storeId != null and storeId != ''">
+				SI.SHOP_ID = #{storeId}
+			</if>
+			AND SB.DEL_FLAG != 1
+		</where>
+	</select>
+	
+	<resultMap id="storeSelectAllForUpdateResDto"
+		type="mm.aeon.com.ass.base.dto.storeSelectUpdate.StoreSelectAllForUpdateResDto">
+		<result property="branchId" column="BRANCH_ID" />
+		<result property="branchCode" column="BRANCH_CODE" />
+		<result property="branchName" column="BRANCH_NAME" />
+		<result property="branchAddress" column="ADDRESS" />
+		<result property="storeId" column="SHOP_ID" />
+		<result property="storeName" column="SHOP_NAME" />
+		<result property="storeCode" column="SHOP_CODE" />
+		<result property="storeAddress" column="SHOP_ADDRESS" />
+		<result property="delFlag" column="DEL_FLAG" />
+		<result property="updatedBy" column="UPDATED_BY" />
+		<result property="createdTime" column="CREATED_TIME" />
+		<result property="updatedTime" column="UPDATED_TIME" />
+		
+	</resultMap>
+</mapper>

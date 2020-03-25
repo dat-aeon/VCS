@@ -1,0 +1,16 @@
+action.package=
+action.sources=
+eclipse.preferences.version=1
+model.package=
+model.sources=
+seam.ejb.project=SeamFrameworkDemo
+seam.project.connection.profile=New MySQL
+seam.project.deployment.type=war
+seam.project.settings.version=1.1
+seam.project.web.root.folder=/PMW/WebContent
+seam.runtime.name=jboss-seam-2.3.0.Final
+seam.settings.changed.by.user=true
+seam.test.creating=false
+seam.test.project=Jsf2FrameworkDemo
+test.package=org.domain.jsf2frameworkdemo.test
+test.sources=/Jsf2FrameworkDemo/src/main

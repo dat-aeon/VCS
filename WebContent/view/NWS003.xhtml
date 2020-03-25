@@ -1,0 +1,126 @@
+<!--***********************************************************************
+ * $Date: 2019-04-30$
+ * $Author: Htet Wai Yan Kyaw $
+ * $Rev:  $
+ * 2018 AEON Microfinance (Myanmar) Company	Limited. All Rights Reserved.
+ ***********************************************************************-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:rich="http://richfaces.org/rich"
+	xmlns:pt="http://presto.dat.com/tag" template="/layout/template.xhtml">
+	<ui:define name="title">
+		<title><h:outputText value="#{displayItemBean.getDisplayItemName('newsDetail')}" /></title>
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="newsInfoDetailForm">
+			<div class="ui-fluid" style="margin-left: 15%;">
+				<div class="ui-g">
+					<div class="ui-g-12" style="color: #302873; font-size: 10pt; text-align: center; margin-left: -100px;">
+						<H1>
+							<p:outputLabel value="#{displayItemBean.getDisplayItemName('newsDetail')}" />
+						</H1>
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="ui-g-12" style="width: 1000px !important; padding-left: 13%;">
+						<span class="message-style">
+							<pt:messages />
+						</span>
+						<p:panelGrid styleClass="status-panel-grid" style="margin-top: 0%;">
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('titleEng')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:300px;">
+									<h:outputText id="titleEng" value="#{newsInfoListFormBean.newsInfoListLineBean.titleEng}" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('titleMyn')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:220px;">
+									<h:outputText id="titleMyn" maxlength="32" value="#{newsInfoListFormBean.newsInfoListLineBean.titleMyn}" style="width:350px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('contentEng')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:220px;">
+									<h:outputText id="contentEng" maxlength="25" value="#{newsInfoListFormBean.newsInfoListLineBean.contentEng}" style="width:350px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('contentMyn')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:300px;">
+									<h:outputText id="contentMyn" maxlength="32" value="#{newsInfoListFormBean.newsInfoListLineBean.contentMyn}" style="width:350px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('publishedFromDate')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:300px;">
+									<h:outputText id="publishedFromDate" value="#{newsInfoListFormBean.newsInfoListLineBean.publishedFromDate}">
+										<f:convertDateTime pattern="yyyy-MM-dd" />
+									</h:outputText>
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('publishedToDate')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:300px;">
+									<h:outputText id="publishedToDate" value="#{newsInfoListFormBean.newsInfoListLineBean.publishedToDate}">
+										<f:convertDateTime pattern="yyyy-MM-dd" />
+									</h:outputText>
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column styleClass="tblSingleLabel">
+									<h:outputLabel id="attckmentImage" value="#{displayItemBean.getDisplayItemName('newsImage')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:300px;">
+									<p:graphicImage id="newsImage" url="#{newsInfoListFormBean.tempUploadImageFilePath}" style="width:50px;height:auto;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('longitude')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:220px;">
+									<h:outputText id="longitude" value="#{newsInfoListFormBean.newsInfoListLineBean.longitude}" style="width:350px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('latitude')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:300px;">
+									<h:outputText id="latitude" maxlength="32" value="#{newsInfoListFormBean.newsInfoListLineBean.latitude}" style="width:350px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('newsUrl')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:300px;">
+									<h:outputLink id="newsUrl" value="#{newsInfoListFormBean.newsInfoListLineBean.newsUrl}" style="width:350px;" >
+										<h:outputText value="#{newsInfoListFormBean.newsInfoListLineBean.newsUrl}" />
+									</h:outputLink>
+								</p:column>
+							</p:row>
+							<p:row style="border: none;">
+								<p:column style="background:#f4f7fc;border: none;padding-left:0%;" colspan="2">
+									<p:commandButton value="#{displayItemBean.getDisplayItemName('back')}" action="#{newsInfoListFormBean.back()}" id="backButton" ajax="false" styleClass="button" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

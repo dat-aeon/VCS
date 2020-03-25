@@ -1,0 +1,133 @@
+body {
+	font-family: "Calibri";
+	font-size: 10pt;
+	float: left;
+	text-align: justify;
+	margin: auto;
+	width: 100%;
+	/* min-width: 1200px; */
+	min-height: 100%;
+	overflow: scroll;
+	background-color: #f4f7fc;
+}
+
+#header {
+	/* padding-top: 10px; */
+	width: 100%;
+	max-width: 100%;
+	min-width: 1000px;
+	height: 100px;
+	position: fixed;
+	color: #fff;
+	z-index: 1000;
+	background-color: #302873;
+}
+
+#menu {
+	margin-top: 110px;
+	margin-top: 5%;
+	height: 33px;
+	width: 100%;
+	max-width: 100%;
+	min-width: 1000px;
+	font-weight: bold;
+	position: fixed;
+	background-color: #f7ad59;
+	padding: 2px 2em 2px 2em;
+	z-index: 1000;
+}
+
+#menu li a {
+	color: #302873;
+	display: block;
+	font-weight: bold;
+	/* line-height: 30px; */
+	margin: 0px;
+	/* padding: 0px 25px; */
+	text-align: center;
+	text-decoration: none;
+	font-size: 14px;
+}
+
+/* #menu ul li:hover a {
+	background: #302873;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+ */
+#contents {
+	padding-bottom: 60px;
+	padding-left: 2%;
+	padding-right: 2%;
+	position: relative;
+	width: 94%;
+	height: 100%;
+	margin-top: 7%;
+}
+
+@media only screen and (max-width: 1350px) {
+	#contents {
+		padding-left: 2%;
+		position: relative;
+		/* width: 1200px; */
+		height: 100%;
+		padding-bottom: 27px;
+		padding-top: 5px;
+		margin-bottom: 33px;
+		margin-top: 7%;
+	}
+	#header {
+		width: 100%;
+		max-width: 100%;
+		min-width: 1000px;
+		height: 70px;
+		position: fixed;
+		color: #fff;
+		z-index: 1000;
+		background-color: #302873;
+	}
+}
+
+#title a {
+	color: #b7e4ff;
+	font-size: 28pt !important;
+}
+
+#title a:hover {
+	opacity: 0.7;
+}
+
+#title_lable {
+	margin-left: 10%;
+	line-height: 0.5pt;
+	color: #fff;
+	/* font-size: 24pt; */
+	font-size: 20pt;
+}
+
+.main_title {
+	margin-left: 10px;
+	float: left;
+	margin-top: 15px;
+}
+
+div.footer {
+	background: #03112b;
+	color: #fff;
+	text-align: center;
+	bottom: 0;
+	width: 100%;
+	max-width: 100%;
+	min-width: 1000px;
+	height: 20px;
+	position: fixed;
+	z-index: 1000 !important;
+}
+
+#title {
+	position: relative;
+	float: left;
+	left: 3%;
+	font-size: 15pt;
+	width: 30%;
+}

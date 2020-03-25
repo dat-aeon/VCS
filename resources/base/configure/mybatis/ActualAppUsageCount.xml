@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ActualAppUsageCount">
+    
+	<select id="count"
+		parameterType="mm.aeon.com.ass.base.dto.ApplicationReportSearch.ActualAppUsageSelectCountReqDto"
+		resultType="java.lang.Integer">
+		SELECT 
+			COUNT(*)
+		FROM 
+			APP_USAGE_INFO AS AP
+		INNER JOIN 
+			CUSTOMER_INFO AS CI
+		ON 
+			CI.CUSTOMER_ID = AP.CUSTOMER_ID
+		<where>
+			<if test="osType != null and osType != ''">
+				AP.OS_TYPE = #{osType}
+			</if>
+		</where>
+	</select>
+
+</mapper>    
+    

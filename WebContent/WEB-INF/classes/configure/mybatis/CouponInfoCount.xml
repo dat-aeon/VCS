@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CouponInfoCount">
+    
+	<select id="count"
+		parameterType="mm.aeon.com.ass.base.dto.couponSearch.CouponSelectCountReqDto"
+		resultType="java.lang.Integer">
+		SELECT 
+			COUNT(*)
+		FROM (
+			SELECT DISTINCT(SHOP_COUPON.COUPON_ID) AS CID,
+			COUPON_INFO.COUPON_CODE,COUPON_INFO.COUPON_NAME_EN,COUPON_INFO.COUPON_NAME_MM,
+			COUPON_INFO.COUPON_AMOUNT,COUPON_INFO.GOODS_PRICE,COUPON_INFO.DESCRIPTION_MM,COUPON_INFO.SPECIAL_EVENT_MM,
+			COUPON_INFO.DESCRIPTION_EN,COUPON_INFO.START_TIME,COUPON_INFO.EXPIRE_TIME,COUPON_INFO.TOTAL_NO,COUPON_INFO.COUPON_NO_PER_CUST,COUPON_INFO.SPECIAL_EVENT_EN,
+			COUPON_INFO.DEL_FLAG,COUPON_INFO.UNUSE_IMAGE_PATH,COUPON_INFO.USE_IMAGE_PATH,COUPON_INFO.DISCOUNT_UNIT,
+			SHOP_INFO.SHOP_NAME FROM COUPON_INFO
+			INNER JOIN SHOP_COUPON 
+			ON COUPON_INFO.COUPON_ID = SHOP_COUPON.COUPON_ID 
+			INNER JOIN SHOP_INFO ON
+			SHOP_COUPON.SHOP_ID = SHOP_INFO.SHOP_ID
+			<where>
+				<if test="coupon_code != null and coupon_code != ''">
+					UPPER(COUPON_INFO.COUPON_CODE) LIKE UPPER(#{coupon_code})
+				</if>
+				<if test="coupon_name != null and coupon_name != ''">
+					AND UPPER(COUPON_INFO.COUPON_NAME_EN) LIKE UPPER(#{coupon_name})
+				</if>
+				<if test="coupon_amount != 0.0">
+					AND COUPON_INFO.COUPON_AMOUNT = #{coupon_amount}
+				</if>
+				<if test="store_name != null and store_name != ''">
+					AND UPPER(SHOP_INFO.SHOP_NAME) LIKE UPPER(#{store_name})
+				</if>
+				AND COUPON_INFO.DEL_FLAG != 1 
+			</where>
+			ORDER BY CID DESC) count;
+	</select>
+
+</mapper>    
+    

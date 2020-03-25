@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CustomerRoomInfo">
+
+	<resultMap id="customerRoomInfoResultMap"
+		type="mm.aeon.com.ass.base.dto.customerRoomInfoSearch.CustomerRoomInfoResDto">
+		<id column="CUST_ROOM_ID" jdbcType="INTEGER" property="custRoomId" />
+	    <result column="CUSTOMER_ID" jdbcType="INTEGER" property="customerId" />
+	</resultMap>
+
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.customerRoomInfoSearch.CustomerRoomInfoReqDto"
+		resultMap="customerRoomInfoResultMap">
+		SELECT
+			CRI.CUST_ROOM_ID,
+			CRI.CUSTOMER_ID
+		FROM
+			cust_room_info CRI
+	</select>
+	
+</mapper>    
+    

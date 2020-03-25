@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ImportMember">
+	<resultMap id="importMemberSearchResDto"
+		type="mm.aeon.com.ass.base.dto.importMemberSearch.ImportMemberSearchResDto">
+		<id column="IMPORT_CUSTOMER_INFO_ID" property="importCustomerId"  />
+		<result column="CUSTOMER_NO" property="customerNo"  />
+		<result column="PHONE_NO" property="phoneNo"  />
+		<result column="MEMBERCARD_ID" property="membercardId"  />
+		<result column="NAME" property="name"  />
+		<result column="SALARY" property="salary"  />
+		<result column="DOB" property="dob"  />
+		<result column="GENDER" property="gender"  />
+		<result column="COMPANY_NAME" property="companyName"  />
+		<result column="NRC_NO" property="nrcNo"  />
+		<result column="ADDRESS" property="township"  />
+		<result column="CREATED_TIME" property="createdDate"  />
+		<result column="MEMBERCARD_STATUS" property="membercardStatus"  />
+	</resultMap>
+	
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.importMemberSearch.ImportMemberSearchReqDto"
+		resultMap="importMemberSearchResDto">
+		SELECT 
+			IMPORT_CUSTOMER_INFO_ID,
+			CUSTOMER_NO, 
+			PHONE_NO, 
+			MEMBERCARD_ID, 
+			NAME, 
+			SALARY,
+			DOB, 
+			GENDER, 
+			COMPANY_NAME,
+			NRC_NO, 
+			ADDRESS,
+			CREATED_TIME,
+			MEMBERCARD_STATUS
+		FROM
+		import_customer_info
+		<where>
+			DEL_FLAG = 0
+			
+			<if test="customerNo != null and customerNo != ''">
+				AND LOWER(CUSTOMER_NO) LIKE '%' || #{customerNo} || '%'
+			</if>
+			<if test="name != null and name != ''">
+				AND LOWER(NAME) LIKE '%' || #{name} || '%'
+			</if>
+			<if test="salaryMin != null">
+				AND SALARY &gt;= #{salaryMin}
+			</if>
+			<if test="salaryMax != null">
+				AND SALARY &lt;= #{salaryMax}
+			</if>
+			<if test="dobFrom != null">
+				AND DOB &gt;= #{dobFrom}
+			</if>
+			<if test="dobTo != null">
+				AND DOB &lt;= #{dobTo}
+			</if>
+			<if test="township != null and township != ''">
+				AND LOWER(ADDRESS) LIKE '%' || #{township} || '%'
+			</if>
+			<if test="nrcNo != null">
+				AND LOWER(NRC_NO) LIKE LOWER('%' || #{nrcNo} || '%')
+			</if>
+			<if test="phoneNo != null and phoneNo != ''">
+				AND LOWER(PHONE_NO) LIKE LOWER('%' || #{phoneNo} || '%')
+			</if>
+			<if test="memberCardId != null ">
+				AND LOWER(membercard_id) LIKE LOWER('%' || #{memberCardId} || '%')
+			</if>
+			<if test="createdDateFrom != null ">
+				AND TO_CHAR(created_time::DATE,'YYYYMMDD') &gt;= TO_CHAR(#{createdDateFrom,jdbcType=DATE}::DATE,'YYYYMMDD')
+			</if>
+			<if test="createdDateTo != null ">
+				AND TO_CHAR(created_time::DATE,'YYYYMMDD') &lt;= TO_CHAR(#{createdDateTo,jdbcType=DATE}::DATE,'YYYYMMDD')
+			</if>
+			<if test="membercardStatus != null and membercardStatus == 0">
+				AND MEMBERCARD_STATUS = #{membercardStatus}
+			</if>
+			<if test="membercardStatus != null and membercardStatus != 0">
+				AND MEMBERCARD_STATUS > 0
+			</if>
+		</where>
+		<if test="sortField != null and sortField != '' and sortField == 'customerNo' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY CUSTOMER_NO ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY CUSTOMER_NO DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'phoneNo' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY PHONE_NO ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY PHONE_NO DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'membercardId' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY MEMBERCARD_ID ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY MEMBERCARD_ID DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'name' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY NAME ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY NAME DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'salary' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY SALARY ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY SALARY DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'dob' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY DOB ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY DOB DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'gender' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY GENDER ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY GENDER DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'companyName' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY COMPANY_NAME ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY COMPANY_NAME DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'nrcNo' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY NRC_NO ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY NRC_NO DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'township' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY ADDRESS ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY ADDRESS DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'createdDate' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY CREATED_TIME ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY CREATED_TIME DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'memberCardId' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY MEMBERCARD_ID ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY MEMBERCARD_ID DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'membercardStatus' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY MEMBERCARD_STATUS ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY MEMBERCARD_STATUS DESC
+			</if>
+		</if>
+		<if test="sortField == null or sortField == ''">
+			ORDER BY created_time DESC
+		</if>
+		
+		<if test="offset != null and limit != null">
+			OFFSET #{offset} LIMIT #{limit}
+		</if>
+	</select>
+	
+	<select id="count"
+		parameterType="mm.aeon.com.ass.base.dto.importMemberSearch.ImportMemberSearchReqDto"
+		resultType="java.lang.Integer">
+		SELECT
+			COUNT(*)
+		FROM
+		import_customer_info
+		<where>
+			del_flag = 0
+			
+			<if test="customerNo != null and customerNo != ''">
+				AND LOWER(customer_no) LIKE '%' || #{customerNo} || '%'
+			</if>
+			<if test="name != null and name != ''">
+				AND LOWER(name) LIKE '%' || #{name} || '%'
+			</if>
+			<if test="salaryMin != null">
+				AND salary &gt;= #{salaryMin}
+			</if>
+			<if test="salaryMax != null">
+				AND salary &lt;= #{salaryMax}
+			</if>
+			<if test="dobFrom != null">
+				AND dob &gt;= #{dobFrom}
+			</if>
+			<if test="dobTo != null">
+				AND dob &lt;= #{dobTo}
+			</if>
+			<if test="township != null and township != ''">
+				AND LOWER(address) LIKE '%' || #{township} || '%'
+			</if>
+			<if test="nrcNo != null">
+				AND LOWER(nrc_no) LIKE LOWER('%' || #{nrcNo} || '%')
+			</if>
+			<if test="phoneNo != null and phoneNo != ''">
+				AND LOWER(phone_no) LIKE LOWER('%' || #{phoneNo} || '%')
+			</if>
+			<if test="memberCardId != null ">
+				AND LOWER(membercard_id) LIKE LOWER('%' || #{memberCardId} || '%')
+			</if>
+			<if test="membercardStatus != null and membercardStatus == 0">
+				AND MEMBERCARD_STATUS = #{membercardStatus}
+			</if>
+			<if test="membercardStatus != null and membercardStatus != 0">
+				AND MEMBERCARD_STATUS > 0
+			</if>
+			<if test="createdDateFrom != null ">
+				AND TO_CHAR(created_time::DATE,'YYYYMMDD') &gt;= TO_CHAR(#{createdDateFrom,jdbcType=DATE}::DATE,'YYYYMMDD')
+			</if>
+			<if test="createdDateTo != null ">
+				AND TO_CHAR(created_time::DATE,'YYYYMMDD') &lt;= TO_CHAR(#{createdDateTo,jdbcType=DATE}::DATE,'YYYYMMDD')
+			</if>
+		</where>
+	</select>
+</mapper>

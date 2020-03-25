@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="CategoryList">
+
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.faqCategorySelect.FaqCategorySearchReqDto"
+		resultMap="faqCategorySearchResDto">
+		SELECT CATEGORY_ID,CATEGORY
+		FROM FAQ_CATEGORY
+		WHERE
+		DEL_FLAG = 0
+	</select>
+	<resultMap id="faqCategorySearchResDto"
+		type="mm.aeon.com.ass.base.dto.faqCategorySelect.FaqCategorySearchResDto">
+		<result property="categoryId" column="CATEGORY_ID" />
+		<result property="categoryName" column="CATEGORY" />
+	</resultMap>
+	
+</mapper>

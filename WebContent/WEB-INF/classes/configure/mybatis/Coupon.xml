@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="Coupon">
+    
+	<select id="refer"
+		parameterType="mm.aeon.com.ass.base.dto.couponCount.CouponCountReqDto"
+		resultMap="couponCountResDtoo">
+		SELECT MAX(COUPON_ID) AS MAX_ID
+		FROM COUPON_INFO
+	</select>
+    
+    <resultMap id="couponCountResDtoo"
+		type="mm.aeon.com.ass.base.dto.couponCount.CouponCountResDto">
+		<result property="max_id" column="max_id" />
+	</resultMap>
+	
+	
+	<update id="update"
+		parameterType="mm.aeon.com.ass.base.dto.couponDelete.CouponDeleteReqDto">
+		UPDATE COUPON_INFO
+		<set>
+			<if test="del_flag != null">
+				DEL_FLAG = #{del_flag},
+			</if>
+			<if test="updated_by != null and updated_by != ''">
+				UPDATED_BY = #{updated_by},
+			</if>
+			<if test="updated_time != null">
+				UPDATED_TIME = #{updated_time},
+			</if>
+			
+		</set>
+		<where>
+			<if test="coupon_id != null and coupon_id !=''">
+				COUPON_ID = #{coupon_id}
+			</if>
+		</where>
+	</update>
+	
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.storeCouponSearch.BranchCouponSearchReqDto"
+		resultMap="branchCouponSearchResDto">
+		SELECT DISTINCT(SHOP_COUPON.SHOP_ID),SHOP_BRANCH.BRANCH_ID,SHOP_COUPON.COUPON_PASSWORD,SHOP_BRANCH.BRANCH_NAME,SHOP_BRANCH.BRANCH_CODE FROM SHOP_COUPON
+        INNER JOIN SHOP_INFO
+		ON SHOP_COUPON.SHOP_ID = SHOP_INFO.SHOP_ID
+		INNER JOIN SHOP_BRANCH 
+		ON SHOP_INFO.SHOP_ID = SHOP_BRANCH.SHOP_ID
+		<where>
+			SHOP_COUPON.SHOP_ID = #{store_id}
+		</where>
+	</select>
+	<resultMap id="branchCouponSearchResDto"
+		type="mm.aeon.com.ass.base.dto.storeCouponSearch.BranchCouponSearchResDto">
+		<result property="shop_id" column="SHOP_ID" />
+		<result property="branch_id" column="BRANCH_ID" />
+		<result property="branch_name" column="BRANCH_NAME" />
+		<result property="branch_code" column="BRANCH_CODE" />
+		<result property="coupon_password" column="COUPON_PASSWORD" />
+	</resultMap>
+	
+	
+	<select id="count"
+		parameterType="mm.aeon.com.ass.base.dto.storeCouponRefer.StoreBranchCouponReferReqDto"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM SHOP_COUPON
+		<where>
+			<if test="branch_id != null and branch_id != ''">
+				BRANCH_ID = #{branch_id}
+			</if>
+		</where>
+	</select>
+    
+    </mapper>

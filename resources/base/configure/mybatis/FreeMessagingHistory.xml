@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FreeMessagingHistory">
+
+
+	<resultMap id="freemessagingHistorySearchResDto"
+		type="mm.aeon.com.ass.base.dto.freeMessagingHistorySearch.FreeMessagingHistorySearchResDto">
+		<id column="MESSAGE_ID" jdbcType="INTEGER" property="messageId" />
+	    <result column="CUSTOMER_NAME" jdbcType="VARCHAR" property="customerName" />
+	    <result column="NRC_NO" jdbcType="VARCHAR" property="nrcNo" />
+	    <result column="SENDER_NAME" jdbcType="VARCHAR" property="senderName" />
+	    <result column="SENDING_TIME" jdbcType="VARCHAR" property="sendingTime" />
+	    <result column="MESSAGE_DETAIL" jdbcType="VARCHAR" property="messageDetail" />
+	</resultMap>
+
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.freeMessagingHistorySearch.FreeMessagingHistorySearchReqDto"
+		resultMap="freemessagingHistorySearchResDto">
+		SELECT
+			FMI.free_message_info_id,
+			FMI.message_content AS MESSAGE_DETAIL,
+			FMI.SEND_TIME AS SENDING_TIME, 
+			FCI.phone_no AS SENDER_NAME, 
+			FCI.phone_no AS CUSTOMER_NAME  
+		FROM
+			free_message_info FMI 
+		INNER JOIN 
+			free_message_room FMR 
+		ON 
+			FMI.free_message_info_id = FMR.free_message_info_id 
+		INNER JOIN 
+			free_cust_room_info FCRI 
+		ON 
+			FMR .free_cust_room_info_id = FCRI.free_cust_room_info_id 
+		INNER JOIN 
+			free_customer_info FCI 
+		ON 
+			FCI.free_customer_info_id::VARCHAR = FMI.SENDER
+		WHERE 
+			FMI.OP_SEND_FLAG = 0 
+		
+		<if test="phoneNo != null and phoneNo != ''">
+			AND LOWER(FCI.phone_no) LIKE '%' || LOWER(#{phoneNo,jdbcType=VARCHAR})  || '%'
+		</if>
+		<if test="fromDate != null">
+			AND TO_CHAR(FMI.SEND_TIME::TIMESTAMP,'YYYYMMDDHH24MISS') <![CDATA[ >= ]]> TO_CHAR(#{fromDate,jdbcType=TIMESTAMP}::TIMESTAMP,'YYYYMMDDHH24MISS')
+		</if>
+		<if test="toDate != null">
+			AND TO_CHAR(FMI.SEND_TIME::TIMESTAMP,'YYYYMMDDHH24MISS') <![CDATA[ <= ]]> TO_CHAR(#{toDate,jdbcType=TIMESTAMP}::TIMESTAMP,'YYYYMMDDHH24MISS')
+		</if>
+	UNION
+		SELECT
+			FMI.free_message_info_id, 
+			FMI.MESSAGE_CONTENT AS MESSAGE_DETAIL,
+			FMI.SEND_TIME AS SENDING_TIME, 
+			UI.NAME AS SENDER_NAME, 
+			FCI.Phone_No AS CUSTOMER_NAME 
+		FROM 
+			free_message_info FMI 
+		INNER JOIN 
+			free_message_room FMR 
+		ON 
+			FMI.free_message_info_id = FMR.free_message_info_id 
+		INNER JOIN 
+				free_cust_room_info FCRI 
+		ON 
+				FMR .free_cust_room_info_id = FCRI.free_cust_room_info_id 
+		INNER JOIN 
+			Free_customer_info FCI 
+		ON 
+			FCRI.free_customer_info_id = FCI.free_customer_info_id 
+		INNER JOIN 
+			user_info UI 
+		ON 
+			UI.USER_ID::VARCHAR =  FMI.SENDER
+		WHERE 
+			FMI.OP_SEND_FLAG = 1 
+	
+		<if test="phoneNo != null and phoneNo != ''">
+			AND LOWER(FCI.Phone_No) LIKE '%' || LOWER(#{phoneNo,jdbcType=VARCHAR})  || '%'
+		</if>
+		<if test="fromDate != null">
+			AND TO_CHAR(FMI.SEND_TIME::TIMESTAMP,'YYYYMMDDHH24MISS') <![CDATA[ >= ]]> TO_CHAR(#{fromDate,jdbcType=TIMESTAMP}::TIMESTAMP,'YYYYMMDDHH24MISS')
+		</if>
+		<if test="toDate != null">
+			AND TO_CHAR(FMI.SEND_TIME::TIMESTAMP,'YYYYMMDDHH24MISS') <![CDATA[ <= ]]> TO_CHAR(#{toDate,jdbcType=TIMESTAMP}::TIMESTAMP,'YYYYMMDDHH24MISS')
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'sendingTime' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY SENDING_TIME ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY SENDING_TIME DESC
+			</if>
+		</if>
+		<if test="sortField == null or sortField == ''">
+			ORDER BY SENDING_TIME DESC
+		</if>
+		<if test="offset != null and limit != null">
+			OFFSET #{offset} LIMIT #{limit}
+		</if>
+	</select>
+
+
+	<select id="count"
+		parameterType="mm.aeon.com.ass.base.dto.freeMessagingHistorySearch.FreeMessagingHistorySearchCountReqDto"
+				resultType="java.lang.Integer">
+		SELECT
+		Count(*) from(SELECT
+			FMI.free_message_info_id,
+			FMI.message_content AS MESSAGE_DETAIL,
+			FMI.SEND_TIME AS SENDING_TIME, 
+			FCI.phone_no AS SENDER_NAME, 
+			FCI.phone_no AS CUSTOMER_NAME  
+		FROM
+			free_message_info FMI 
+		INNER JOIN 
+			free_message_room FMR 
+		ON 
+			FMI.free_message_info_id = FMR.free_message_info_id 
+		INNER JOIN 
+			free_cust_room_info FCRI 
+		ON 
+			FMR .free_cust_room_info_id = FCRI.free_cust_room_info_id 
+		INNER JOIN 
+			free_customer_info FCI 
+		ON 
+			FCI.free_customer_info_id::VARCHAR = FMI.SENDER
+		WHERE 
+			FMI.OP_SEND_FLAG = 0 
+		
+		<if test="phoneNo != null and phoneNo != ''">
+			AND LOWER(FCI.phone_no) LIKE '%' || LOWER(#{phoneNo,jdbcType=VARCHAR})  || '%'
+		</if>
+		<if test="fromDate != null">
+			AND TO_CHAR(FMI.SEND_TIME::TIMESTAMP,'YYYYMMDDHH24MISS') <![CDATA[ >= ]]> TO_CHAR(#{fromDate,jdbcType=TIMESTAMP}::TIMESTAMP,'YYYYMMDDHH24MISS')
+		</if>
+		<if test="toDate != null">
+			AND TO_CHAR(FMI.SEND_TIME::TIMESTAMP,'YYYYMMDDHH24MISS') <![CDATA[ <= ]]> TO_CHAR(#{toDate,jdbcType=TIMESTAMP}::TIMESTAMP,'YYYYMMDDHH24MISS')
+		</if>
+	UNION
+		SELECT
+			FMI.free_message_info_id, 
+			FMI.MESSAGE_CONTENT AS MESSAGE_DETAIL,
+			FMI.SEND_TIME AS SENDING_TIME, 
+			UI.NAME AS SENDER_NAME, 
+			FCI.Phone_No AS CUSTOMER_NAME 
+		FROM 
+			free_message_info FMI 
+		INNER JOIN 
+			free_message_room FMR 
+		ON 
+			FMI.free_message_info_id = FMR.free_message_info_id 
+		INNER JOIN 
+				free_cust_room_info FCRI 
+		ON 
+				FMR .free_cust_room_info_id = FCRI.free_cust_room_info_id 
+		INNER JOIN 
+			Free_customer_info FCI 
+		ON 
+			FCRI.free_customer_info_id = FCI.free_customer_info_id 
+		INNER JOIN 
+			user_info UI 
+		ON 
+			UI.USER_ID::VARCHAR =  FMI.SENDER
+		WHERE 
+			FMI.OP_SEND_FLAG = 1 
+	
+		<if test="phoneNo != null and phoneNo != ''">
+			AND LOWER(FCI.Phone_No) LIKE '%' || LOWER(#{phoneNo,jdbcType=VARCHAR})  || '%'
+		</if>
+		<if test="fromDate != null">
+			AND TO_CHAR(FMI.SEND_TIME::TIMESTAMP,'YYYYMMDDHH24MISS') <![CDATA[ >= ]]> TO_CHAR(#{fromDate,jdbcType=TIMESTAMP}::TIMESTAMP,'YYYYMMDDHH24MISS')
+		</if>
+		<if test="toDate != null">
+			AND TO_CHAR(FMI.SEND_TIME::TIMESTAMP,'YYYYMMDDHH24MISS') <![CDATA[ <= ]]> TO_CHAR(#{toDate,jdbcType=TIMESTAMP}::TIMESTAMP,'YYYYMMDDHH24MISS')
+		</if>
+		ORDER BY 
+				SENDING_TIME DESC) COUNT
+	</select>
+
+</mapper>    
+    

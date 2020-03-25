@@ -1,0 +1,51 @@
+<!--***********************************************************************
+ * $Date: 2018-06-20$
+ * $Author: Khin Yadanar Thein$
+ * $Rev:  $
+ * 2018 AEON Microfinance (Myanmar) Company	Limited. All Rights Reserved.
+ ***********************************************************************-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:a="http://richfaces.org/a4j"
+	xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+	<title>System Error - ASS</title>
+	<link href="../presto/images/AEON_Logo.png" rel="shortcut icon" />
+</h:head>
+<h:body>
+	<h:form id="err001form">
+		<table width="100%" style="margin-top: 50px;">
+			<tr align="center">
+				<td></td>
+			</tr>
+			<tr>
+				<td align="center">
+					<div style="bottom: 5px; right: 10px; width: 60%; background-color: #FFCECF; border: 2px solid red;">
+						<table width="100%" style="margin-top: 20px; text-align: left;">
+							<tr>
+								<td colspan="2" height="40px" align="left">
+									<!-- <p style="font-size: 18px; color: #251EF8">&nbsp;&nbsp;System
+										Error Occurred</p> -->
+								</td>
+							</tr>
+							<tr>
+								<td height="40px" width="40px">&nbsp;</td>
+								<td height="40px" style="border: 1px dotted gray;">
+									<p style="color: red; padding-left: 10px">
+										<h:messages globalOnly="true" />
+									</p>
+								</td>
+							</tr>
+							<tr>
+								<td height="40px" width="40px">&nbsp;</td>
+								<td height="40px">
+									<p:commandLink action="#{loginFormBean.init()}" style="font-size: 11pt; color:blue" value="Go to Login Screen" />
+								</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</h:form>
+</h:body>
+</html>

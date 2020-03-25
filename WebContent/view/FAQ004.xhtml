@@ -1,0 +1,121 @@
+<!--***********************************************************************
+ * $Date: 2019-01-28$
+ * $Author: Aung Ko Lin $
+ * $Rev:  $
+ * 2019 AEON Microfinance (Myanmar) Company	Limited. All Rights Reserved.
+ ***********************************************************************-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:rich="http://richfaces.org/rich"
+	xmlns:pt="http://presto.dat.com/tag" template="/layout/template.xhtml">
+	<ui:define name="title">
+		<title><h:outputText value="#{displayItemBean.getDisplayItemName('faqDetail')}" /></title>
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="faqform">
+			<div class="ui-fluid">
+				<div class="ui-g">
+					<div class="ui-g-12" style="color: #302873; font-size: 10pt; text-align: center;">
+						<H1>
+							<p:outputLabel value="#{displayItemBean.getDisplayItemName('faqDetail')}" />
+						</H1>
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="ui-g-12" style="padding-left: 30%;">
+						<span class="message-style">
+							<pt:messages />
+						</span>
+						<!-- <p:fieldset styleClass="import-fieldset"
+							style="width: 500px !important;"
+							legend="#{displayItemBean.getDisplayItemName('faqDetail')}"> -->
+						<!-- <span class="message-style"><pt:messages /></span> -->
+						<p:panelGrid styleClass="status-panel-grid" style="margin-top: 0%;">
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('questionEng')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:300px;">
+									<p:outputLabel id="questionEng" value="#{faqListFormBean.lineBean.questionEng}" style="width:250px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('questionMyan')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:300px;">
+									<p:outputLabel id="questionMyan" value="#{faqListFormBean.lineBean.questionMyan}" style="width:250px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('answerEng')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:300px;">
+									<p:outputLabel id="answerEng" value="#{faqListFormBean.lineBean.answerEng}" style="width:250px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('answerMyan')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:300px;">
+									<p:outputLabel id="answerMyan" value="#{faqListFormBean.lineBean.answerMyan}" style="width:250px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('category')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:300px;">
+									<p:outputLabel id="category" value="#{faqListFormBean.lineBean.categoryName}" style="width:250px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('createdBy')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:300px;">
+									<p:outputLabel id="created_by" value="#{faqListFormBean.lineBean.createdBy}" style="width:250px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('createdTime')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:300px;">
+									<p:outputLabel id="created_time" value="#{faqListFormBean.lineBean.createdTime}" style="width:250px;" >
+									<f:convertDateTime pattern="dd-MM-yyyy hh:mm:ss a" />
+									</p:outputLabel>
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('updatedBy')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:300px;">
+									<p:outputLabel id="updated_by" value="#{faqListFormBean.lineBean.updatedBy}" style="width:250px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('updatedTime')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:300px;">
+									<p:outputLabel id="updated_time" value="#{faqListFormBean.lineBean.updatedTime}" style="width:250px;" >
+									<f:convertDateTime pattern="dd-MM-yyyy hh:mm:ss a" />
+									</p:outputLabel>
+								</p:column>
+							</p:row>
+							<p:row style="border:0px">
+								<p:column style="width:45%;background:#f4f7fc;border:0px;padding-left:0%;">
+									<p:commandButton action="#{faqManagementFormBean.back()}" value="#{displayItemBean.getDisplayItemName('back')}" styleClass="button" process="@form" update="faqform" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+						<!-- </p:fieldset> -->
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

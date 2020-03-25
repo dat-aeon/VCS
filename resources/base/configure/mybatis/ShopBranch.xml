@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+     <mapper namespace="ShopBranch">
+     
+     <select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.branchSearch.StoreBranchCouponSearchReqDto"
+		resultMap="storeBranchCouponSearchResDto">
+		SELECT SHOP_BRANCH.BRANCH_ID,SHOP_BRANCH.BRANCH_NAME,SHOP_BRANCH.BRANCH_CODE FROM SHOP_INFO
+		INNER JOIN SHOP_BRANCH 
+		ON SHOP_INFO.SHOP_ID = SHOP_BRANCH.SHOP_ID
+		<where>
+			SHOP_INFO.SHOP_ID = #{store_id} AND SHOP_BRANCH.DEL_FLAG != 1
+		</where>
+	</select>
+	<resultMap id="storeBranchCouponSearchResDto"
+		type="mm.aeon.com.ass.base.dto.branchSearch.StoreBranchCouponSearchResDto">
+		<result property="branch_id" column="BRANCH_ID" />
+		<result property="branch_name" column="BRANCH_NAME" />
+		<result property="branch_code" column="BRANCH_CODE" />
+	</resultMap>
+	
+	<select id="count"
+		parameterType="mm.aeon.com.ass.base.dto.branchCount.BranchCouponCountReqDto"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM SHOP_BRANCH
+		
+		<where>
+			<if test="shop_id != null and shop_id != ''">
+				SHOP_ID = #{shop_id}
+			</if>
+			<if test="branch_id != null and branch_id != ''">
+				AND BRANCH_ID = #{branch_id}
+			</if>
+		</where>
+		
+	</select>
+     
+     </mapper>

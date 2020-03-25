@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PromotionsInfoCount">
+    
+	<select id="count"
+		parameterType="mm.aeon.com.ass.base.dto.promotionsInfoSearch.PromotionsInfoSelectCountReqDto"
+		resultType="java.lang.Integer">
+		SELECT 
+			COUNT(*)
+		FROM 
+			promotions_info PI
+		WHERE 
+			PI.DEL_FLAG = 0
+	</select>
+
+</mapper>    
+    

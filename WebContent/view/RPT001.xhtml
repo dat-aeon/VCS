@@ -1,0 +1,133 @@
+<!--***********************************************************************
+ * $Date: 2019-02-06$
+ * $Author: Ye Lin Thu$
+ * $Rev:  $
+ * 2019 AEON Microfinance (Myanmar) Company	Limited. All Rights Reserved.
+ ***********************************************************************-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:rich="http://richfaces.org/rich"
+	xmlns:pt="http://presto.dat.com/tag" template="/layout/template.xhtml">
+	<ui:define name="title">
+		<title><h:outputText value="#{displayItemBean.getDisplayItemName('applicationUsageReport')}" /></title>
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="applicationUsageReportForm">
+			<div class="ui-fluid">
+				<div class="ui-g">
+					<div class="ui-g-12" style="color: #302873; font-size: 10pt; text-align: center;">
+						<H1>
+							<p:outputLabel value="#{displayItemBean.getDisplayItemName('applicationUsageReport')}" />
+						</H1>
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="ui-g-12">
+						<p:panelGrid styleClass="status-panel-grid" id="critieaPanel" style="margin-top: 0%;">
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:100px;font-weight: bold;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('cusotmerNo')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:100px;font-weight: bold;">
+									<p:inputText id="customerno" maxlength="32" value="#{applicationReportFormBean.applicationReportSearchLineBean.customerNo}" style="width:270px;" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:100px;font-weight: bold;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('customer_name')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:300px;">
+									<p:inputText id="customername" maxlength="32" value="#{applicationReportFormBean.applicationReportSearchLineBean.customerName}" style="width:270px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:100px;font-weight: bold;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('reportSearchStartTime')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:300px;">
+									<p:calendar id="reportRegDateFr" autocomplete="off" navigator="true" style="height:22px;" pattern="yyyy-MM-dd HH:mm" mask="true" value="#{applicationReportFormBean.rptStrFrom}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:125px;font-weight: bold;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('reportSearchStartTimeTo')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:300px;">
+									<p:calendar id="reportRegTo" autocomplete="off" navigator="true" style="height:22px;" pattern="yyyy-MM-dd HH:mm" mask="true" value="#{applicationReportFormBean.rptStrTo}" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:150px;font-weight: bold;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('latestUsingTime')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:150px;">
+									<p:calendar id="reportLstDateFr" autocomplete="off" navigator="true" style="height:22px;" pattern="yyyy-MM-dd HH:mm" mask="true" value="#{applicationReportFormBean.lstUseFrom}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:100px;font-weight: bold;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('latestUsingTimeTo')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:300px;">
+									<p:calendar id="reportLstDateTo" autocomplete="off" navigator="true" style="height:22px;" pattern="yyyy-MM-dd HH:mm" mask="true" value="#{applicationReportFormBean.lstUseTo}" />
+								</p:column>
+							</p:row>
+							<p:row style="border: none;">
+								<p:column colspan="3" style="border: none;background:#f4f7fc;">
+									<p:commandButton id="searchApplicationUsage" action="#{applicationReportFormBean.search()}" value="#{displayItemBean.getDisplayItemName('search')}" styleClass="button"
+										style="margin: 3px 0px 0px -10px;;float : left;" ajax="false" />
+									<p:commandButton value="#{displayItemBean.getDisplayItemName('clear')}" action="#{applicationReportFormBean.reset()}" style="margin: 3px 0px 0px 10px;;float : left;"
+										id="clearButton" ajax="false" styleClass="button" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="ui-g-12">
+						<div class="message-block ui-g-6">
+							<pt:messages />
+						</div>
+						<div class="ui-g-6" style="text-align: right;">
+							<p:commandButton value="#{displayItemBean.getDisplayItemName('exportCSV')}" rendered="#{applicationReportFormBean.lazyModel != null}" styleClass="button" ajax="false">
+								<p:dataExporter type="csv" target="applicationResultTable" fileName="ApplicationUsageReport" />
+							</p:commandButton>
+						</div>
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="ui-g-12">
+						<f:view encoding="utf-8">
+							<p:dataTable var="lineBean" first="#{applicationReportFormBean.pageFirst}" value="#{applicationReportFormBean.lazyModel}" rows="50" lazy="true" paginator="true"
+								rowIndexVar="rowIndex" paginatorPosition="both"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="50,100"
+								styleClass="resultTable" style="width:100%;" id="applicationResultTable">
+								<p:column style="width:20px" styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('no')}">
+									<h:outputText value="#{rowIndex+1}" />
+								</p:column>
+								<p:column style="width:125px" sortBy="#{lineBean.customer_no}" headerText="#{displayItemBean.getDisplayItemName('cusotmerNo')}">
+									<h:outputText value="#{lineBean.customer_no}" />
+								</p:column>
+								<p:column style="width:125px" sortBy="#{lineBean.name}" headerText="#{displayItemBean.getDisplayItemName('customer_name')}">
+									<h:outputText value="#{lineBean.name}" />
+								</p:column>
+								<p:column style="width:125px" sortBy="#{lineBean.os_type}" headerText="#{displayItemBean.getDisplayItemName('osType')}">
+									<h:outputText value="#{lineBean.os_type}" />
+								</p:column>
+								<p:column style="width:150px" sortBy="#{lineBean.startTime}" headerText="#{displayItemBean.getDisplayItemName('reportSearchStartTime')}">
+									<h:outputText value="#{lineBean.startTime}">
+										<f:convertDateTime pattern="yyyy-MM-dd HH:mm" timeZone="GMT+6:30" />
+									</h:outputText>
+								</p:column>
+								<p:column style="width:150px" sortBy="#{lineBean.latestUsingTime}" headerText="#{displayItemBean.getDisplayItemName('latestUsingTime')}">
+									<h:outputText value="#{lineBean.latestUsingTime}">
+										<f:convertDateTime pattern="yyyy-MM-dd HH:mm" timeZone="GMT+6:30" />
+									</h:outputText>
+								</p:column>
+								<p:column style="width:150px" sortBy="#{lineBean.avgOfLogPerDay}" headerText="#{displayItemBean.getDisplayItemName('avgNoOflgPerDay')}">
+									<h:outputText value="#{lineBean.avgOfLogPerDay}" />
+								</p:column>
+								<p:column style="width:150px" sortBy="#{lineBean.noOfUsgTol}" headerText="#{displayItemBean.getDisplayItemName('tlNoOfUsagePerDay')}">
+									<h:outputText value="#{lineBean.noOfUsgTol}" />
+								</p:column>
+							</p:dataTable>
+						</f:view>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

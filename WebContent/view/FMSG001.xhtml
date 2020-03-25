@@ -1,0 +1,58 @@
+<!--***********************************************************************
+ * $Date: 2019-04-19$
+ * $Author: Khin Yadanar Thein $
+ * $Rev:  $
+ * 2019 AEON Microfinance (Myanmar) Company	Limited. All Rights Reserved.
+ ***********************************************************************-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://presto.dat.com/tag" template="/layout/template.xhtml">
+	<ui:define name="script">
+		<h:outputScript library="primefaces" name="jquery/jquery.js" />
+		<script type="text/javascript" src="../javascript/jquery-ui.js" />
+		<script type="text/javascript" src="../javascript/freefrontend.js" />
+		<script type="text/javascript" src="../resources/presto/javascript/message.js" />
+		<link rel="stylesheet" type="text/css" href="../stylesheet/font_awesome.css" />
+		<link rel="stylesheet" type="text/css" href="../stylesheet/messaging_layout.css" />
+	</ui:define>
+	<ui:define name="title">
+		<title><h:outputText value="#{displayItemBean.getDisplayItemName('freeMessaging')}" /></title>
+	</ui:define>
+	<ui:define name="body">
+		<h:inputHidden value="#{userInfo.userId}" id="userId" />
+		<h:inputHidden value="#{userInfo.id}" id="id" />
+		<div class="errMsg" id="errMsgDiv">
+			<i class="fas fa-exclamation-triangle" />
+			<span id="errMsg" />
+		</div>
+		<div class="whole_screen">
+			<div style="min-height: 3px;">
+				<div class="load-bar" id="loadBar">
+					<div class="bar"></div>
+					<div class="bar"></div>
+					<div class="bar"></div>
+				</div>
+			</div>
+			<div class="msg_container" id="msg_container" style="max-height: 100%">
+				<div class="inbox_room">
+					<div class="inbox_chat_list scrollable" id="inboxChatList"></div>
+				</div>
+				<div class="msg_conversation" id="msgContent" style="max-height: 100%">
+					<div class="msg_conversation_header">
+						<span id="roomStatus" class="roomStatus">Message Content</span>
+						<div class="btn_finish" onclick="endConversation()" style="display: none; margin-right: 10px; width: auto; padding-left: 10px; padding-right: 10px;" id="conversationEndBtn">
+							<i class="fas fa-check-circle" style="color: #45ff77;"></i>
+							<span>End Conversation</span>
+						</div>
+					</div>
+					<div class="msg_history scrollable" id="msg_history" onscroll="msgScroll()" />
+					<div class="msg_conversation_footer" id="msg_footer">
+						<div contenteditable="true" id="message" class="msg_input scrollable test" />
+						<button class="msg_send_btn" type="button" onclick="onloadCheckMsgLock()" >
+							<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

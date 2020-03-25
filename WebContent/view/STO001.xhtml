@@ -1,0 +1,117 @@
+<!--***********************************************************************
+ * $Date: 2019-02-04$
+ * $Author: Aung Ko Lin$
+ * $Rev:  $
+ * 2019 AEON Microfinance (Myanmar) Company	Limited. All Rights Reserved.
+ ***********************************************************************-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:rich="http://richfaces.org/rich"
+	xmlns:pt="http://presto.dat.com/tag" template="/layout/template.xhtml">
+	<ui:define name="title">
+		<title><h:outputText value="#{displayItemBean.getDisplayItemName('shopList')}" /></title>
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="storeSearchform">
+			<p:defaultCommand target="searchButton" />
+			<div class="ui-fluid">
+				<div class="ui-g" style="padding-left: 1%;">
+					<div class="ui-g-12" style="padding-left: 45%; color: #302873; font-size: 10pt;">
+						<H1>
+							<p:outputLabel value="#{displayItemBean.getDisplayItemName('shopList')}" />
+						</H1>
+					</div>
+				</div>
+				<!-- <div style="padding-left: 88%;">
+						<p:commandButton action="#{storeListFormBean.prepareRegister()}"
+						 value="#{displayItemBean.getDisplayItemName('createNewShop')}"
+						 styleClass="button" style="width: 140px!important;" />
+					</div> -->
+				<div class="ui-g">
+					<div class="ui-g-6">
+						<p:panelGrid styleClass="status-panel-grid" style="margin-top: 0%;">
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:110px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('shopCode')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:170px;">
+									<p:inputText id="storeCode" style="width:100%;" value="#{storeListFormBean.searchHeaderBean.storeCode}" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:110px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('shopName')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:170px;">
+									<p:inputText id="storeName" style="width:100%;" value="#{storeListFormBean.searchHeaderBean.storeName}" />
+								</p:column>
+							</p:row>
+							<p:row style="border:0px">
+								<p:column colspan="2" style="width:45%;background:#f4f7fc;border:0px;padding-left:0%;">
+									<p:commandButton id="searchButton" styleClass="button" action="#{storeListFormBean.search()}" value="#{displayItemBean.getDisplayItemName('btnSearch')}" />
+									<p:commandButton id="clearButton" styleClass="button" value="#{displayItemBean.getDisplayItemName('clear')}" ajax="false" action="#{storeListFormBean.reset()}" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</div>
+					<div class="ui-g-6" style="text-align: right;">
+						<p:commandButton action="#{storeListFormBean.prepareRegister()}" value="#{displayItemBean.getDisplayItemName('createNewShop')}" styleClass="button"
+							style="width: 140px!important;height: 35px;" />
+					</div>
+				</div>
+				<!-- <div class="ui-g-6">
+						<p:commandButton action="#{storeListFormBean.prepareRegister()}"
+						 value="#{displayItemBean.getDisplayItemName('createNewShop')}"
+						 styleClass="button" style="width: 140px!important;" />
+					</div> -->
+				<div class="ui-g">
+					<div class="space-block"></div>
+					<div style="width: 1080px; padding-left: 13px;" class="message-block">
+						<pt:messages />
+					</div>
+					<div class="ui-g" style="width: 100%;">
+						<div class="ui-g-12">
+							<f:view encoding="utf-8">
+								<p:dataTable var="lineBean" first="#{storeListFormBean.pageFirst}" value="#{storeListFormBean.lazyModel}" rows="50" lazy="true" paginator="true" rowIndexVar="rowIndex"
+									paginatorPosition="both" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="50,100" styleClass="resultTable" style="margin-left: 10px;" id="faqResultTable">
+									<p:column style="width:20px" styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('no')}">
+										<h:outputText value="#{rowIndex+1}" />
+									</p:column>
+									<p:column style="width:50px" sortBy="#{lineBean.storeCode}" headerText="#{displayItemBean.getDisplayItemName('shopCode')}">
+										<h:outputText value="#{lineBean.storeCode}" />
+									</p:column>
+									<p:column style="width:200px" sortBy="#{lineBean.storeName}" headerText="#{displayItemBean.getDisplayItemName('shopName')}">
+										<h:outputText value="#{lineBean.storeName}" />
+									</p:column>
+									<p:column style="width:200px" sortBy="#{lineBean.storeAddress}" headerText="#{displayItemBean.getDisplayItemName('address')}">
+										<h:outputText value="#{lineBean.storeAddress}" />
+									</p:column>
+									<p:column id="actions" styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('operation')}" style="width:50px">
+										<p:commandLink id="update" styleClass="management-link" action="#{storeManagementFormBean.prepareUpdate(lineBean)}"
+											value="#{displayItemBean.getDisplayItemName('update')}" />
+										<p:commandLink id="changeValid" styleClass="management-link" action="#{storeListFormBean.toggleValidStatus(lineBean)}"
+											value="#{displayItemBean.getDisplayItemName((lineBean.delFlag == 0)?'disable':'enable')}" update="actions">
+											<p:confirm header="Confirmation" message="Are you sure to #{(lineBean.delFlag == 0)?'disable':'enable'}?" icon="ui-icon-alert" />
+											<f:setPropertyActionListener value="#{lineBean}" target="#{storeListFormBean.lineBean}" />
+										</p:commandLink>
+										<p:commandLink id="detail" styleClass="management-link" action="#{storeListFormBean.detail(lineBean)}" value="#{displayItemBean.getDisplayItemName('detail')}" />
+									</p:column>
+								</p:dataTable>
+							</f:view>
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:form>
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="confirmBox" closable="false" style="background-color:#302873">
+			<div class="ui-g-12">
+				<div class="ui-g-6">
+					<p:commandButton value="Yes" styleClass="ui-confirmdialog-yes button" icon="ui-icon-check" />
+				</div>
+				<div class="ui-g-6">
+					<p:commandButton value="No" styleClass="ui-confirmdialog-no button" icon="ui-icon-close" />
+				</div>
+			</div>
+		</p:confirmDialog>
+	</ui:define>
+</ui:composition>

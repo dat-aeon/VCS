@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="StoreCoupon">
+
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.storeCouponSearch.StoreCouponSearchReqDto"
+		resultMap="storeCouponSearchResDto">
+		SELECT
+		SHOP_COUPON.BRANCH_ID,SHOP_BRANCH.BRANCH_CODE,SHOP_COUPON.COUPON_PASSWORD,SHOP_BRANCH.BRANCH_NAME
+		FROM SHOP_COUPON
+		INNER JOIN SHOP_BRANCH
+		ON SHOP_COUPON.BRANCH_ID =
+		SHOP_BRANCH.BRANCH_ID
+		<where>
+			SHOP_COUPON.SHOP_ID = #{store_id}
+			<if test="coupon_id != null and coupon_id !=''">
+				AND SHOP_COUPON.COUPON_ID = #{coupon_id}
+			</if>
+		</where>
+	</select>
+	<resultMap id="storeCouponSearchResDto"
+		type="mm.aeon.com.ass.base.dto.storeCouponSearch.StoreCouponSearchResDto">
+		<result property="branch_id" column="BRANCH_ID" />
+		<result property="branch_code" column="BRANCH_CODE" />
+		<result property="branch_name" column="BRANCH_NAME" />
+		<result property="coupon_password" column="COUPON_PASSWORD" />
+	</resultMap>
+
+	<update id="update"
+		parameterType="mm.aeon.com.ass.base.dto.storeCouponUpdate.StoreCouponUpdateReqDto">
+		UPDATE SHOP_COUPON
+		<set>
+			<if test="coupon_password != null and coupon_password !=''">
+				COUPON_PASSWORD = #{coupon_password},
+			</if>
+			<if test="updated_by != null and updated_by !=''">
+				UPDATED_BY = #{updated_by},
+			</if>
+			<if test="updatedTime != null">
+				UPDATED_TIME = #{updatedTime}
+			</if>
+		</set>
+		<where>
+			<if test="branch_id != null">
+				BRANCH_ID = #{branch_id}
+			</if>
+		</where>
+	</update>
+
+	<select id="refer"
+		parameterType="mm.aeon.com.ass.base.dto.storeCouponRefer.StoreCouponReferReqDto"
+		resultMap="storeCouponReferResDto">
+		SELECT BRANCH_ID,SHOP_ID,COUPON_PASSWORD
+		FROM SHOP_COUPON
+		<where>
+			<if test="branch_id != null and branch_id != ''">
+				BRANCH_ID = #{branch_id}
+			</if>
+			<if test="coupon_id != null and coupon_id != ''">
+				AND COUPON_ID = #{coupon_id}
+			</if>
+		</where>
+	</select>
+
+	<resultMap id="storeCouponReferResDto"
+		type="mm.aeon.com.ass.base.dto.storeCouponRefer.StoreCouponReferResDto">
+		<result property="branch_id" column="branch_id" />
+		<result property="store_id" column="store_id" />
+		<result property="coupon_password" column="coupon_password" />
+	</resultMap>
+
+	<insert id="insert"
+		parameterType="mm.aeon.com.ass.base.dto.storeCouponRegister.StoreCouponRegisterReqDto">
+		INSERT INTO
+		SHOP_COUPON
+		<trim prefix="(" suffixOverrides="," suffix=")">
+
+			<if test="branch_id != null and branch_id != ''">
+				BRANCH_ID,
+			</if>
+			<if test="store_id != null and store_id != ''">
+				SHOP_ID,
+			</if>
+			<if test="coupon_id != null and coupon_id != ''">
+				COUPON_ID,
+			</if>
+			<if test="coupon_password != null and coupon_password !=''">
+				COUPON_PASSWORD,
+			</if>
+			<if test="updated_by != null and updated_by != ''">
+				UPDATED_BY,
+			</if>
+			<if test="updated_time != null">
+				UPDATED_TIME,
+			</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffixOverrides="," suffix=")">
+
+			<if test="branch_id != null and branch_id != ''">
+				#{branch_id},
+			</if>
+			<if test="store_id != null and store_id != ''">
+				#{store_id},
+			</if>
+			<if test="coupon_id != null and coupon_id != ''">
+				#{coupon_id},
+			</if>
+			<if test="coupon_password != null and coupon_password !=''">
+				#{coupon_password},
+			</if>
+			<if test="updated_by != null and updated_by != ''">
+				#{updated_by},
+			</if>
+			<if test="updated_time != null">
+				#{updated_time},
+			</if>
+		</trim>
+	</insert>
+
+	<delete id="delete" parameterType="mm.aeon.com.ass.base.dto.storeCouponDelete.StoreCouponDeleteReqDto" >
+		DELETE FROM
+			shop_coupon
+		WHERE
+			BRANCH_ID = #{branch_id,jdbcType=INTEGER}
+		AND
+			COUPON_ID = #{coupon_id,jdbcType=INTEGER}
+		AND
+			SHOP_ID = #{store_id,jdbcType=INTEGER}
+	</delete>
+
+</mapper>

@@ -1,0 +1,192 @@
+<!--***********************************************************************
+ * $Date: $
+ * $Author: $
+ * $Rev:  $
+ * 2019 AEON Microfinance (Myanmar) Company	Limited. All Rights Reserved.
+ ***********************************************************************-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:rich="http://richfaces.org/rich"
+	xmlns:pt="http://presto.dat.com/tag" template="/layout/template.xhtml">
+	<ui:define name="title">
+		<title><h:outputText value="#{displayItemBean.getDisplayItemName('CUS002')}" /></title>
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="customerUpdateForm">
+			<div class="ui-fluid">
+				<div class="ui-g">
+					<div class="ui-g-12" style="color: #302873; font-size: 10pt; text-align: center;">
+						<H1>
+							<p:outputLabel value="#{displayItemBean.getDisplayItemName('CUS002')}" />
+						</H1>
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="ui-g-12" style="padding-left: 30%;">
+						<!-- <p:fieldset styleClass="import-fieldset"
+							style="width: 500px !important;"
+							legend="#{displayItemBean.getDisplayItemName('CUS002')}"> -->
+						<span class="message-style">
+							<pt:messages />
+						</span>
+						<p:panelGrid styleClass="status-panel-grid" style="margin-top: 0%;">
+							<p:row styleClass="status-panel-grid-row">
+								<p:column style="width: 200px" styleClass="status-panel-grid-column tblSingleLabel">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('name')}" />
+									<h:outputText styleClass="star" value=" *" />
+								</p:column>
+								<p:column style="width: 300px;" styleClass="status-panel-grid-column">
+									<p:inputText id="name" styleClass="width200px" value="#{customerManagementFormBean.lineBean.name}" valueChangeListener="#{customerManagementFormBean.nameChange}">
+										<p:ajax process="@this" />
+									</p:inputText>
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column style="width: 200px" styleClass="status-panel-grid-column tblSingleLabel">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('customerNo')}" />
+								</p:column>
+								<p:column style="width: 300px;" styleClass="status-panel-grid-column">
+									<p:inputText id="customerNo" styleClass="width200px" value="#{customerManagementFormBean.lineBean.customerNo}"
+										valueChangeListener="#{customerManagementFormBean.cusNoChange}">
+										<p:ajax process="@this" />
+									</p:inputText>
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column style="width: 200px" styleClass="status-panel-grid-column tblSingleLabel">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('phoneNo')}" />
+									<h:outputText styleClass="star" value=" *" />
+								</p:column>
+								<p:column style="width: 300px;" styleClass="status-panel-grid-column">
+									<p:inputText id="phoneNo" styleClass="width200px" maxlength="13" value="#{customerManagementFormBean.lineBean.phoneNo}"
+										valueChangeListener="#{customerManagementFormBean.phoneChange}">
+										<p:ajax process="@this" />
+									</p:inputText>
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column style="width: 200px" styleClass="status-panel-grid-column tblSingleLabel">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('nrcNo')}" />
+									<h:outputText styleClass="star" value=" *" />
+								</p:column>
+								<p:column style="width: 300px;" styleClass="status-panel-grid-column">
+									<p:inputText id="nrcNo" styleClass="width200px" maxlength="20" value="#{customerManagementFormBean.lineBean.nrcNo}"
+										valueChangeListener="#{customerManagementFormBean.nrcChange}">
+										<p:ajax process="@this" />
+									</p:inputText>
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column style="width: 200px" styleClass="status-panel-grid-column tblSingleLabel">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('dob')}" />
+									<h:outputText styleClass="star" value=" *" />
+								</p:column>
+								<p:column style="width: 300px;" styleClass="status-panel-grid-column">
+									<p:calendar id="dob" pattern="dd-MM-yyyy" navigator="true" showOn="button" styleClass="width200px" value="#{customerManagementFormBean.lineBean.dob}" >
+										<p:ajax event="dateSelect" listener="#{customerManagementFormBean.dobChange}"  />
+									</p:calendar>
+								</p:column>
+							</p:row>
+							<!-- <p:row styleClass="status-panel-grid-row">
+									<p:column style="width: 200px"
+										styleClass="status-panel-grid-column tblSingleLabel">
+										<h:outputText
+											value="#{displayItemBean.getDisplayItemName('startDate')}" />
+									</p:column>
+									<p:column style="width: 300px;"
+										styleClass="status-panel-grid-column">
+										<p:calendar id="startDate" pattern="dd-MM-yyyy"
+											showOn="button" styleClass="width200px"
+											value="#{customerManagementFormBean.lineBean.joinDate}" />
+									</p:column>
+								</p:row> -->
+							<p:row styleClass="status-panel-grid-row">
+								<p:column style="width: 200px" styleClass="status-panel-grid-column tblSingleLabel">
+									<p:outputLabel indicateRequired="true" value="#{displayItemBean.getDisplayItemName('salary')}" />
+								</p:column>
+								<p:column style="width: 300px;" styleClass="status-panel-grid-column">
+									<p:inputNumber id="salary" styleClass="width200px" value="#{customerManagementFormBean.lineBean.salary}" maxValue="9999999999999999"
+										valueChangeListener="#{customerManagementFormBean.salaryChange}">
+										<p:ajax process="@this" />
+									</p:inputNumber>
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column style="width: 200px" styleClass="status-panel-grid-column tblSingleLabel">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('gender')}" />
+									<h:outputText styleClass="star" value=" *" />
+								</p:column>
+								<p:column style="width: 300px;" styleClass="status-panel-grid-column">
+									<p:selectOneRadio id="gender" styleClass="width200px" value="#{customerManagementFormBean.lineBean.gender}"
+										valueChangeListener="#{customerManagementFormBean.genderChange}">
+										<f:selectItems value="#{customerManagementFormBean.lineBean.genderSelectItemList}" />
+										<p:ajax process="@this" />
+									</p:selectOneRadio>
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column style="width: 200px" styleClass="status-panel-grid-column tblSingleLabel">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('companyName')}" />
+								</p:column>
+								<p:column style="width: 300px;" styleClass="status-panel-grid-column">
+									<p:inputText id="companyName" styleClass="width200px" value="#{customerManagementFormBean.lineBean.companyName}"
+										valueChangeListener="#{customerManagementFormBean.companyChange}">
+										<p:ajax process="@this" />
+									</p:inputText>
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column style="width: 200px" styleClass="status-panel-grid-column tblSingleLabel">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('township')}" />
+								</p:column>
+								<p:column style="width: 300px;" styleClass="status-panel-grid-column">
+									<p:inputText id="township" styleClass="width200px" value="#{customerManagementFormBean.lineBean.township}"
+										valueChangeListener="#{customerManagementFormBean.townshipChange}">
+										<p:ajax process="@this" />
+									</p:inputText>
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row" rendered="#{customerManagementFormBean.lineBean.member}">
+								<p:column style="width: 200px" styleClass="status-panel-grid-column tblSingleLabel">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('nonMember')}" />
+								</p:column>
+								<p:column style="width: 300px;" styleClass="status-panel-grid-column">
+									<p:selectBooleanCheckbox id="nonMember" styleClass="width200px" value="#{customerManagementFormBean.lineBean.nonMember}"
+										valueChangeListener="#{customerManagementFormBean.cusTypeChange}">
+										<p:ajax process="@this" />
+									</p:selectBooleanCheckbox>
+								</p:column>
+							</p:row>
+							<p:row style="border: none;">
+								<p:column style="background:#f4f7fc;border: none;padding-left:0%;" colspan="2">
+									<p:commandButton value="#{displayItemBean.getDisplayItemName('update')}" id="updateButton" style="margin-top: 2%;" process="@this" styleClass="button"
+										onclick="PF('updateConfirmDlg').show()">
+									</p:commandButton>
+									<p:commandButton value="#{displayItemBean.getDisplayItemName('reset')}" update="customerUpdateForm" action="#{customerManagementFormBean.reset()}" id="resetButton"
+										style="margin-top: 2%;" process="@this" styleClass="button" />
+									<p:commandButton value="#{displayItemBean.getDisplayItemName('back')}" process="@this" action="#{customerManagementFormBean.back()}" id="cancelButton"
+										style="margin-top: 2%;" styleClass="button" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+						<!-- <p:commandButton
+								value="#{displayItemBean.getDisplayItemName('update')}"
+								id="updateButton" style="margin-top: 2%;" styleClass="button"
+								onclick="PF('updateConfirmDlg').show()">
+							</p:commandButton>
+							<p:commandButton
+								value="#{displayItemBean.getDisplayItemName('cancel')}"
+								action="#{customerManagementFormBean.back()}" id="cancelButton"
+								process="@none" style="margin-top: 2%;" ajax="false"
+								styleClass="button" /> -->
+						<!-- </p:fieldset> -->
+					</div>
+				</div>
+			</div>
+			<p:confirmDialog message="Are you sure to update?" header="Confirmation" widgetVar="updateConfirmDlg" showEffect="fade" hideEffect="fade" icon="ui-icon-alert"
+				style="background-color:#302873">
+				<p:commandButton value="Yes" process="@this" action="#{customerManagementFormBean.update()}" styleClass="ui-confirmdialog-yes button" icon="ui-icon-check" />
+				<p:commandButton value="No" process="@this" styleClass="ui-confirmdialog-no button" icon="ui-icon-close" oncomplete="PF('updateConfirmDlg').hide()" />
+			</p:confirmDialog>
+		</h:form>
+	</ui:define>
+</ui:composition>

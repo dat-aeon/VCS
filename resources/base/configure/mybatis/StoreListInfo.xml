@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="Store">
+	
+	<select id="count"
+		parameterType="mm.aeon.com.ass.base.dto.storeCount.StoreCountReqDto"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM SHOP_INFO
+		
+	</select>
+	
+	<select id="refer"
+		parameterType="mm.aeon.com.ass.base.dto.storeCount.StoreMaxReqDto"
+		resultMap="storeMaxResDto">
+		SELECT MAX(SHOP_ID) AS MAX_ID
+		FROM SHOP_INFO
+	</select>
+    
+    <resultMap id="storeMaxResDto"
+		type="mm.aeon.com.ass.base.dto.storeCount.StoreMaxResDto">
+		<result property="max_id" column="max_id" />
+	</resultMap>
+	
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.storeSearch.StoreSearchReqDto"
+		resultMap="storeSearchResDto">
+		SELECT SHOP_ID,SHOP_NAME,SHOP_CODE,
+				ADDRESS,DEL_FLAG,UPDATED_BY,CREATED_TIME,
+				UPDATED_TIME
+		FROM SHOP_INFO 
+		<where>
+			<if test="storeName != null and storeName != ''">
+				AND SHOP_NAME ILIKE '%' || TRIM(#{storeName,jdbcType=VARCHAR}) ||'%'
+			</if>
+			<if test="storeCode != null and storeCode != ''">
+				AND SHOP_CODE ILIKE '%' || #{storeCode} || '%'
+			</if>
+		</where>
+		ORDER BY SHOP_ID DESC
+	</select>
+	<resultMap id="storeSearchResDto"
+		type="mm.aeon.com.ass.base.dto.storeSearch.StoreSearchResDto">
+		<result property="storeId" column="SHOP_ID" />
+		<result property="storeName" column="SHOP_NAME" />
+		<result property="storeCode" column="SHOP_CODE" />
+		<result property="storeAddress" column="ADDRESS" />
+		<result property="delFlag" column="DEL_FLAG" />
+		<result property="updatedBy" column="UPDATED_BY" />
+		<result property="createdTime" column="CREATED_TIME" />
+		<result property="updatedTime" column="UPDATED_TIME" />
+	</resultMap>
+	
+	<insert id="insert"
+		parameterType="mm.aeon.com.ass.base.dto.storeRegister.StoreInsertReqDto">
+		INSERT INTO
+		SHOP_INFO
+		<trim prefix="(" suffixOverrides="," suffix=")">
+
+			<!-- <if test="storeId != null and storeId != ''">
+				SHOP_ID,
+			</if> -->
+			<if test="storeName != null and storeName != ''">
+				SHOP_NAME,
+			</if>
+			<if test="storeCode != null and storeCode != ''">
+				SHOP_CODE,
+			</if>
+			<if test="storeAddress != null">
+				ADDRESS,
+			</if>
+			<if test="delFlag != null">
+				DEL_FLAG,
+			</if>
+			<if test="createdBy != null and createdBy != ''">
+				CREATED_BY,
+			</if>			
+			<if test="createdTime != null">
+				CREATED_TIME,
+			</if>
+			
+		</trim>
+		VALUES
+		<trim prefix="(" suffixOverrides="," suffix=")">
+			
+			<!-- <if test="storeId != null and storeId != ''">
+				#{storeId}, 
+			</if> -->
+			<if test="storeName != null and storeName != ''">
+				#{storeName},
+			</if>
+			<if test="storeCode != null and storeCode != ''">
+				#{storeCode},
+			</if>
+			<if test="storeAddress != null">
+				#{storeAddress},
+			</if>
+			<if test="delFlag != null">
+				#{delFlag},
+			</if>
+			<if test="createdBy != null and createdBy != ''">
+				#{createdBy},
+			</if>
+			<if test="createdTime != null">
+				#{createdTime},
+			</if>
+			
+		</trim>
+	</insert>
+	
+	<select id="selectForUpdate"
+		parameterType="mm.aeon.com.ass.base.dto.storeSelectUpdate.StoreSelectForUpdateReqDto"
+		resultMap="storeSelectForUpdateResDto">
+		SELECT SHOP_ID,UPDATED_TIME
+		FROM SHOP_INFO
+		<where>
+			<if test="storeId != null and storeId != ''">
+				SHOP_ID = #{storeId}
+			</if>
+		</where>
+	</select>
+	
+	<resultMap id="storeSelectForUpdateResDto"
+		type="mm.aeon.com.ass.base.dto.storeSelectUpdate.StoreSelectForUpdateResDto">
+		<result property="storeId" column="SHOP_ID" />
+		<result property="updatedDate" column="UPDATED_TIME" />
+	</resultMap>
+	
+	<update id="update"
+		parameterType="mm.aeon.com.ass.base.dto.storeUpdate.StoreUpdateReqDto">
+		UPDATE 
+		SHOP_INFO
+			<set>
+				<if test="storeName != null and storeName != ''">
+					SHOP_NAME = #{storeName},
+				</if>
+				<if test="storeCode != null">
+					SHOP_CODE = #{storeCode},
+				</if>
+				<if test="storeAddress != null and storeAddress != ''">
+					ADDRESS  = #{storeAddress},
+				</if>
+				<if test="updatedBy != null and updatedBy != ''">
+					UPDATED_BY = #{updatedBy},
+				</if>
+			
+				<if test="updatedDate != null">
+					UPDATED_TIME = #{updatedDate},
+				</if>
+				<if test="delFlag != null">
+					DEL_FLAG = #{delFlag},
+				</if>
+			</set>
+		<where>
+			<if test="storeId != null and storeId !=''">
+				SHOP_ID = #{storeId}
+			</if>
+		</where>
+	</update>
+
+</mapper>

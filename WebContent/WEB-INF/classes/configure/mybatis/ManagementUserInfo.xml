@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="ManagementUserInfo">
+
+	<select id="refer"
+		parameterType="mm.aeon.com.ass.base.dto.managementUserInfoRefer.ManagementUserInfoReferReqDto"
+		resultMap="ManagementUserInfoReferResDto">
+		SELECT ID, LOGIN_ID, NAME, PASSWORD, ROLE
+		FROM MANAGEMENT_USER_INFO
+		<where>
+			ISVALID = 1
+			<if test="loginID != null and loginID != ''">
+				AND LOGIN_ID = #{loginID}
+			</if>
+			<if test="password != null and password != ''">
+				AND PASSWORD = #{password}
+			</if>
+
+		</where>
+	</select>
+
+	<resultMap id="ManagementUserInfoReferResDto"
+		type="mm.aeon.com.ass.base.dto.managementUserInfoRefer.ManagementUserInfoReferResDto">
+		<result property="id" column="id" />
+		<result property="loginID" column="login_id" />
+		<result property="name" column="name" />
+		<result property="role" column="role" />
+
+	</resultMap>
+
+</mapper>

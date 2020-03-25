@@ -1,0 +1,154 @@
+<!--***********************************************************************
+ * $Date: 2019-04-30$
+ * $Author: Htet Wai Yan Kyaw $
+ * $Rev:  $
+ * 2018 AEON Microfinance (Myanmar) Company	Limited. All Rights Reserved.
+ ***********************************************************************-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:rich="http://richfaces.org/rich"
+	xmlns:pt="http://presto.dat.com/tag" template="/layout/template.xhtml">
+	<ui:define name="title">
+		<title><h:outputText value="#{displayItemBean.getDisplayItemName((promotionsInfoManagementFormBean.update)?'promotionsUpdate':'promotionsRegister')}" /></title>
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="promotionsInfoManagementForm">
+			<div class="ui-fluid">
+				<div class="ui-g">
+					<div class="ui-g-12" style="color: #302873; font-size: 10pt; text-align: center;">
+						<H1>
+							<p:outputLabel value="#{displayItemBean.getDisplayItemName((promotionsInfoManagementFormBean.update)?'promotionsUpdate':'promotionsRegister')}" />
+						</H1>
+					</div>
+				</div>
+			</div>
+			<div class="ui-fluid" style="margin-left: 15%;">
+				<div class="ui-g" style="width: 1000px;">
+					<div class="ui-g-12" style="width: 1000px !important; padding-left: 20%;">
+						<span class="message-style">
+							<pt:messages />
+						</span>
+						<p:panelGrid styleClass="status-panel-grid" style="margin-top: 0%;">
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('titleEng')}" />
+									<h:outputText styleClass="star" value=" *" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:220px;">
+									<p:inputText id="titleEng" maxlength="256" value="#{promotionsInfoManagementFormBean.promotionsInfoManagementHeaderBean.titleEng}" style="width:350px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('titleMyn')}" />
+									<h:outputText styleClass="star" value=" *" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:220px;">
+									<p:inputText id="titleMyn" maxlength="256" value="#{promotionsInfoManagementFormBean.promotionsInfoManagementHeaderBean.titleMyn}" style="width:350px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('contentEng')}" />
+									<h:outputText styleClass="star" value=" *" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:220px;">
+									<p:inputTextarea id="contentEng" maxlength="2000" value="#{promotionsInfoManagementFormBean.promotionsInfoManagementHeaderBean.contentEng}" style="width:350px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('contentMyn')}" />
+									<h:outputText styleClass="star" value=" *" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:220px;">
+									<p:inputTextarea id="contentMyn" maxlength="2000" value="#{promotionsInfoManagementFormBean.promotionsInfoManagementHeaderBean.contentMyn}" style="width:350px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('publishedFromDate')}" />
+									<h:outputText styleClass="star" value=" *" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:300px;">
+									<p:calendar id="publishedFromDate" navigator="true" style="height:22px;" pattern="dd-MM-yyyy" mask="true"
+										value="#{promotionsInfoManagementFormBean.promotionsInfoManagementHeaderBean.publishedFromDate}" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('publishedToDate')}" />
+									<h:outputText styleClass="star" value=" *" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:300px;">
+									<p:calendar id="publishedToDate" navigator="true" style="height:22px;" pattern="dd-MM-yyyy"
+										value="#{promotionsInfoManagementFormBean.promotionsInfoManagementHeaderBean.publishedToDate}" mask="true" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column styleClass="tblSingleLabel">
+									<h:outputLabel id="attckmentImage" value="#{displayItemBean.getDisplayItemName('promotionsImage')}" />
+								</p:column>
+								<p:column styleClass="tblSingleInput import_btn" id="imageUpload">
+									<h:outputLabel value="#{displayItemBean.getDisplayItemName('promotionsImageInfo')}" styleClass="tblSingleLabel"
+										style="color:#004DFE;background-color: transparent;" />
+									<div style="height: 10px;"></div>
+									<p:fileUpload id="promotionsImage" fileLimit="1" value="#{promotionsInfoManagementFormBean.newsInfoManagementImageBean.newsInfoImage}"
+										fileUploadListener="#{promotionsInfoManagementFormBean.uploadImage}" oncomplete="doFinishedImage(this);" mode="advanced" allowTypes="/(\.|\/)(png)$/" styleClass="file"
+										label="Browse" />
+									<p:remoteCommand name="importImage" update="promotionsInfoManagementForm:imageUpload promotionsInfoManagementForm:promotionsImageDisplay"
+										action="#{promotionsInfoManagementFormBean.importImage()}" />
+									<script type="text/javascript">
+										function doFinishedImage(fileupload) {
+											if (fileupload.files.length == 0) {
+												importImage();
+											}
+										}
+									</script>
+								</p:column>
+								<p:column id="promotionsImageDisplay">
+									<p:graphicImage url="#{promotionsInfoManagementFormBean.tempUploadImageFilePath}" style="width:50px;height:auto;">
+									</p:graphicImage>
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('longitude')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:220px;">
+									<p:inputText id="longitude" maxlength="20" value="#{promotionsInfoManagementFormBean.promotionsInfoManagementHeaderBean.longitude}" style="width:350px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('latitude')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:220px;">
+									<p:inputText id="latitude" maxlength="20" value="#{promotionsInfoManagementFormBean.promotionsInfoManagementHeaderBean.latitude}" style="width:350px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('announcementUrl')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:220px;">
+									<p:inputText id="announcementUrl" maxlength="500" value="#{promotionsInfoManagementFormBean.promotionsInfoManagementHeaderBean.announcementUrl}" style="width:350px;" />
+								</p:column>
+							</p:row>
+							<p:row style="border: none;">
+								<p:column style="background:#f4f7fc;border: none;padding-left:0%;" colspan="2">
+									<p:commandButton id="registerButton" styleClass="button" value="#{displayItemBean.getDisplayItemName((promotionsInfoManagementFormBean.update)?'update':'register')}"
+										ajax="false" action="#{promotionsInfoManagementFormBean.register()}" />
+									<p:commandButton rendered="#{not promotionsInfoManagementFormBean.update}" value="#{displayItemBean.getDisplayItemName('clear')}"
+										action="#{promotionsInfoManagementFormBean.clear()}" id="cancelButton" ajax="false" styleClass="button" />
+									<p:commandButton rendered="#{promotionsInfoManagementFormBean.update}" value="#{displayItemBean.getDisplayItemName('reset')}"
+										action="#{promotionsInfoManagementFormBean.reset()}" id="resetButton" ajax="false" styleClass="button" update="promotionsInfoManagementForm" />
+									<p:commandButton value="#{displayItemBean.getDisplayItemName('back')}" action="#{promotionsInfoManagementFormBean.back()}" id="backButton" ajax="false" styleClass="button" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

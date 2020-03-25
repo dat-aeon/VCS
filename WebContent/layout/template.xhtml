@@ -1,0 +1,59 @@
+<!--***************************************************************************
+ * $Date: 2018-06-20$
+ * $Author: Khin Yadanar Thein$
+ * $Rev:  $
+ * 2018 AEON Microfinance (Myanmar) Company Limited. All Rights Reserved.
+ ***************************************************************************-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" contentType="text/html" encoding="UTF-8">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<h:head>
+	<ui:insert name="script" />
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	</f:facet>
+	<link rel="stylesheet" href="#{request.contextPath}/stylesheet/base.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="#{request.contextPath}/stylesheet/container.css" type="text/css" media="all" />
+	<script type="text/javascript" src="#{request.contextPath}/javascript/general.js"></script>
+	<h:outputScript library="primefaces" name="jquery/jquery.js" />
+	<ui:insert name="title" />
+	<link href="../presto/images/AEON_Logo.png" rel="shortcut icon" />
+</h:head>
+<body onload="customCommonLoad();">
+	<div class="ui-g" id="header">
+		<!--  HEADER -->
+		<ui:include src="/layout/header.xhtml" />
+		<!-- HEADER -->
+	</div>
+	<div class="ui-g" id="menu">
+		<!--  MENU -->
+		<ui:include src="/layout/menu.xhtml" />
+		<!-- MENU -->
+	</div>
+	<div class="ui-g" id="contents">
+		<div class="ui-g-12">
+			<!-- SCREEN BODY -->
+			<ui:insert name="body" />
+			<!-- SCREEN BODY -->
+		</div>
+	</div>
+	
+	<p:ajaxStatus id="ajaxStatus" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+	
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false" styleClass="loading-spin">
+		<img src="${facesContext.externalContext.requestContextPath}/images/Spinner-1s-200px-03A9F4.svg" />
+	</p:dialog>
+	<p:idleMonitor timeout="${session.maxInactiveInterval*1000}">
+		<p:ajax event="idle" listener="#{userInfo.isSessionValid}"></p:ajax>
+	</p:idleMonitor>
+	<div class="ui-g">
+		<!-- FOOTER -->
+		<ui:include src="/layout/footer.xhtml" />
+		<!-- FOOTER -->
+	</div>
+</body>
+	</html>
+</f:view>

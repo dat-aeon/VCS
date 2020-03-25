@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PromotionsInfo">
+
+	<resultMap id="promotionsInfoResultMap"
+		type="mm.aeon.com.ass.base.dto.promotionsInfoSearch.PromotionsInfoSearchResDto">
+		<id column="PROMOTIONS_INFO_ID" jdbcType="INTEGER" property="promotionsInfoId" />
+	    <result column="TITLE_ENG" jdbcType="VARCHAR" property="titleEng" />
+	    <result column="TITLE_MYN" jdbcType="VARCHAR" property="titleMyn" />
+	    <result column="CONTENT_ENG" jdbcType="VARCHAR" property="contentEng" />
+	    <result column="CONTENT_MYN" jdbcType="VARCHAR" property="contentMyn" />
+	    <result column="PUBLISHED_FROM_DATE" jdbcType="DATE" property="publishedFromDate" />
+	    <result column="PUBLISHED_TO_DATE" jdbcType="DATE" property="publishedToDate" />
+	    <result column="IMAGE_PATH" jdbcType="VARCHAR" property="imagePath" />
+	    <result column="LONGITUDE" jdbcType="VARCHAR" property="longitude" />
+	    <result column="LATITUDE" jdbcType="VARCHAR" property="latitude" />
+	    <result column="ANNOUNCEMENT_URL" jdbcType="VARCHAR" property="announcementUrl" />
+	</resultMap>
+
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.promotionsInfoSearch.PromotionsInfoSearchReqDto"
+		resultMap="promotionsInfoResultMap">
+		SELECT
+			PI.PROMOTIONS_INFO_ID,
+			PI.TITLE_ENG,
+			PI.TITLE_MYN,
+			PI.CONTENT_ENG,
+			PI.CONTENT_MYN,
+			PI.PUBLISHED_FROM_DATE,
+			PI.PUBLISHED_TO_DATE,
+			PI.IMAGE_PATH,
+			PI.LONGITUDE,
+			PI.LATITUDE,
+			PI.ANNOUNCEMENT_URL
+		FROM
+			promotions_info PI
+		WHERE
+			PI.DEL_FLAG = 0
+		<if test="sortField != null and sortField != '' and sortField == 'titleEng' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY PI.TITLE_ENG ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY PI.TITLE_ENG DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'titleMyn' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY PI.TITLE_MYN ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY PI.TITLE_MYN DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'publishedFromDate' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY PI.PUBLISHED_FROM_DATE ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY PI.PUBLISHED_FROM_DATE DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'publishedToDate' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY PI.PUBLISHED_TO_DATE ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY PI.PUBLISHED_TO_DATE DESC
+			</if>
+		</if>
+		<if test="sortField == null or sortField == ''">
+			ORDER BY PI.CREATED_TIME DESC, PI.PUBLISHED_FROM_DATE DESC
+		</if>
+		<if test="offset != null and limit != null">
+			OFFSET #{offset} LIMIT #{limit}
+		</if>
+	</select>
+	
+	<update id="delete"
+		parameterType="mm.aeon.com.ass.base.dto.promotionsInfoDelete.PromotionsInfoDeleteReqDto">
+		UPDATE 
+			promotions_info
+		<set>
+			<if test="delFlag != null">
+				DEL_FLAG = #{delFlag},
+			</if>
+			<if test="updatedBy != null and updatedBy != ''">
+				UPDATED_BY = #{updatedBy},
+			</if>
+			<if test="updatedTime != null">
+				UPDATED_TIME = #{updatedTime},
+			</if>
+		</set>
+		<where>
+			<if test="promotionsInfoId != null and promotionsInfoId !=''">
+				PROMOTIONS_INFO_ID = #{promotionsInfoId}
+			</if>
+		</where>
+	</update>
+	
+	<insert id="insert" parameterType="mm.aeon.com.ass.base.dto.promotionsInfoRegister.PromotionsInfoInsertReqDto">
+    insert into promotions_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="promotionsInfoId != null">
+        promotions_info_id,
+      </if>
+      <if test="titleEng != null">
+        title_eng,
+      </if>
+      <if test="titleMyn != null">
+        title_myn,
+      </if>
+      <if test="contentEng != null">
+        content_eng,
+      </if>
+      <if test="contentMyn != null">
+        content_myn,
+      </if>
+      <if test="publishedFromDate != null">
+        published_from_date,
+      </if>
+      <if test="publishedToDate != null">
+        published_to_date,
+      </if>
+      <if test="imagePath != null">
+        image_path,
+      </if>
+      <if test="longitude != null">
+        longitude,
+      </if>
+      <if test="latitude != null">
+        latitude,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="updatedTime != null">
+        updated_time,
+      </if>
+      <if test="updatedBy != null">
+        updated_by,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="announcementUrl != null">
+        announcement_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="promotionsInfoId != null">
+        #{promotionsInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="titleEng != null">
+        #{titleEng,jdbcType=VARCHAR},
+      </if>
+      <if test="titleMyn != null">
+        #{titleMyn,jdbcType=VARCHAR},
+      </if>
+      <if test="contentEng != null">
+        #{contentEng,jdbcType=VARCHAR},
+      </if>
+      <if test="contentMyn != null">
+        #{contentMyn,jdbcType=VARCHAR},
+      </if>
+      <if test="publishedFromDate != null">
+        #{publishedFromDate,jdbcType=DATE},
+      </if>
+      <if test="publishedToDate != null">
+        #{publishedToDate,jdbcType=DATE},
+      </if>
+      <if test="imagePath != null">
+        #{imagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="announcementUrl != null">
+        #{announcementUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+	
+	<update id="update" parameterType="mm.aeon.com.ass.base.dto.promotionsInfoUpdate.PromotionsInfoUpdateReqDto">
+    update promotions_info
+    <set>
+      <if test="titleEng != null">
+        title_eng = #{titleEng,jdbcType=VARCHAR},
+      </if>
+      <if test="titleMyn != null">
+        title_myn = #{titleMyn,jdbcType=VARCHAR},
+      </if>
+      <if test="contentEng != null">
+        content_eng = #{contentEng,jdbcType=VARCHAR},
+      </if>
+      <if test="contentMyn != null">
+        content_myn = #{contentMyn,jdbcType=VARCHAR},
+      </if>
+      <if test="publishedFromDate != null">
+        published_from_date = #{publishedFromDate,jdbcType=DATE},
+      </if>
+      <if test="publishedToDate != null">
+        published_to_date = #{publishedToDate,jdbcType=DATE},
+      </if>
+      <if test="imagePath != null">
+        image_path = #{imagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        longitude = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        latitude = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null">
+        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        updated_by = #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="announcementUrl != null">
+        announcement_url = #{announcementUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where promotions_info_id = #{promotionsInfoId,jdbcType=INTEGER}
+  </update>
+</mapper>    
+    

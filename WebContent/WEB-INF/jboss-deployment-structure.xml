@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-deployment-structure>
+
+<deployment>
+      <dependencies>
+         <module name="org.javassist" />
+         <module name="org.apache.velocity" export="TRUE" />
+         <module name="org.dom4j" export="true"/> 
+      </dependencies>
+        
+       <exclusions>
+       		<module name="org.apache.log4j" slot="main"/>	 
+		</exclusions>
+
+   </deployment>
+</jboss-deployment-structure>

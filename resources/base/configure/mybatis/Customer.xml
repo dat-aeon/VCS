@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Customer">
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.customerSearch.CustomerSearchReqDto"
+		resultMap="customerSearchResDto">
+		SELECT 
+			CUSTOMER_ID, 
+			CUSTOMER_NO, 
+			PHONE_NO, 
+			CUSTOMER_TYPE_ID, 
+			NAME,
+			DOB, 
+			NRC_NO, 
+			JOIN_DATE, 
+			SALARY, 
+			COMPANY_NAME, 
+			ADDRESS, 
+			GENDER,
+			PHOTO_PATH,
+			CREATED_BY, 
+			UPDATED_BY, 
+			CREATED_TIME, 
+			UPDATED_TIME,
+			APPLOCK_FLAG
+		FROM
+			customer_info
+		<where>
+			del_flag = 0
+			<if test="customerTypeId != null ">
+				AND CUSTOMER_TYPE_ID = #{customerTypeId}
+			</if>
+			<if test="name != null and name != ''">
+				AND LOWER(NAME) LIKE '%' || #{name} || '%'
+			</if>
+			<if test="customerNo != null and customerNo != ''">
+				AND LOWER(CUSTOMER_NO) LIKE '%' || #{customerNo} || '%'
+			</if>
+			<if test="salaryMin != null">
+				AND SALARY &gt;= #{salaryMin}
+			</if>
+			<if test="salaryMax != null">
+				AND SALARY &lt;= #{salaryMax}
+			</if>
+			<if test="dobFrom != null">
+				AND DOB &gt;= #{dobFrom}
+			</if>
+			<if test="dobTo != null">
+				AND DOB &lt;= #{dobTo}
+			</if>
+			<if test="township != null and township != ''">
+				AND LOWER(ADDRESS) LIKE '%' || #{township} || '%'
+			</if>
+			<if test="phoneNo != null and phoneNo != ''">
+				AND LOWER(PHONE_NO) LIKE LOWER('%' || #{phoneNo} || '%')
+			</if>
+			<if test="nrcNo != null and nrcNo != ''">
+				AND LOWER(NRC_NO) LIKE LOWER('%' || #{nrcNo} || '%')
+			</if>
+			<if test="startDateFrom != null ">
+				AND TO_CHAR(JOIN_DATE::DATE,'YYYYMMDD') &gt;= TO_CHAR(#{startDateFrom,jdbcType=DATE}::DATE,'YYYYMMDD')
+			</if>
+			<if test="startDateTo != null ">
+				AND TO_CHAR(JOIN_DATE::DATE,'YYYYMMDD') &lt;= TO_CHAR(#{startDateTo,jdbcType=DATE}::DATE,'YYYYMMDD')
+			</if>
+		</where>
+		<if test="sortField != null and sortField != '' and sortField == 'customerNo' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY CUSTOMER_NO ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY CUSTOMER_NO DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'name' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY NAME ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY NAME DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'phoneNo' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY PHONE_NO ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY PHONE_NO DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'township' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY ADDRESS ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY ADDRESS DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'nrcNo' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY NRC_NO ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY NRC_NO DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'joinDate' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY JOIN_DATE ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY JOIN_DATE DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'customerTypeId' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY CUSTOMER_TYPE_ID ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY CUSTOMER_TYPE_ID DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'dob' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY DOB ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY DOB DESC
+			</if>
+		</if>
+		<if test="sortField == null or sortField == ''">
+			ORDER BY JOIN_DATE DESC
+		</if>
+		<if test="offset != null and limit != null">
+			OFFSET #{offset} LIMIT #{limit}
+		</if>
+	</select>
+
+	<select id="count"
+		parameterType="mm.aeon.com.ass.base.dto.customerSearch.CustomerSelectCountReqDto"
+		resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM
+		customer_info
+		<where>
+			del_flag = 0
+			<if test="customerTypeId != null ">
+				AND customer_type_id = #{customerTypeId}
+			</if>
+			<if test="name != null and name != ''">
+				AND LOWER(name) LIKE '%' || #{name} || '%'
+			</if>
+			<if test="customerNo != null and customerNo != ''">
+				AND LOWER(customer_no) LIKE '%' || #{customerNo} || '%'
+			</if>
+			<if test="salaryMin != null">
+				AND salary &gt;= #{salaryMin}
+			</if>
+			<if test="salaryMax != null">
+				AND salary &lt;= #{salaryMax}
+			</if>
+			<if test="dobFrom != null">
+				AND dob &gt;= #{dobFrom}
+			</if>
+			<if test="dobTo != null">
+				AND dob &lt;= #{dobTo}
+			</if>
+			<if test="township != null and township != ''">
+				AND LOWER(address) LIKE '%' || #{township} || '%'
+			</if>
+			<if test="phoneNo != null and phoneNo != ''">
+				AND LOWER(phone_no) LIKE LOWER('%' || #{phoneNo} || '%')
+			</if>
+			<if test="nrcNo != null and nrcNo != ''">
+				AND LOWER(nrc_no) LIKE LOWER('%' || #{nrcNo} || '%')
+			</if>
+			<if test="startDateFrom != null ">
+				AND TO_CHAR(JOIN_DATE::DATE,'YYYYMMDD') &gt;= TO_CHAR(#{startDateFrom,jdbcType=DATE}::DATE,'YYYYMMDD')
+			</if>
+			<if test="startDateTo != null ">
+				AND TO_CHAR(JOIN_DATE::DATE,'YYYYMMDD') &lt;= TO_CHAR(#{startDateTo,jdbcType=DATE}::DATE,'YYYYMMDD')
+			</if>
+		</where>
+	</select>
+
+	<resultMap id="customerSearchResDto"
+		type="mm.aeon.com.ass.base.dto.customerSearch.CustomerSearchResDto">
+		<result property="township" column="ADDRESS" />
+		<result property="companyName" column="COMPANY_NAME" />
+		<result property="createdBy" column="CREATED_BY" />
+		<result property="createdTime" column="CREATED_TIME" />
+		<result property="customerId" column="CUSTOMER_ID" />
+		<result property="customerNo" column="CUSTOMER_NO" />
+		<result property="customerTypeId" column="CUSTOMER_TYPE_ID" />
+		<result property="dob" column="DOB" />
+		<result property="gender" column="GENDER" />
+		<result property="joinDate" column="JOIN_DATE" />
+		<result property="name" column="NAME" />
+		<result property="nrcNo" column="NRC_NO" />
+		<result property="phoneNo" column="PHONE_NO" />
+		<result property="salary" column="SALARY" />
+		<result property="photoPath" column="PHOTO_PATH" />
+		<result property="updatedBy" column="UPDATED_BY" />
+		<result property="updatedTime" column="UPDATED_TIME" />
+		<result property="applockFlag" column="APPLOCK_FLAG" />
+	</resultMap>
+
+	<update id="update"
+		parameterType="mm.aeon.com.ass.base.dto.customerUpdate.CustomerUpdateReqDto">
+		UPDATE customer_info
+		<set>
+			<if test="name != null">
+				name = #{name},
+			</if>
+				customer_no = #{customerNo},
+			<if test="customerTypeId != null">
+				customer_type_id = #{customerTypeId},
+			</if>
+			<if test="dob != null">
+				dob = #{dob},
+			</if>
+			<if test="gender != null">
+				gender = #{gender},
+			</if>
+			<if test="joinDate != null">
+				join_date = #{joinDate},
+			</if>
+			<if test="salary != null">
+				salary = #{salary},
+			</if>
+			<if test="nrcNo != null">
+				nrc_no = #{nrcNo},
+			</if>
+			<if test="phoneNo != null">
+				phone_no = #{phoneNo},
+			</if>
+			<if test="companyName != null">
+				company_name = #{companyName},
+			</if>
+			<if test="township != null">
+				address = #{township},
+			</if>
+			<if test="updatedBy != null">
+				updated_by = #{updatedBy},
+			</if>
+			<if test="updatedTime != null">
+				updated_time = #{updatedTime},
+			</if>
+			<if test="applockFlag != null">
+				applock_flag = #{applockFlag},
+			</if>
+		</set>
+		<where>
+			<if test="customerId != null">
+				customer_id = #{customerId}
+			</if>
+		</where>
+	</update>
+
+	<select id="selectForUpdate"
+		parameterType="mm.aeon.com.ass.base.dto.customerSelectForUpdate.CustomerSelectForUpdateReqDto"
+		resultMap="CustomerSelectForUpdateResDto">
+		SELECT customer_id, updated_time
+		FROM customer_info
+		<where>
+			del_flag = 0
+			<if test="customerId != null">
+				AND customer_id = #{customerId}
+			</if>
+		</where>
+	</select>
+	<resultMap id="CustomerSelectForUpdateResDto"
+		type="mm.aeon.com.ass.base.dto.customerSelectForUpdate.CustomerSelectForUpdateResDto">
+		<result property="customerId" column="customer_id" />
+		<result property="updatedTime" column="updated_time" />
+	</resultMap>
+
+</mapper>

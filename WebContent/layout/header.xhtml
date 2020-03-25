@@ -1,0 +1,47 @@
+<!--***********************************************************************
+ * $Date: 2018-06-20$
+ * $Author: Khin Yadanar Thein$
+ * $Rev:  $
+ * 2018 AEON Microfinance (Myanmar) Company	Limited. All Rights Reserved.
+ ***********************************************************************-->
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j" xmlns:p="http://primefaces.org/ui"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" contentType="text/html">
+
+	<script type="text/javascript">
+		function deleteAllCookies() {
+			document.cookie.split(";").forEach(
+					function(c) {
+						document.cookie = c.replace(/^ +/, "").replace(
+								/=.*/,
+								"=;expires=" + new Date().toUTCString()
+										+ ";path=/");
+					});
+		}
+	</script>
+
+	<div class="ui-g-10">
+		<c:if test="#{identity.loggedIn}">
+			<div class="ui-g-12">
+				<div id="title_lable">
+					<img src="../presto/images/AEON_Logo.png"
+						style="float: left; width: 50px; height: 50px;" />
+					<p class="main_title">Virtual Card System</p>
+				</div>
+				<!-- <div class="header-line"></div> -->
+
+			</div>
+		</c:if>
+	</div>
+	<div class="ui-g-2">
+		<c:if test="#{identity.loggedIn}">
+			<p:commandButton value="Logout" action="#{loginFormBean.logout()}"
+				styleClass="btn_logout" style="width:104px;" />
+		</c:if>
+	</div>
+
+</f:view>

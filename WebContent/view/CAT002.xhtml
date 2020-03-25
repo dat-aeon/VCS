@@ -1,0 +1,75 @@
+<!--***********************************************************************
+ * $Date: 2019-07-09$
+ * $Author: Thiha Htet Zaw $
+ * $Rev:  $
+ * 2018 AEON Microfinance (Myanmar) Company	Limited. All Rights Reserved.
+ ***********************************************************************-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:rich="http://richfaces.org/rich"
+	xmlns:pt="http://presto.dat.com/tag" template="/layout/template.xhtml">
+	<ui:define name="title">
+		<title><h:outputText value="#{displayItemBean.getDisplayItemName((categoryInfoManagementFormBean.update)?'categoryUpdate':'categoryRegister')}" /></title>
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="categoryInfoManagementForm">
+			<div class="ui-fluid">
+				<div class="ui-g">
+					<div class="ui-g-12" style="color: #302873; font-size: 10pt; text-align: center;">
+						<H1>
+							<p:outputLabel value="#{displayItemBean.getDisplayItemName((categoryInfoManagementFormBean.update)?'categoryUpdate':'categoryRegister')}" />
+						</H1>
+					</div>
+				</div>
+			</div>
+			<div class="ui-fluid" style="margin-left: 15%;">
+				<div class="ui-g" style="width: 1000px;">
+					<div class="ui-g-12" style="width: 1000px !important; padding-left: 20%;">
+						<span class="message-style">
+							<pt:messages />
+						</span>
+						<p:panelGrid styleClass="status-panel-grid" style="margin-top: 0%;">
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('categoryEng')}" />
+									<h:outputText styleClass="star" value=" *" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:220px;">
+									<p:inputText id="categoryEng" maxlength="50" value="#{categoryInfoManagementFormBean.categoryInfoManagementHeaderBean.categoryEng}" style="width:350px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('categoryMyan')}" />
+									<h:outputText styleClass="star" value=" *" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:220px;">
+									<p:inputText id="categoryMyan" maxlength="50" value="#{categoryInfoManagementFormBean.categoryInfoManagementHeaderBean.categoryMyn}" style="width:350px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('description')}" />
+									<h:outputText styleClass="star" value=" *" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:220px;">
+									<p:inputTextarea id="description" maxlength="100" value="#{categoryInfoManagementFormBean.categoryInfoManagementHeaderBean.description}" style="width:350px;" />
+								</p:column>
+							</p:row>
+							<p:row style="border: none;">
+								<p:column style="background:#f4f7fc;border: none;padding-left:0%;" colspan="2">
+									<p:commandButton id="registerButton" styleClass="button" value="#{displayItemBean.getDisplayItemName((categoryInfoManagementFormBean.update)?'update':'register')}"
+										ajax="false" action="#{categoryInfoManagementFormBean.register()}" />
+									<p:commandButton rendered="#{not categoryInfoManagementFormBean.update}" value="#{displayItemBean.getDisplayItemName('clear')}" action="#{categoryInfoManagementFormBean.clear()}"
+										id="cancelButton" ajax="false" styleClass="button" />
+									<p:commandButton rendered="#{categoryInfoManagementFormBean.update}" value="#{displayItemBean.getDisplayItemName('reset')}" action="#{categoryInfoManagementFormBean.reset()}"
+										id="resetButton" ajax="false" styleClass="button" update="categoryInfoManagementForm" />
+									<p:commandButton value="#{displayItemBean.getDisplayItemName('back')}" action="#{categoryInfoManagementFormBean.back()}" id="backButton" ajax="false" styleClass="button" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

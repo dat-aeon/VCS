@@ -1,0 +1,68 @@
+<!--***********************************************************************
+ * $Date: 2019-01-30$
+ * $Author: Aung Ko Lin $
+ * $Rev:  $
+ * 2018 AEON Microfinance (Myanmar) Company	Limited. All Rights Reserved.
+ ***********************************************************************-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:rich="http://richfaces.org/rich"
+	xmlns:pt="http://presto.dat.com/tag" template="/layout/template.xhtml">
+	<ui:define name="title">
+		<title><h:outputText value="#{displayItemBean.getDisplayItemName('appSetting')}" /></title>
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="appSettingform">
+			<div class="ui-fluid">
+				<div class="ui-g">
+					<div class="ui-g-12" style="padding-left: 49%; color: #302873; font-size: 10pt;">
+						<H1>
+							<p:outputLabel value="#{displayItemBean.getDisplayItemName('appSetting')}" />
+						</H1>
+					</div>
+				</div>
+			</div>
+			<div class="ui-fluid">
+				<div class="ui-g" style="padding-left: 35%;">
+					<div class="ui-g-12">
+						<span class="message-style">
+							<pt:messages />
+						</span>
+						<!-- <p:fieldset styleClass="import-fieldset"
+							style="width: 500px !important;"
+							legend="#{displayItemBean.getDisplayItemName('appSetting')}">
+							<span class="message-style"><pt:messages /></span> -->
+						<p:panelGrid styleClass="status-panel-grid" style="margin-top: 0%;">
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('noOfSecurityQuestion')}" />
+									<h:outputText styleClass="star" value=" *" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:300px;">
+									<p:inputNumber id="noOfSecurityQuestion" maxlength="32" value="#{appSettingManagementFormBean.appSettingManagementHeaderBean.noOfsecurityQuestion}" style="width:250px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('noOfChAnswer')}" />
+									<h:outputText styleClass="star" value=" *" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:300px;">
+									<p:inputNumber id="noOfChAnswer" value="#{appSettingManagementFormBean.appSettingManagementHeaderBean.noOfcharacterAnswer}" style="width:250px;" />
+								</p:column>
+							</p:row>
+							<p:row style="border:0px">
+								<p:column style="width:45%;background:#f4f7fc;border:0px;padding-left:0%;">
+									<p:commandButton value="#{displayItemBean.getDisplayItemName('update')}" action="#{appSettingManagementFormBean.update()}" id="actionButton" style="margin-top: 2%;"
+										ajax="false" styleClass="button" update="appSettingform" />
+									<p:commandButton value="#{displayItemBean.getDisplayItemName('reset')}" action="#{appSettingManagementFormBean.reset()}" id="cancelButton" style="margin-top: 2%;"
+										ajax="false" styleClass="button" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+						<!-- </p:fieldset> -->
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

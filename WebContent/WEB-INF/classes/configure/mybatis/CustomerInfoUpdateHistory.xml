@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CustomerInfoUpdateHistory">
+
+	<insert id="insert"
+		parameterType="mm.aeon.com.ass.base.dto.customerUpdateHistoryInsert.CustomerInfoUpdateHistoryInsertReqDto">
+		insert into customer_info_update_history
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="customerInfoUpdateHistoryId != null">
+				CUSTOMER_INFO_UPDATE_HISTORY_ID,
+			</if>
+			<if test="customerId != null">
+				customer_id,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="updatedTime != null">
+				updated_time,
+			</if>
+			<if test="updatedBy != null">
+				updated_by,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="customerInfoUpdateHistoryId != null">
+				#{customerInfoUpdateHistoryId,jdbcType=INTEGER},
+			</if>
+			<if test="customerId != null">
+				#{customerId,jdbcType=INTEGER},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="updatedTime != null">
+				#{updatedTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatedBy != null">
+				#{updatedBy,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	
+	<resultMap id="customerUpdateHistoryInfoResultMap"
+		type="mm.aeon.com.ass.base.dto.customerUpdateHistorySearch.CustomerUpdateHistoryInfoSearchResDto">
+		<id column="CUSTOMER_INFO_UPDATE_HISTORY_ID" jdbcType="INTEGER" property="customerInfoUpdateHistoryId" />
+		<result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="CUSTOMER_NO" jdbcType="VARCHAR" property="customerNo" />
+		<result column="UPDATED_BY" property="updatedBy" />
+		<result column="UPDATED_TIME" property="updatedTime" />
+	</resultMap>
+
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.customerUpdateHistorySearch.CustomerUpdateHistoryInfoSearchReqDto"
+		resultMap="customerUpdateHistoryInfoResultMap">
+		SELECT
+			CIUH.CUSTOMER_INFO_UPDATE_HISTORY_ID,
+			CIUH.DESCRIPTION, 
+			CI.NAME, 
+			CI.CUSTOMER_NO,
+			(SELECT NAME FROM USER_INFO WHERE CAST(USER_ID as TEXT) = split_part(CIUH.UPDATED_BY::TEXT,',', 1) AND CAST(USER_TYPE_ID as TEXT)= split_part(CIUH.UPDATED_BY::TEXT,',', 2)) as UPDATED_BY,
+			CIUH.UPDATED_TIME 
+		FROM
+			customer_info_update_history CIUH
+		LEFT JOIN
+			customer_info CI
+		ON
+			CIUH.CUSTOMER_ID = CI.CUSTOMER_ID
+		<where>
+			<if test="updatedTimeFrom != null">
+				AND CIUH.UPDATED_TIME &gt;= #{updatedTimeFrom}
+			</if>
+			<if test="updatedTimeTo != null">
+				AND CIUH.UPDATED_TIME &lt;= #{updatedTimeTo}
+			</if>
+			<if test="customerName != null and customerName != ''">
+				AND CI.NAME ILIKE '%' || #{customerName} || '%'
+			</if>
+			<if test="customerNo != null and customerNo != ''">
+				AND CI.CUSTOMER_NO ILIKE '%' || #{customerNo} || '%'
+			</if>
+		</where>
+		<if test="sortField != null and sortField != '' and sortField == 'description' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY CIUH.DESCRIPTION ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY CIUH.DESCRIPTION DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'updatedBy' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY CIUH.UPDATED_BY ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY CIUH.UPDATED_BY DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'updatedTime' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY CIUH.UPDATED_TIME ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY CIUH.UPDATED_TIME DESC
+			</if>
+		</if>
+		<if test="sortField == null or sortField == ''">
+			ORDER BY CIUH.CUSTOMER_INFO_UPDATE_HISTORY_ID DESC
+		</if>
+		<if test="offset != null and limit != null">
+			OFFSET #{offset} LIMIT #{limit}
+		</if>
+	</select>
+	
+	<select id="count"
+		parameterType="mm.aeon.com.ass.base.dto.customerUpdateHistorySearch.CustomerUpdateHistoryInfoSelectCountReqDto"
+		resultType="java.lang.Integer">
+		SELECT 
+			COUNT(*)
+		FROM 
+			customer_info_update_history CIUH
+		LEFT JOIN
+			customer_info CI
+		ON
+			CIUH.CUSTOMER_ID = CI.CUSTOMER_ID
+		<where>
+			<if test="updatedTimeFrom != null">
+				AND CIUH.UPDATED_TIME &gt;= #{updatedTimeFrom}
+			</if>
+			<if test="updatedTimeTo != null">
+				AND CIUH.UPDATED_TIME &lt;= #{updatedTimeTo}
+			</if>
+			<if test="customerName != null and customerName != ''">
+				AND CI.NAME ILIKE '%' || #{customerName} || '%'
+			</if>
+			<if test="customerNo != null and customerNo != ''">
+				AND CI.CUSTOMER_NO ILIKE '%' || #{customerNo} || '%'
+			</if>
+		</where> 
+	</select>
+
+</mapper>    
+    

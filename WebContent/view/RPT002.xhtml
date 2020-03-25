@@ -1,0 +1,95 @@
+<!--***********************************************************************
+ * $Date: 2019-02-012$
+ * $Author: Aung Ko Lin$
+ * $Rev:  $
+ * 2019 AEON Microfinance (Myanmar) Company	Limited. All Rights Reserved.
+ ***********************************************************************-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:rich="http://richfaces.org/rich"
+	xmlns:pt="http://presto.dat.com/tag" template="/layout/template.xhtml">
+	<ui:define name="title">
+		<title><h:outputText value="#{displayItemBean.getDisplayItemName('deviceUsageReport')}" /></title>
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="deviceUsageReportForm">
+			<div class="ui-fluid">
+				<div class="ui-g" style="padding-left: 1%;">
+					<div class="ui-g-12">
+						<div style="padding-left: 45%; color: #302873; font-size: 10pt;">
+							<H1>
+								<p:outputLabel value="#{displayItemBean.getDisplayItemName('deviceUsageReport')}"/>
+								
+							</H1>
+						</div>
+						<p:panelGrid styleClass="status-panel-grid" style="margin-top: 0%;">
+							<p:row>
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:110px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('osType')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:170px;">
+									<p:selectOneMenu value="#{applicationListFormBean.appHeaderBean.osType}">
+										<f:selectItem itemLabel="Select OS Type" />
+										<f:selectItem itemLabel="iOS" itemValue="iOS" />
+										<f:selectItem itemLabel="Android" itemValue="Android" />
+									</p:selectOneMenu>
+								</p:column>
+							</p:row>
+							<p:row style="border:0px">
+								<p:column style="width:45%;background:#f4f7fc;border:0px;padding-left:0%;">
+									<p:commandButton id="search" styleClass="button" action="#{applicationListFormBean.search()}" value="#{displayItemBean.getDisplayItemName('btnSearch')}" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="ui-g-12">
+						<div style="width: 933px;" class="message-block">
+							<pt:messages />
+						</div>
+						<div style="padding-left: 88%">
+							<p:commandButton value="#{displayItemBean.getDisplayItemName('exportCSV')}" styleClass="button" style="width:150px" ajax="false">
+								<p:dataExporter type="csv" target="reportResultTable" fileName="DeviceUsageReport" />
+							</p:commandButton>
+						</div>
+					</div>
+				</div>
+				<div class="ui-g" style="width: 100%;">
+					<div class="ui-g-12">
+						<f:view encoding="utf-8">
+							<p:dataTable var="lineBean" first="#{applicationListFormBean.pageFirst}" value="#{applicationListFormBean.lazyModel}" rows="50"
+								lazy="true" paginator="true" rowIndexVar="rowIndex" paginatorPosition="bottom"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="50,100"
+								styleClass="resultTable" style="margin-left: 10px;" id="reportResultTable">
+								<p:column style="width:20px" styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('no')}">
+									<h:outputText value="#{rowIndex+1}" />
+								</p:column>
+								<p:column style="width:50px" styleClass="unsort-column" sortBy="#{lineBean.customerNo}" headerText="#{displayItemBean.getDisplayItemName('customerNo')}">
+									<h:outputText value="#{lineBean.customerNo}" />
+								</p:column>
+								<p:column style="width:50px" styleClass="unsort-column" sortBy="#{lineBean.customerName}" headerText="#{displayItemBean.getDisplayItemName('customerName')}">
+									<h:outputText value="#{lineBean.customerName}" />
+								</p:column>
+								<p:column style="width:50px" sortBy="#{lineBean.osType}" headerText="#{displayItemBean.getDisplayItemName('osType')}">
+									<h:outputText value="#{lineBean.osType}" />
+								</p:column>
+								<p:column style="width:50px" sortBy="#{lineBean.model}" headerText="#{displayItemBean.getDisplayItemName('model')}">
+									<h:outputText value="#{lineBean.model}" />
+								</p:column>
+								<p:column style="width:80px" sortBy="#{lineBean.manufacture}" headerText="#{displayItemBean.getDisplayItemName('manufacture')}">
+									<h:outputText value="#{lineBean.manufacture}" />
+								</p:column>
+								<p:column style="width:50px" sortBy="#{lineBean.sdk}" headerText="#{displayItemBean.getDisplayItemName('sdk')}">
+									<h:outputText value="#{lineBean.sdk}" />
+								</p:column>
+								<p:column style="width:50px" sortBy="#{lineBean.osVersion}" headerText="#{displayItemBean.getDisplayItemName('osVersion')}">
+									<h:outputText value="#{lineBean.osVersion}" />
+								</p:column>
+							</p:dataTable>
+						</f:view>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

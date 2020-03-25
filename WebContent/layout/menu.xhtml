@@ -1,0 +1,125 @@
+<!--***********************************************************************
+ * $Date: 2018-06-20$
+ * $Author: Khin Yadanar Thein$
+ * $Rev:  $
+ * 2018 AEON Microfinance (Myanmar) Company	Limited. All Rights Reserved.
+ ***********************************************************************-->
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j" xmlns:p="http://primefaces.org/ui" xmlns:s="http://jboss.com/products/seam/taglib" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	contentType="text/html">
+	<h:form>
+		<p:menubar>
+			<!-- For Administrator User -->
+			<c:if test="#{userInfo.userTypeName == 'ADMIN'}">
+				<p:submenu label="#{displayItemBean.getDisplayItemName('userManagement')}" icon="ui-icon-gear">
+					<p:menuitem value="#{displayItemBean.getDisplayItemName('admin')}" icon="ui-icon-search" action="#{mnu001FormBean.propagate('AdminSearch')}" />
+					<p:separator />
+					<p:menuitem value="#{displayItemBean.getDisplayItemName('operator')}" icon="ui-icon-search" action="#{mnu001FormBean.propagate('OperatorList')}" />
+				</p:submenu>
+			</c:if>
+			<!-- For Member Management -->
+			<p:submenu icon="ui-icon-gear" label="#{displayItemBean.getDisplayItemName('memberManagement')}">
+				<p:menuitem value="#{displayItemBean.getDisplayItemName('customerInfo')}" icon="ui-icon-search" action="#{mnu001FormBean.propagate('CUS001')}" />
+				<!-- <p:separator /> -->
+				<!-- <p:menuitem
+						value="#{displayItemBean.getDisplayItemName('memberInfo')}"
+						icon="ui-icon-search"
+						action="#{mnu001FormBean.propagate('MEM001')}" />
+					<p:separator /> -->
+				<!-- <p:menuitem
+					value="#{displayItemBean.getDisplayItemName('memberGroupInfo')}"
+					icon="ui-icon-search"
+					action="#{mnu001FormBean.propagate('COMING_SOON')}" />
+				<p:separator />
+
+				<p:menuitem
+					value="#{displayItemBean.getDisplayItemName('serachCondition')}"
+					icon="ui-icon-search"
+					action="#{mnu001FormBean.propagate('COMING_SOON')}" /> -->
+			</p:submenu>
+			<p:submenu label="#{displayItemBean.getDisplayItemName('eventManagement')}" icon="ui-icon-gear">
+				<!-- will be open at version 2 -->
+				<p:menuitem value="#{displayItemBean.getDisplayItemName('news')}" icon="ui-icon-search" action="#{mnu001FormBean.propagate('NWS001')}" />
+				<p:separator />
+				<p:menuitem value="#{displayItemBean.getDisplayItemName('promotion')}" icon="ui-icon-search" action="#{mnu001FormBean.propagate('PRO001')}" />
+				<p:separator />
+				<p:menuitem value="#{displayItemBean.getDisplayItemName('couponManagement')}" icon="ui-icon-search" action="#{mnu001FormBean.propagate('COU001')}" />
+				<p:separator />
+				<p:menuitem value="#{displayItemBean.getDisplayItemName('storeManagement')}" icon="ui-icon-search" action="#{mnu001FormBean.propagate('STO001')}" />
+			</p:submenu>
+			<p:submenu label="#{displayItemBean.getDisplayItemName('appInfoManagement')}" icon="ui-icon-gear">
+				<p:menuitem value="#{displayItemBean.getDisplayItemName('faqMenu')}" icon="ui-icon-search" action="#{mnu001FormBean.propagate('FAQ001')}" />
+				<p:separator />
+				<p:menuitem value="#{displayItemBean.getDisplayItemName('securityQuestion')}" icon="ui-icon-search" action="#{mnu001FormBean.propagate('SEC001')}" />
+				<p:separator />
+				<p:menuitem value="#{displayItemBean.getDisplayItemName('appSetting')}" icon="ui-icon-search" action="#{mnu001FormBean.propagate('APS001')}" />
+				<p:separator />
+				<p:menuitem value="#{displayItemBean.getDisplayItemName('companyInfo')}" icon="ui-icon-search" action="#{mnu001FormBean.propagate('COI001')}" />
+				<p:separator />
+				<p:menuitem value="#{displayItemBean.getDisplayItemName('categoryManagement')}" icon="ui-icon-search" action="#{mnu001FormBean.propagate('CAT001')}" />
+			</p:submenu>
+			<!-- will be open at version 2 -->
+			<p:submenu label="#{displayItemBean.getDisplayItemName('messageManagement')}" icon="ui-icon-gear">
+				<!-- <p:menuitem value="Messaging Template" icon="ui-icon-search"
+					action="#{mnu001FormBean.propagate('COMING_SOON')}" />
+				<p:separator />
+
+				<p:menuitem value="Sent Message Info" icon="ui-icon-search"
+					action="#{mnu001FormBean.propagate('COMING_SOON')}" />
+				<p:separator />
+
+
+				<p:menuitem value="Send SMS Info" icon="ui-icon-search"
+					action="#{mnu001FormBean.propagate('COMING_SOON')}" />
+				<p:separator />
+
+				<p:menuitem value="Received Message Info" icon="ui-icon-search"
+					action="#{mnu001FormBean.propagate('COMING_SOON')}" />
+				<p:separator /> -->
+				<p:submenu label="#{displayItemBean.getDisplayItemName('freeMessaging')}" icon="ui-icon-gear">
+					<p:menuitem value="#{displayItemBean.getDisplayItemName('messageSending')}" icon="ui-icon-search" action="#{mnu001FormBean.propagate('FMSG001')}" />
+					<p:separator />
+					<p:menuitem value="#{displayItemBean.getDisplayItemName('messagingHistory')}" icon="ui-icon-search" action="#{mnu001FormBean.propagate('FMSG002')}" />
+				</p:submenu>
+				<p:separator />
+				<p:submenu label="#{displayItemBean.getDisplayItemName('contactMessaging')}" icon="ui-icon-gear">
+					<p:menuitem value="#{displayItemBean.getDisplayItemName('messageSending')}" icon="ui-icon-search" action="#{mnu001FormBean.propagate('MSG001')}" />
+					<p:separator />
+					<p:menuitem value="#{displayItemBean.getDisplayItemName('messagingHistory')}" icon="ui-icon-search" action="#{mnu001FormBean.propagate('MSG002')}" />
+
+				</p:submenu>
+
+			</p:submenu>
+			<!-- For Personal Loan Message Management -->
+			<!-- <p:submenu label="#{displayItemBean.getDisplayItemName('plMesaageManagement')}" icon="ui-icon-gear">
+				<p:menuitem value="#{displayItemBean.getDisplayItemName('plMessageSending')}"  icon="ui-icon-search" action="#{mnu001FormBean.propagate('PLM001')}" />
+				<p:separator />
+				<p:menuitem value="#{displayItemBean.getDisplayItemName('plMessagingHistory')}"  icon="ui-icon-search" action="#{mnu001FormBean.propagate('PLM002')}" />
+			</p:submenu> -->
+			<p:submenu label="#{displayItemBean.getDisplayItemName('report')}" icon="ui-icon-gear">
+				<p:submenu label="#{displayItemBean.getDisplayItemName('actualAppUsage')}" icon="ui-icon-gear">
+					<p:menuitem value="#{displayItemBean.getDisplayItemName('applicationUsageReport')}" icon="ui-icon-search" action="#{mnu001FormBean.propagate('RPT001')}" />
+					<p:separator />
+					<p:menuitem value="#{displayItemBean.getDisplayItemName('deviceUsageReport')}" icon="ui-icon-search" action="#{mnu001FormBean.propagate('RPT002')}" />
+					<p:separator />
+					<p:menuitem value="#{displayItemBean.getDisplayItemName('freeUsageReport')}" icon="ui-icon-search" action="#{mnu001FormBean.propagate('RPT004')}" />
+				</p:submenu>
+				
+				<p:separator />
+				<p:submenu label="#{displayItemBean.getDisplayItemName('transactionHistory')}" icon="ui-icon-gear">
+					<p:menuitem value="#{displayItemBean.getDisplayItemName('customerUpdateHistory')}" icon="ui-icon-search" action="#{mnu001FormBean.propagate('RPT003')}" />
+				</p:submenu>
+
+				<!-- <p:separator /> -->
+				<!-- <p:menuitem value="#{displayItemBean.getDisplayItemName('messagingUsage')}" icon="ui-icon-search" action="#{mnu001FormBean.propagate('COMING_SOON')}" /> -->
+				<!-- <p:menuitem value="Sending Message Result" icon="ui-icon-search" action="#{mnu001FormBean.propagate('COMING_SOON')}" />
+				<p:separator />
+				<p:menuitem value="Received Message Result" icon="ui-icon-search" action="#{mnu001FormBean.propagate('COMING_SOON')}" /> -->
+			</p:submenu>
+			<!-- For Profile Management -->
+			<p:submenu label="#{displayItemBean.getDisplayItemName('profile')}" icon="ui-icon-gear">
+				<p:menuitem value="#{displayItemBean.getDisplayItemName('passwordChange')}" icon="ui-icon-search" action="#{mnu001FormBean.propagate('PasswordChange')}" />
+			</p:submenu>
+		</p:menubar>
+	</h:form>
+</f:view>

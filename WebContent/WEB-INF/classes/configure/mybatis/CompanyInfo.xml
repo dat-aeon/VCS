@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="CompanyInfo">
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.companyInfoSearch.CompanyInfoSearchReqDto"
+		resultMap="CompanyInfoSearchResDto">
+			SELECT COMPANY_INFO_ID, ADDRESS_ENG,ADDRESS_MYAN, HOTLINE_PHONE, WEB_ADDRESS, SOCIAL_MEDIA_ADDRESS, ABOUT_COMPANY_ENG,
+			ABOUT_COMPANY_MYAN, CHAT_AUTO_REPLY_MESSAGE FROM COMPANY_INFO
+			ORDER BY COMPANY_INFO_ID DESC
+	</select>
+	<resultMap id="CompanyInfoSearchResDto"
+		type="mm.aeon.com.ass.base.dto.companyInfoSearch.CompanyInfoSearchResDto">
+		<result property="infoId" column="COMPANY_INFO_ID" />
+		<result property="address_eng" column="ADDRESS_ENG" />
+		<result property="address_mya" column="ADDRESS_MYAN" />
+		<result property="hotLine" column="HOTLINE_PHONE" />
+		<result property="webAddress" column="WEB_ADDRESS" />
+		<result property="socialMedia" column="SOCIAL_MEDIA_ADDRESS" />
+		<result property="aboutCompanyEng" column="ABOUT_COMPANY_ENG" />
+		<result property="aboutCompanyMya" column="ABOUT_COMPANY_MYAN" />
+		<result property="chatAutoReplyMessage" column="CHAT_AUTO_REPLY_MESSAGE" />
+	</resultMap>
+	
+	
+
+	<select id="selectForUpdate"
+		parameterType="mm.aeon.com.ass.base.dto.companyInfoSelectForUpdate.CompanyInfoSelectForUpdateReqDto"
+		resultMap="CompanyInfoSelectForUpdateResDto">
+		SELECT COMPANY_INFO_ID,UPDATED_TIME
+		FROM COMPANY_INFO
+		<where>
+			<!-- <if test="secId != null and secId!= ''"> -->
+				 COMPANY_INFO_ID = #{infoId}
+			<!-- </if> -->
+		</where>
+	</select>
+
+	<resultMap id="CompanyInfoSelectForUpdateResDto"
+		type="mm.aeon.com.ass.base.dto.companyInfoSelectForUpdate.CompanyInfoSelectForUpdateResDto">
+		<result property="infoId" column="COMPANY_INFO_ID" />
+		<result property="updatedTime" column="UPDATED_TIME" />
+	</resultMap>
+	
+	<insert id="insert"
+		parameterType="mm.aeon.com.ass.base.dto.companyInfoRegister.CompanyInfoRegisterReqDto">
+		INSERT INTO
+		COMPANY_INFO
+		<trim prefix="(" suffixOverrides="," suffix=")">
+				HOTLINE_PHONE
+		</trim>
+		VALUES
+		<trim prefix="(" suffixOverrides="," suffix=")">
+				#{hotLine}
+		</trim>
+	</insert>
+
+	<update id="update"
+		parameterType="mm.aeon.com.ass.base.dto.companyInfoUpdate.CompanyInfoUpdateReqDto">
+		UPDATE COMPANY_INFO 
+		<set>
+				ADDRESS_ENG = #{address_eng},
+				ADDRESS_MYAN = #{address_mya},
+				HOTLINE_PHONE = #{hotLine},
+				WEB_ADDRESS = #{webAddress},
+				SOCIAL_MEDIA_ADDRESS = #{socialMedia},
+				ABOUT_COMPANY_ENG = #{aboutCompanyEng},
+				ABOUT_COMPANY_MYAN = #{aboutCompanyMya},
+				CHAT_AUTO_REPLY_MESSAGE = #{chatAutoReplyMessage}
+		</set>
+		 <where>
+			
+				COMPANY_INFO_ID = #{infoId}
+			
+		</where>  
+	</update>
+</mapper>

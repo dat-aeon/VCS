@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CustomerType">
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.customerTypeList.CustomerTypeSelectListReqDto"
+		resultMap="CustomerTypeSelectListResDto">
+		SELECT customer_type_id, del_flag, cust_type
+		FROM
+		customer_type
+		<where>
+			<if test="delFlag != null ">
+				del_flag = #{delFlag}
+			</if>
+		</where>
+		ORDER BY cust_type
+	</select>
+
+	<resultMap id="CustomerTypeSelectListResDto"
+		type="mm.aeon.com.ass.base.dto.customerTypeList.CustomerTypeSelectListResDto">
+		<result property="customerTypeId" column="customer_type_id" />
+		<result property="delFlag" column="del_flag" />
+		<result property="custType" column="cust_type" />
+	</resultMap>
+
+</mapper>

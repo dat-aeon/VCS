@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FaqInfoCount">
+
+	
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.faqCount.CategorySearchByFaqReqDto"
+		resultMap="categorySearchByFaqResDto">
+		SELECT FAQ_CATEGORY.DEL_FLAG FROM FAQ_CATEGORY
+		INNER JOIN FAQ_INFO 
+		ON FAQ_CATEGORY.CATEGORY_ID = FAQ_INFO.CATEGORY_ID 
+		<where>
+			<if test="categoryId != null and categoryId != ''">
+				FAQ_INFO.CATEGORY_ID = #{categoryId}
+			</if>
+		</where>
+	</select>
+	
+	<resultMap id="categorySearchByFaqResDto"
+		type="mm.aeon.com.ass.base.dto.faqCount.CategorySearchByFaqResDto">
+		<result property="del_flag" column="DEL_FLAG" />
+	</resultMap>
+	
+</mapper>

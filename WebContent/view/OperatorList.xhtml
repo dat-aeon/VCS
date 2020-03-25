@@ -1,0 +1,155 @@
+<!--***********************************************************************
+ * $Date: 2018-06-20$
+ * $Author: Swe Hsu Mon $
+ * $Rev:  $
+ * 2018 AEON Microfinance (Myanmar) Company	Limited. All Rights Reserved.
+ ***********************************************************************-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:rich="http://richfaces.org/rich"
+	xmlns:pt="http://presto.dat.com/tag" template="/layout/template.xhtml">
+	<ui:define name="title">
+		<title><h:outputText value="#{displayItemBean.getDisplayItemName('operatorList')}" /></title>
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="operatorSearchform">
+			<p:defaultCommand target="searchButton" />
+			<div class="ui-fluid">
+				<div class="ui-g">
+					<div class="ui-g-12" style="color: #302873; font-size: 10pt; text-align: center;">
+						<H1>
+							<p:outputLabel value="#{displayItemBean.getDisplayItemName('operatorList')}" />
+						</H1>
+					</div>
+				</div>
+				<!-- <div class="ui-g">
+					<div style="width: 930px;padding-left: 10px;" class="message-block">
+					</div>
+					<div>
+						<p:commandButton id="createNewButton"
+							value="#{displayItemBean.getDisplayItemName('createNewOperator')}"
+							style="width:160px!important" ajax="false" styleClass="button"
+							action="#{operatorListFormBean.prepareRegister()}" />
+					</div>
+				</div> -->
+				<div class="ui-g">
+					<div class="ui-g-6">
+						<!-- <p:fieldset styleClass="import-fieldset"
+							legend="#{displayItemBean.getDisplayItemName('operatorList')}"> -->
+						<p:panelGrid styleClass="status-panel-grid" style="margin-top: 0%;">
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:110px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('name')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:170px;">
+									<p:inputText id="name" style="width:100%;" value="#{operatorListFormBean.searchHeaderBean.userName}" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:110px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('loginId')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:170px;">
+									<p:inputText id="loginId" style="width:100%;" value="#{operatorListFormBean.searchHeaderBean.userLoginId}" />
+								</p:column>
+							</p:row>
+							<p:row style="border: none;">
+								<p:column style="border: none;background:#f4f7fc;" colspan="2">
+									<p:commandButton id="searchButton" styleClass="button" value="#{displayItemBean.getDisplayItemName('search')}" style="margin: 3px 0px 0px -10px;" ajax="false"
+										action="#{operatorListFormBean.search()}" />
+									<p:commandButton id="clearButton" styleClass="button" value="#{displayItemBean.getDisplayItemName('clear')}" style="margin: 3px 0px 0px 5px;" ajax="false"
+										action="#{operatorListFormBean.reset()}" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</div>
+					<div class="ui-g-6" style="text-align: right;">
+						<p:commandButton id="createNewButton" value="#{displayItemBean.getDisplayItemName('createNewOperator')}" style="width:140px!important;height: 35px;" ajax="false"
+							styleClass="button" action="#{operatorListFormBean.prepareRegister()}" />
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="space-block"></div>
+				</div>
+				<div class="ui-g">
+					<div style="width: 930px; padding-left: 10px;" class="message-block">
+						<pt:messages />
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="ui-g-12">
+						<f:view encoding="utf-8">
+							<p:dataTable var="lineBean" first="#{operatorListFormBean.pageFirst}" value="#{operatorListFormBean.lazyModel}" rows="20" paginator="true" rowIndexVar="rowIndex"
+								paginatorPosition="both" lazy="true"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="50,100"
+								styleClass="resultTable" id="operatorResultTable">
+								<p:column style="width:20px;" styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('no')}">
+									<h:outputText value="#{rowIndex+1}" />
+								</p:column>
+								<p:column style="width:120px" sortBy="#{lineBean.userName}" headerText="#{displayItemBean.getDisplayItemName('name')}">
+									<h:outputText value="#{lineBean.userName}" />
+								</p:column>
+								<p:column style="width:120px" sortBy="#{lineBean.userLoginId}" headerText="#{displayItemBean.getDisplayItemName('loginId')}">
+									<h:outputText value="#{lineBean.userLoginId}" />
+								</p:column>
+								<p:column id="actions" styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('operation')}" exportable="false" style="width:60px">
+									<p:commandLink id="update" styleClass="management-link" action="#{operatorListFormBean.prepareUpdate(lineBean)}" value="#{displayItemBean.getDisplayItemName('update')}" />
+									<p:commandLink id="delete" styleClass="management-link" action="#{operatorListFormBean.delete()}" update="operatorResultTable"
+										value="#{displayItemBean.getDisplayItemName('delete')}">
+										<p:confirm header="Confirmation" message="Are you sure to delete?" icon="ui-icon-alert" />
+										<f:setPropertyActionListener value="#{lineBean}" target="#{operatorListFormBean.lineBean}" />
+									</p:commandLink>
+									<!-- <p:commandLink id="detail" styleClass="management-link" -->
+									<!-- action="#{operatorListFormBean.detail(lineBean)}" -->
+									<!-- value="#{displayItemBean.getDisplayItemName('detail')}" /> -->
+								</p:column>
+								
+								<p:column styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('allowMessaging')}" exportable="false" style="width:40px">
+									<p:commandLink id="allowMessaging" rendered="#{lineBean.allowMessagingFlag == 0}" style="width:auto" styleClass="management-link" action="#{operatorListFormBean.allowMessaging()}"
+										value="#{displayItemBean.getDisplayItemName('enable')}" update="actions">
+										<p:confirm header="Confirmation" message="Are you sure to enable messaging?" icon="ui-icon-alert" />
+										<f:setPropertyActionListener value="#{lineBean}" target="#{operatorListFormBean.lineBean}" />
+									</p:commandLink>
+								</p:column>
+								
+								<p:column styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('synchronizeMessaging')}" exportable="false" style="width:40px">
+									<p:commandLink id="upsertMessaging" rendered="#{lineBean.allowMessagingFlag != 0}" style="width:auto" styleClass="management-link" action="#{operatorListFormBean.sync()}"
+										value="#{displayItemBean.getDisplayItemName('sync')}" update="actions">
+										<p:confirm header="Confirmation" message="Are you sure to sync messaging?" icon="ui-icon-alert" />
+										<f:setPropertyActionListener value="#{lineBean}" target="#{operatorListFormBean.lineBean}" />
+									</p:commandLink>
+								</p:column>
+								
+								<p:column styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('allowFreeMessaging')}" exportable="false" style="width:40px">
+									<p:commandLink id="allowFreeMessaging" rendered="#{lineBean.allowFreeMessagingFlag == 0}" style="width:auto" styleClass="management-link" action="#{operatorListFormBean.allowFreeMessaging()}"
+										value="#{displayItemBean.getDisplayItemName('enable')}" update="actions">
+										<p:confirm header="Confirmation" message="Are you sure to enable messaging?" icon="ui-icon-alert" />
+										<f:setPropertyActionListener value="#{lineBean}" target="#{operatorListFormBean.lineBean}" />
+									</p:commandLink>
+								</p:column>
+								
+								<p:column styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('synchronizeFreeMessaging')}" exportable="false" style="width:40px">
+									<p:commandLink id="upsertFreeMessaging" rendered="#{lineBean.allowFreeMessagingFlag != 0}" style="width:auto" styleClass="management-link" action="#{operatorListFormBean.syncFreeMessaging()}"
+										value="#{displayItemBean.getDisplayItemName('sync')}" update="actions">
+										<p:confirm header="Confirmation" message="Are you sure to sync messaging?" icon="ui-icon-alert" />
+										<f:setPropertyActionListener value="#{lineBean}" target="#{operatorListFormBean.lineBean}" />
+									</p:commandLink>
+								</p:column>
+								
+							</p:dataTable>
+						</f:view>
+					</div>
+				</div>
+			</div>
+		</h:form>
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="confirmBox" closable="false" style="background-color:#302873">
+			<div class="ui-g-12">
+				<div class="ui-g-6">
+					<p:commandButton value="Yes" styleClass="ui-confirmdialog-yes button" icon="ui-icon-check" />
+				</div>
+				<div class="ui-g-6">
+					<p:commandButton value="No" styleClass="ui-confirmdialog-no button" icon="ui-icon-close" />
+				</div>
+			</div>
+		</p:confirmDialog>
+	</ui:define>
+</ui:composition>

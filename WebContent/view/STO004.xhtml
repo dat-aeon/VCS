@@ -1,0 +1,85 @@
+<!--***********************************************************************
+ * $Date: 2019-01-28$
+ * $Author: Aung Ko Lin $
+ * $Rev:  $
+ * 2019 AEON Microfinance (Myanmar) Company	Limited. All Rights Reserved.
+ ***********************************************************************-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:rich="http://richfaces.org/rich"
+	xmlns:pt="http://presto.dat.com/tag" template="/layout/template.xhtml">
+	<ui:define name="title">
+		<title><h:outputText value="#{displayItemBean.getDisplayItemName('shopDetail')}" /></title>
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="storeform">
+			<div class="ui-fluid">
+				<div class="ui-g">
+					<div class="ui-g-12" style="color: #302873; font-size: 10pt; text-align: center;">
+						<H1>
+							<p:outputLabel value="#{displayItemBean.getDisplayItemName('shopDetail')}" />
+						</H1>
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="ui-g-12" style="width: 80%; padding-left: 26%;">
+						<!-- <span class="message-style"><pt:messages /></span> -->
+						<!-- <p:fieldset styleClass="import-fieldset"
+							style="width: 71% !important;"
+							legend="#{displayItemBean.getDisplayItemName('shopDetail')}"> -->
+						<!-- <span class="message-style"><pt:messages /></span> -->
+						<p:panelGrid styleClass="status-panel-grid" style="margin-top: 0%;">
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('shopCode')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:700px;">
+									<p:outputLabel id="storeCode" value="#{storeListFormBean.lineBean.storeCode}" style="width:250px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('shopName')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:300px;">
+									<p:outputLabel id="storeName" value="#{storeListFormBean.lineBean.storeName}" style="width:250px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('address')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:300px;">
+									<p:outputLabel id="storeAddress" value="#{storeListFormBean.lineBean.storeAddress}" style="width:250px;" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+						<!-- </p:fieldset> -->
+					</div>
+				</div>
+				<div class="ui-g" style="padding-left: 25%;">
+					<div class="ui-g-12">
+						<p:fieldset legend="#{displayItemBean.getDisplayItemName('branchList')}" style="width:70%;">
+							<f:view encoding="utf-8">
+								<p:dataTable var="lineBean" value="#{storeListFormBean.branchlineBeans}" rows="50" rendered="#{storeListFormBean.branchlineBeans != null}" lazy="true"
+									style="width:100%;margin-left: 0px;" id="branchResultTable">
+									<p:column style="width:30px" styleClass="unsort-column" sortBy="#{lineBean.branchCode}" headerText="#{displayItemBean.getDisplayItemName('branchCode')}">
+										<h:outputText value="#{lineBean.branchCode}" />
+									</p:column>
+									<p:column style="width:50px" sortBy="#{lineBean.branchName}" headerText="#{displayItemBean.getDisplayItemName('branchName')}">
+										<h:outputText value="#{lineBean.branchName}" />
+									</p:column>
+									<p:column style="width:50px" sortBy="#{lineBean.branchAddress}" headerText="#{displayItemBean.getDisplayItemName('address')}">
+										<h:outputText value="#{lineBean.branchAddress}" />
+									</p:column>
+								</p:dataTable>
+							</f:view>
+						</p:fieldset>
+						<div>
+							<p:commandButton action="#{storeListFormBean.back()}" style="margin-top:5px;" value="#{displayItemBean.getDisplayItemName('back')}" styleClass="button" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

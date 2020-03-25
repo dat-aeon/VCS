@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="VCS">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/dev" source-path="/src/hot"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/front"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/base"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/resources/front"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/resources/base"/>
+        <property name="java-output-path" value="/presto/build/classes"/>
+        <property name="context-root" value="VCS"/>
+    </wb-module>
+</project-modules>

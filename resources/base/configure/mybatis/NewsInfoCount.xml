@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NewsInfoCount">
+    
+	<select id="count"
+		parameterType="mm.aeon.com.ass.base.dto.newsInfoSearch.NewsInfoSelectCountReqDto"
+		resultType="java.lang.Integer">
+		SELECT 
+			COUNT(*)
+		FROM 
+			news_info NI
+		WHERE 
+			NI.DEL_FLAG = 0
+	</select>
+
+</mapper>    
+    

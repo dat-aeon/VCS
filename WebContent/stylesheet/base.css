@@ -1,0 +1,848 @@
+﻿/*======================== AEON SMS css========================== */
+/* h3 {
+	color: #fff;
+	background-color: #302873;
+	padding: 10px 0px 10px 5px;
+	border-radius: 8px;
+	margin-bottom: 6px;
+	width: 33%;
+} */
+
+.loading-spin {
+	background: none !important;
+	border: none !important;
+	box-shadow: none !important;
+}
+
+.header-line {
+	background-color: #302873;
+	height: 20px;
+	clear: both;
+	margin-top: 90px;
+}
+
+/*----------------------------- button----------------------- */
+.ui-button.button {
+	width: 100px;
+	height: 30px;
+	margin-right: 2px;
+	margin-bottom: 2px;
+	color: #fff;
+	background-color: #302873 !important;
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
+	font-weight: normal;
+	font-size: 10pt;
+	border-radius: 5px !important;
+	border-width: 0px;
+	background-image: none !important;
+	text-shadow: none !important;
+}
+
+.ui-button.ui-picklist-button-add, .ui-button.ui-picklist-button-add-all,
+	.ui-button.ui-picklist-button-remove, .ui-button.ui-picklist-button-remove-all
+	{
+	margin-right: 2px;
+	margin-bottom: 2px;
+	float: left;
+	color: #fff;
+	background-color: #2185C5 !important;
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
+	border-radius: 5px !important;
+	border-width: 0px;
+	background-image: none !important;
+	font-weight: normal;
+	text-shadow: none !important;
+}
+
+.ui-button.button:hover, .ui-picklist-button-add:hover,
+	.ui-picklist-button-remove:hover, .ui-picklist-button-add-all:hover,
+	.ui-picklist-button-remove-all:hover, .ui-button.translate-btn:hover,
+	.ui-button.dirChangeBtn:hover {
+	opacity: 0.7;
+	background-image: none !important;
+}
+
+.ui-button.btn_logout {
+	font-size: 15px;
+	border-width: 2px;
+	border-color: #f7ad59;
+	border-radius: 5px;
+	background-color: #deb6d4;
+	margin-top: 10px;
+	color: #fff;
+	box-shadow: none !important;
+	text-shadow: none !important;
+	background: #302873
+		-webkit-gradient(linear, left top, left bottom, from(rgb(48, 40, 115)),
+		to(rgba(255, 255, 255, 0)));
+	/* background-image: url('../images/logoutbtn.png') !important; */
+}
+
+.ui-button.btn_logout:hover {
+	background-color: #fff;
+	color: #302873;
+	background-image: none !important;
+}
+
+.ui-state-hover {
+	background: #85b2cb
+		-webkit-gradient(linear, left top, left bottom, from(rgba(162, 142, 124,
+		0.93)), to(rgb(244, 247, 252)))
+}
+/*-------------------------- Login CSS -------------------------------*/
+.password {
+	font-size: 9pt !important;
+	padding-top: 6px !important;
+	padding-bottom: 4px !important;
+	margin-top: 20px;
+}
+
+.logo {
+	width: 213px;
+	height: 36px;
+	margin: 30px auto;
+}
+
+.login-block input {
+	width: 100%;
+	height: 40px;
+	box-sizing: border-box;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	margin-bottom: 20px;
+	font-size: 14px;
+	font-family: "Calibri";
+	padding: 0 20px 0 50px;
+	outline: none;
+}
+
+.login-block input#lgn001form\:userId {
+	margin-top: 9px;
+	background-image: url('../images/user_icon.png') !important;
+	background-position-x: 20px;
+	background-position-y: top;
+	background-repeat: no-repeat;
+	background-size: 16px 80px !important;
+}
+
+.login-block input#lgn001form\:userId:focus {
+	background-image: url('../images/user_icon.png') !important;
+	background-position-x: 20px;
+	background-position-y: bottom;
+	background-repeat: no-repeat;
+	background-size: 16px 80px !important;
+}
+
+.login-block input#lgn001form\:password {
+	background-image: url('../images/password_icon.png') !important;
+	background-position-x: 20px;
+	background-position-y: top;
+	background-repeat: no-repeat;
+	background-size: 16px 80px;
+}
+
+.login-block input#lgn001form\:password:focus {
+	background-image: url('../images/password_icon.png') !important;
+	background-position-x: 20px;
+	background-position-y: bottom;
+	background-repeat: no-repeat;
+	background-size: 16px 80px;
+}
+
+.login-block input:active, .login-block input:focus {
+	border: 1px solid #ff656c;
+}
+
+#lgn001form :-moz-placeholder /* Firefox 18- */ {
+	color: #999999 !important;
+	font-style: italic;
+}
+
+#lgn001form ::-moz-placeholder /* Firefox 19+ */ {
+	color: #999999 !important;
+	font-style: italic;
+}
+
+#lgn001form :-ms-input-placeholder {
+	color: #999999 !important;
+	font-style: italic;
+}
+
+/* ----------------------Menu CSS--------------------------*/
+.ui-menu {
+	background: none !important;
+	padding: 0px;
+	border-width: 0px !important;
+}
+
+.ui-menuitem {
+	height: 35px;
+}
+
+.ui-menuitem-text {
+	color: white;
+}
+
+.ui-menu .ui-menu-child {
+	background: #302873;
+	color: white;
+}
+
+.ui-menu .ui-menu-parent .ui-menu-child{
+	width: 240px;
+	border-width: 0px;
+}
+
+.ui-corner-all {
+	/* border-radius: 0px !important; */
+	
+}
+
+/* -------------------------------Import CSS------------------------------ */
+input.file {
+	width: 70%;
+}
+
+.import_btn {
+	border: none;
+}
+
+.tblSingleLabel {
+	width: 25%;
+	background-color: #302873;
+	color: #fff;
+	padding: 6px 0px 6px 5px;
+	text-align: left;
+	font-weight: 400;
+	font-size: 10pt;
+	font-family: "Calibri";
+	height: 28px;
+}
+
+.panel-grid {
+	width: 100%;
+}
+
+.panel-grid tr {
+	min-height: 25px;
+}
+
+.panel-grid td {
+	text-align: left;
+}
+
+.ui-widget-content.import-fieldset {
+	border-color: #302873;
+	background: #f4f7fc;
+	width: 60%;
+	margin-top: 15px;
+}
+
+.ui-widget-content.user-fieldset {
+	border-color: #302873;
+	background: #f4f7fc;
+	width: 97.7%;
+	margin-top: 15px;
+}
+
+.ui-widget-content.received-fieldset {
+	border-color: #302873;
+	background: #f4f7fc;
+	width: 97.7%;
+	margin-top: 15px;
+}
+
+.status-panel-grid {
+	float: left;
+	margin-top: 3%;
+}
+
+.list-panel-grid {
+	float: left;
+	margin-top: 1%;
+}
+
+.ui-fileupload-simple .ui-button {
+	width: 25%;
+}
+
+.ui-widget-content legend.ui-state-default {
+	color: 302873;
+	border-color: #302873;
+	font-weight: bold;
+	font-size: 14pt;
+	font-family: "Calibri";
+	background: #fff;
+	width: 35%;
+	/* padding: 8px; */
+	padding: 3px;
+}
+
+.import-fieldset .ui-fieldset-content {
+	/* margin-top: 2%; */
+	
+}
+/* ---------------------------------------Other ------------------------------------- */
+.ui-widget-content a {
+	font-size: 10pt;
+	font-family: "Calibri";
+}
+
+.ui-widget textarea {
+	font-family: "Calibri";
+	font-size: 10pt;
+}
+
+.tblSingleInput {
+	padding: 5px 2px 5px 8px;
+	width: 80%;
+}
+
+/*=========================== Remaining List ======================== */
+.ui-datatable .ui-sortable-column-icon {
+	right: 10% !important;
+}
+
+.ui-datatable table.ui-datatable-fs {
+	width: 100%;
+}
+
+.ui-datatable-scrollable-body {
+	height: auto;
+	max-height: 500px;
+}
+
+#remainListForm\:remainResultList_data td {
+	font-size: 10pt;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	height: 32px;
+}
+
+#remainListForm\:remainResultList .ui-widget-content a {
+	font-size: 10pt;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+/* 
+#remainListForm\:remainResultList th {
+	height: 33px !important;
+} */
+#remainListForm\:remainResultList {
+	padding-top: 3px;
+}
+
+#remainListForm\:remainResultList  .ui-datatable-scrollable-header {
+	margin-right: 17px;
+	overflow: visible;
+	background: none;
+}
+
+.ui-datatable-tablewrapper {
+	margin-top: 20px;
+}
+
+table.resultTable {
+	border-collapse: collapse;
+	margin-bottom: 4px;
+	font-size: 10pt;
+	width: 80%;
+	text-align: center;
+	vertical-align: center;
+	border: 1px solid #194584;
+	height: 400px;
+}
+
+table.resultTable th {
+	border: 1px solid #194584;
+}
+
+table.resultTable td {
+	border: 1px solid #194584;
+	padding: 2px 2px;
+}
+
+.resultTable tbody tr {
+	vertical-align: middle;
+	text-align: center;
+	height: 25px !important;
+	font-family: "Calibri";
+}
+
+table.dialogTable {
+	border-collapse: collapse;
+	margin-bottom: 4px;
+	font-size: 10pt;
+	width: 10%;
+	text-align: center;
+	vertical-align: center;
+	border: 1px solid #194584;
+	height: 400px;
+}
+
+table.dialogTable th {
+	border: 1px solid #194584;
+}
+
+table.dialogTable td {
+	border: 1px solid #194584;
+	padding: 2px 2px;
+}
+
+.dialogTable tbody tr {
+	vertical-align: middle;
+	text-align: center;
+	height: 25px !important;
+	font-family: "Calibri";
+}
+
+.ui-datatable th.ui-sortable-column, .ui-datatable th.unsort-column {
+	font-size: 10pt;
+	padding: .571em .857em;
+	height: auto;
+	text-shadow: 0 1px 0 rgb(48, 40, 115);
+	background: #302873
+		-webkit-gradient(linear, left top, left bottom, from(#302873),
+		to(#302873));
+	background: #302873 -moz-linear-gradient(top, rgb(48, 40, 115),
+		rgb(48, 40, 115));
+	color: #fff;
+	font-weight: normal;
+	color: #fff;
+}
+
+table.resultAppTable {
+	border-collapse: collapse;
+	margin-bottom: 4px;
+	font-size: 10pt;
+	width: 80%;
+	text-align: center;
+	vertical-align: center;
+	border: 1px solid #194584;
+	height: 400px;
+}
+
+table.resultAppTable th {
+	border: 1px solid #194584;
+}
+
+table.resultAppTable td {
+	border: 1px solid #194584;
+	padding: 2px 2px;
+}
+
+.resultAppTable tbody tr {
+	vertical-align: middle;
+	text-align: center;
+	height: 25px !important;
+	font-family: "Calibri";
+}
+
+.resultAppTable.ui-datatable .ui-paginator{
+	margin-top: -30px;
+}
+
+table.receivedTable {
+	border-collapse: collapse;
+	margin-bottom: 4px;
+	font-size: 10pt;
+	width: 80%;
+	text-align: center;
+	vertical-align: center;
+	border: 1px solid #194584;
+	height: 400px;
+}
+
+table.receivedTable th {
+	border: 1px solid #194584;
+}
+
+table.receivedTable td {
+	border: 1px solid #194584;
+	padding: 2px 2px;
+}
+
+.receivedTable tbody tr {
+	vertical-align: middle;
+	text-align: center;
+	height: 25px !important;
+	font-family: "Calibri";
+}
+
+.receivedTable.ui-datatable .ui-paginator{
+	margin-top: -50px;
+}
+
+.ui-button.call-btn {
+	width: 115px;
+	background-color: #302873;
+	color: #fff;
+	background-image: none !important;
+	text-shadow: none;
+}
+
+.ui-button.delete-green-btn {
+	background-color: green !important;
+}
+
+.ui-button.confirm-delete-btn {
+	background-color: #025fbf !important;
+}
+
+.ui-button.confirm-btn {
+	width: 50px;
+	background-color: #302873;
+	color: #fff;
+	background-image: none !important;
+	text-shadow: none;
+}
+
+.ui-datatable thead th, .ui-datatable tbody td, .ui-datatable tfoot td,
+	.ui-datatable tfoot th {
+	overflow: hidden;
+	/* border-color: #194584 !important; */
+}
+
+.ui-datatable .ui-paginator, .ui-datatable .ui-paginator {
+	background: none;
+	color: #03112b !important;
+	border-style: none;
+}
+
+.ui-datatable-scrollable-theadclone {
+	display: none !important;
+}
+
+.dialog-text {
+	text-align: center;
+	margin-top: 15px;
+}
+
+.calendar-dialog {
+	margin-left: 150px;
+}
+
+.check-status-btn {
+	border-style: none;
+	/* border-left:#f4f7fc;
+	border-right: #fff;
+	border-top: #fff;
+	border-bottom: #fff; */
+}
+
+.downloadLink-div {
+	float: right;
+	margin-right: 250px;
+	margin-left: -250px;
+	background: #302873;
+	margin-top: 2px;
+	border-radius: 4px;
+	padding: 7px 20px;
+}
+
+.downloadLink-div:hover {
+	opacity: 0.7;
+}
+
+.downloadLink {
+	color: #fff;
+	font-size: 10pt;
+	font-weight: normal;
+	text-decoration: none;
+	text-shadow: none;
+}
+
+.txtArea {
+	resize: none;
+}
+
+/* =================================== Welcome Letter List ============================ */
+#welcomeListForm\:welcomeLetterList_data td {
+	font-size: 10pt;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	height: 32px;
+}
+
+#welcomeListForm\:welcomeLetterList .ui-widget-content a {
+	font-size: 10pt;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+/* 
+#welcomeListForm\:welcomeLetterList th {
+	height: 33px !important;
+} */
+#welcomeListForm\:welcomeLetterList {
+	padding-top: 3px;
+}
+
+#welcomeListForm\:welcomeLetterList  .ui-datatable-scrollable-header {
+	margin-right: 17px;
+	overflow: visible;
+	background: none;
+}
+
+/* ================================ Staff Search ===================================*/
+.staffResult.ui-datatable thead th {
+	height: 35px;
+	background: #302873
+		-webkit-gradient(linear, left top, left bottom, from(#302873),
+		to(#302873));
+	background: #302873 -moz-linear-gradient(top, rgb(48,40,115),
+		rgb(48,40,115));
+	color: #fff;
+	color: #fff;
+	text-shadow: 0 1px 0 rgb(182, 122, 206);
+}
+
+/* ================================ Agency User Register ===================================*/
+.ui-widget-content.register-fieldset {
+	border-color: #302873;
+	background: #f4f7fc;
+	width: 54%;
+	margin-top: 15px;
+}
+
+.register-fieldset .ui-fieldset-content {
+	/* margin-top: 4%; */
+	
+}
+
+#staffSearchform\:staffResultTable {
+	width: 52%;
+	margin-left: 10px;
+}
+/* ================================max-width : 1650px ===================================*/
+@media only screen and (max-width: 1650px) {
+	.ui-fileupload-simple .ui-button {
+		width: 20%;
+	}
+	.ui-widget-content.import-fieldset {
+		width: 85%;
+	}
+	.ui-widget-content.user-fieldset {
+		width: 97%;
+	}
+	.ui-widget-content.received-fieldset {
+		width: 97%;
+	}
+	#staffSearchform\:staffResultTable {
+		width: 72%;
+		margin-left: 10px;
+	}
+}
+
+textarea, input[type='text'], input[type='password'], select {
+	font-size: 10pt;
+	font-family: "Calibri";
+	color: #000000 !important;
+}
+
+.tblLabel-status {
+	width: 6%;
+	background-color: #302873;
+	color: #fff;
+	padding-left: 5px;
+}
+
+.tblHeader {
+	background-color: #302873;
+	color: #000;
+	height: 30px !important;
+}
+
+.tableForm {
+	border-collapse: collapse;
+	width: 80%;
+	text-align: left;
+	float: left;
+	margin-right: 20px;
+	margin-top: 10px;
+}
+
+.tableForm td {
+	border: 1px solid #194584;
+	padding-left: 10px;
+	padding-right: 10px;
+	height: 25px;
+}
+
+.login-block {
+	box-shadow: 5px 5px 15px grey;
+	width: 320px;
+	padding: 20px;
+	background: #fff;
+	border-radius: 5px;
+	border-top: 5px solid #302873;
+	border-bottom: 5px solid #302873;
+	height: 350px;
+}
+
+tr.search td.col {
+	border-left: 0px solid;
+	border-right: 0px solid;
+}
+/*======================== Start For ASS========================== */
+.ui-calendar input {
+	width: 160px !important;
+}
+
+.star {
+	color: red;
+	font-weight: bold;
+}
+
+.management-link {
+	color: #302873 !important;
+	margin-left: 5px;
+	margin-right: 5px;
+	display: inline-block;
+	width: 45px;	
+}
+
+.management-link:hover {
+	color: #5853a3 !important;
+}
+
+.message-style {
+	white-space: pre-wrap;
+}
+
+.ui-widget-content.initialize-fieldset {
+	border-color: #302873;
+	background: #f4f7fc;
+	width: 50%;
+	margin-top: 15px;
+}
+
+.ui-widget-content.judgementUpload-fieldset {
+	border-color: #302873;
+	background: #f4f7fc;
+	width: 102%;
+	margin-top: 15px;
+}
+
+.ui-widget-content.initialize-fieldset-msg {
+	border-color: #302873;
+	background: #f4f7fc;
+	margin-top: 15px;
+}
+
+.centerText {
+	text-align: center !important;
+}
+
+.resultDatatable.ui-datatable thead th {
+	height: 30px;
+	background: #302873
+		-webkit-gradient(linear, left top, left bottom, from(#302873),
+		to(#302873));
+	background: #302873 -moz-linear-gradient(top, rgb(48, 40, 115),
+		rgb(48, 40, 115));
+	color: #fff;
+	color: #fff;
+	text-shadow: 0 1px 0 rgb(182, 122, 206);
+}
+
+.ui-datatable-tablewrapper {
+	overflow: hidden;
+}
+
+.agencyResult {
+	width: 88%;
+}
+
+.appLabel {
+	font-size: 15px;
+	font-weight: normal;
+	font-weight: bold;
+	font-family: Arial, sans-serif;
+	color: #302873;
+}
+
+.recordStyle{
+	font-weight: bold;
+	font-family: Arial,sans-serif;
+	color:#302873;
+}
+
+.ui-selectonemenu .ui-selectonemenu-trigger {
+	border-right: 0;
+	border-top: 0;
+	border-bottom: 0;
+	cursor: pointer;
+	width: 16px;
+	height: 100%;
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding: 0 5px;
+}
+
+.ui-inputfield {
+	margin: 0;
+	outline: medium none;
+	padding: 2px;
+	font-weight: normal;
+	height: 100%;
+}
+
+.ui-fluid .ui-inputtext {
+	width: 50%;
+}
+
+.ui-confirm-dialog-message {
+    display: inline-block;
+    margin-top: 1px;
+    color: white;
+}
+
+.ui-fluid .ui-calendar input {
+    width: auto!important;
+}
+
+.message-block{
+	 float: left;
+	 padding-left: 0px;/* 15px; */
+	 min-height: 1px;	 
+}
+
+.centre-block{
+	 float: left;
+	 padding-left: 0px;/* 15px; */
+	 min-height: 1px;	 
+}
+
+.space-block{
+	 min-height: 30px;
+}
+
+/* .ui-dialog-content .ui-widget-content .dialogContent{
+	height: 352px;
+    width: 346px;
+} */
+
+.ui-menuitem-link.ui-state-hover {
+    box-shadow:none !important;
+    border:none !important;
+    background: #302873;
+}
+
+.ui-menuitem .ui-menuitem-active, .ui-menu-child .ui-state-hover {
+    box-shadow:none !important;
+    border:none !important;
+    background: #f7ad59;
+}
+
+.inputNumber > input {
+	width: 100% !important;
+}
+
+.width200px, .width200px > input, .width200px > input.hasDatepicker {
+	width: 200px !important;
+}
+
+/*======================== End For ASS ========================== */

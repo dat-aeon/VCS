@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="ShopCoupon">
+    
+    <select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.storeSearch.ShopSearchForCouponReqDto"
+		resultMap="shopSearchForCouponResDto">
+		SELECT SHOP_ID,SHOP_NAME,SHOP_CODE,
+				ADDRESS,DEL_FLAG,UPDATED_BY,CREATED_TIME,
+				UPDATED_TIME
+				
+		FROM SHOP_INFO 
+		
+		<where>
+			<if test="storeName != null and storeName != ''">
+				SHOP_NAME = #{storeName}
+			</if>
+			<if test="storeCode != null and storeCode != ''">
+				AND SHOP_CODE = #{storeCode}
+			</if>
+			AND DEL_FLAG != 1
+		</where>
+		ORDER BY SHOP_ID DESC
+	</select>
+	<resultMap id="shopSearchForCouponResDto"
+		type="mm.aeon.com.ass.base.dto.storeSearch.ShopSearchForCouponResDto">
+		<result property="storeId" column="SHOP_ID" />
+		<result property="storeName" column="SHOP_NAME" />
+		<result property="storeCode" column="SHOP_CODE" />
+		<result property="storeAddress" column="ADDRESS" />
+		<result property="delFlag" column="DEL_FLAG" />
+		<result property="updatedBy" column="UPDATED_BY" />
+		<result property="createdTime" column="CREATED_TIME" />
+		<result property="updatedTime" column="UPDATED_TIME" />
+	</resultMap>
+    
+    
+    </mapper>

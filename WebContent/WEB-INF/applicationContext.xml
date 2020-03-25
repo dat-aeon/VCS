@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+	<import resource="classpath:configure/controller-definitions.xml" />
+
+	<import resource="classpath:configure/service-definitions.xml" />
+
+	<import resource="classpath:resources/base/configure/base-definitions.xml" />
+
+	<bean id="springApplicationContext"
+		class="mm.com.dat.presto.main.front.common.ApplicationContextProvider" />
+
+	<!-- For times when you need more complex processing, passing data to the 
+		scheduled job -->
+	<bean name="fileDeleteJobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="mm.aeon.com.ass.front.common.job.FileDeleteJob" />
+		<property name="durability" value="true" />
+	</bean>
+	
+	<!-- Run the job every 12:00 am every day -->
+	<bean id="fileDeleteTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="fileDeleteJobDetail" />
+		<property name="cronExpression" value="0 0 00 * * ?"/>
+	</bean>
+	
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="jobDetails">
+			<list>
+				<ref bean="fileDeleteJobDetail" />
+			</list>
+		</property>
+		<property name="triggers">
+			<list>
+				<ref bean="fileDeleteTrigger" />
+			</list>
+		</property>
+	</bean>
+
+</beans>

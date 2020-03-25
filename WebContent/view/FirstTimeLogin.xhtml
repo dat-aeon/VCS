@@ -1,0 +1,79 @@
+<!--***********************************************************************
+ * $Date: 2018-06-20$
+ * $Author: Khin Yadanar Thein$
+ * $Rev:  $
+ * 2018 AEON Microfinance (Myanmar) Company	Limited. All Rights Reserved.
+ ***********************************************************************-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:pt="http://presto.dat.com/tag" xmlns:c="http://java.sun.com/jsp/jstl/core" contentType="text/html">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	</f:facet>
+	<link rel="stylesheet" href="#{request.contextPath}/stylesheet/base.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="#{request.contextPath}/stylesheet/container.css" type="text/css" media="all" />
+	<link href="../presto/images/AEON_Logo.png" rel="shortcut icon" />
+	<script type="text/javascript" src="#{request.contextPath}/resources/presto/javascript/message.js"></script>
+	<script type="text/javascript" src="#{request.contextPath}/javascript/general.js"></script>
+	<script type="text/javascript">
+		function deleteAllCookies() {
+			document.cookie.split(";").forEach(
+					function(c) {
+						document.cookie = c.replace(/^ +/, "").replace(
+								/=.*/,
+								"=;expires=" + new Date().toUTCString()
+										+ ";path=/");
+					});
+		}
+	</script>
+	<title>Virtual Card System</title>
+</h:head>
+<body onload="customCommonLoad();">
+	<div class="ui-g" id="header" style="height: 80px;">
+		<div class="ui-g-12">
+			<div id="title_lable">
+				<img src="../presto/images/AEON_Logo.png" style="margin-left: 5px; float: left; width: 63px; height: 63px;" />
+				<p style="margin-left: 20px; float: left;">Virtual Card System</p>
+			</div>
+			<!-- <div class="header-line"></div> -->
+		</div>
+	</div>
+	<div class="ui-g" id="contents" style="top: 10px; margin: 0% 35% 0% 35%">
+		<h:form id="lgn001form" style="width:100%;">
+			<div class="logo"></div>
+			<div class="login-block">
+				<div class="logo-login" style="text-align: center; margin-bottom: 15px;">
+					<h:outputLabel style="color:#5853a3;font-size:20pt; margin-left: 10px;" value="Change Your Password" />
+				</div>
+				<!-- <h2 style="text-align: center;">
+					<h:outputLabel value="Login" />
+				</h2> -->
+				<pt:messages />
+				<p:password id="newpassword" rendered="#{!firstTimePasswordChangeFormBean.change}" value="#{firstTimePasswordChangeFormBean.passwordChangeHeaderBean.newPassword}"
+					label="password" styleClass="txt password" placeholder="password" style="margin-top: 30px;" />
+				<p:watermark for="newpassword" value="NEW PASSWORD" />
+				<p:password id="confirmpassword" rendered="#{!firstTimePasswordChangeFormBean.change}" value="#{firstTimePasswordChangeFormBean.passwordChangeHeaderBean.confirmPassword}"
+					label="password" styleClass="txt password" placeholder="password" />
+				<p:watermark for="confirmpassword" value="CONFIRM PASSWORD" />
+				<h:panelGrid rendered="#{firstTimePasswordChangeFormBean.change}">
+					<div class="ui-g-12"></div>
+				</h:panelGrid>
+				<div class="ui-g-12" style="text-align: center">
+					<p:commandButton value="Change" rendered="#{not firstTimePasswordChangeFormBean.change}" action="#{firstTimePasswordChangeFormBean.change()}" styleClass="button" />
+					<p:commandButton value="Login" rendered="#{firstTimePasswordChangeFormBean.change}" action="#{firstTimePasswordChangeFormBean.back()}" styleClass="button" />
+				</div>
+			</div>
+		</h:form>
+	</div>
+	<div class="ui-g">
+		<div class="footer">
+			<span>Copyright © 2019 AEON Microfinance (Myanmar) Company Limited. All Rights Reserved.</span>
+		</div>
+	</div>
+</body>
+	</html>
+</f:view>

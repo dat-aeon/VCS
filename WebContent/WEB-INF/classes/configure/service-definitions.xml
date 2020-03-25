@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+						http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context-3.1.xsd
+						http://www.springframework.org/schema/tx
+						http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+
+
+
+	<!-- ************************************************************************************** 
+		************************ Configuration of Service Classes. *************************** 
+		************************************************************************************** -->
+
+	<bean name="UserInfoRegisterService"
+		class="mm.aeon.com.ass.base.service.userInfoRegisterService.UserInfoRegisterService" />
+
+	<bean name="UserInfoUpdateService"
+		class="mm.aeon.com.ass.base.service.userInfoUpdateService.UserInfoUpdateService" />
+		
+	<bean name="PasswordInfoUpdateService"
+		class="mm.aeon.com.ass.base.service.passwordInfoUpdateService.PasswordInfoUpdateService" />
+
+	<bean name="SecurityRegisterService"
+		class="mm.aeon.com.ass.base.service.securityRegisterService.SecurityRegisterService" />
+
+	<bean name="SecurityUpdateService"
+		class="mm.aeon.com.ass.base.service.securityUpdateService.SecurityUpdateService" />
+
+	<bean name="CompanyInfoRegisterService"
+		class="mm.aeon.com.ass.base.service.companyInfoRegisterService.CompanyInfoRegisterService" />
+
+	<bean name="CompanyInfoUpdateService"
+		class="mm.aeon.com.ass.base.service.companyInfoUpdateService.CompanyInfoUpdateService" />
+
+	<bean name="faqInsertService"
+		class="mm.aeon.com.ass.base.service.faqInsertService.FaqInsertService"
+		scope="prototype" />
+
+	<bean name="faqUpdateService"
+		class="mm.aeon.com.ass.base.service.faqUpdateService.FaqUpdateService"
+		scope="prototype" />
+
+	<bean name="appSettingUpdateService"
+		class="mm.aeon.com.ass.base.service.appSettingUpdateService.AppSettingUpdateService"
+		scope="prototype" />
+
+	<bean name="storeInsertService"
+		class="mm.aeon.com.ass.base.service.storeRegisterService.StoreInsertService"
+		scope="prototype" />
+
+	<bean name="branchInsertService"
+		class="mm.aeon.com.ass.base.service.storeRegisterService.BranchInsertService"
+		scope="prototype" />
+
+	<bean name="storeUpdateService"
+		class="mm.aeon.com.ass.base.service.storeUpdateService.StoreUpdateService"
+		scope="prototype" />
+
+	<bean name="branchUpdateService"
+		class="mm.aeon.com.ass.base.service.storeUpdateService.BranchUpdateService"
+		scope="prototype" />
+
+	<bean name="adminCustomerRoomInsertService"
+		class="mm.aeon.com.ass.base.service.adminCustomerRoomInsertService.AdminCustomerRoomInsertService"
+		scope="prototype" />
+		
+	<bean name="freeAdminCustomerRoomInsertService"
+		class="mm.aeon.com.ass.base.service.freeAdminCustomerRoomInsertService.FreeAdminCustomerRoomInsertService"
+		scope="prototype" />
+		
+	<bean name="adminCustomerRoomSyncService"
+		class="mm.aeon.com.ass.base.service.adminCustomerRoomSyncService.AdminCustomerRoomSyncService"
+		scope="prototype" />
+		
+	<bean name="freeAdminCustomerRoomSyncService"
+		class="mm.aeon.com.ass.base.service.freeAdminCustomerRoomSyncService.FreeAdminCustomerRoomSyncService"
+		scope="prototype" />
+
+	<bean name="categoryInfoInsertService"
+		class="mm.aeon.com.ass.base.service.categoryInfoInsertService.CategoryInfoInsertService"
+		scope="prototype" />
+		
+	<bean name="categoryInfoDeleteService"
+		class="mm.aeon.com.ass.base.service.categoryInfoDeleteService.CategoryInfoDeleteService"
+		scope="prototype" />
+		
+	<bean name="categoryInfoUpdateService"
+		class="mm.aeon.com.ass.base.service.categoryInfoUpdateService.CategoryInfoUpdateService"
+		scope="prototype" />
+
+	<bean name="newsInfoInsertService"
+		class="mm.aeon.com.ass.base.service.newsInfoInsertService.NewsInfoInsertService"
+		scope="prototype" />
+
+	<bean name="newsInfoDeleteService"
+		class="mm.aeon.com.ass.base.service.newsInfoDeleteService.NewsInfoDeleteService"
+		scope="prototype" />
+
+	<bean name="newsInfoUpdateService"
+		class="mm.aeon.com.ass.base.service.newsInfoUpdateService.NewsInfoUpdateService"
+		scope="prototype" />
+
+	<bean name="promotionsInfoInsertService"
+		class="mm.aeon.com.ass.base.service.promotionsInfoInsertService.PromotionsInfoInsertService"
+		scope="prototype" />
+
+	<bean name="promotionsInfoDeleteService"
+		class="mm.aeon.com.ass.base.service.promotionsInfoDeleteService.PromotionsInfoDeleteService"
+		scope="prototype" />
+
+	<bean name="promotionsInfoUpdateService"
+		class="mm.aeon.com.ass.base.service.promotionsInfoUpdateService.PromotionsInfoUpdateService"
+		scope="prototype" />
+
+	<bean name="couponInsertService"
+		class="mm.aeon.com.ass.base.service.couponInsertService.CouponInsertService"
+		scope="prototype" />
+
+	<bean name="cusCouponInsertService"
+		class="mm.aeon.com.ass.base.service.couponInsertService.CusCouponInsertService"
+		scope="prototype" />
+
+	<bean name="storeCouponUpdateService"
+		class="mm.aeon.com.ass.base.service.storeCouponUpdateService.StoreCouponUpdateService"
+		scope="prototype" />
+
+	<bean name="storeCouponDeleteService"
+		class="mm.aeon.com.ass.base.service.storeCouponUpdateService.StoreCouponDeleteService"
+		scope="prototype" />
+
+	<bean name="couponUpdateService"
+		class="mm.aeon.com.ass.base.service.couponUpdateService.CouponUpdateService"
+		scope="prototype" />
+
+	<bean name="cusCouponUpdateService"
+		class="mm.aeon.com.ass.base.service.couponUpdateService.CusCouponUpdateService"
+		scope="prototype" />
+
+	<bean name="storeCouponRegisterService"
+		class="mm.aeon.com.ass.base.service.storeCouponRegisterService.StoreCouponRegisterService"
+		scope="prototype" />
+
+	<bean name="customerCouponUpdateService"
+		class="mm.aeon.com.ass.base.service.couponUpdateService.CustomerCouponUpdateService"
+		scope="prototype" />
+
+	<bean name="couponDeleteService"
+		class="mm.aeon.com.ass.base.service.couponDeleteService.CouponDeleteService"
+		scope="prototype" />
+
+	<bean name="cusCouponDeleteService"
+		class="mm.aeon.com.ass.base.service.couponDeleteService.CusCouponDeleteService"
+		scope="prototype" />
+
+	<bean name="customerUpdateService"
+		class="mm.aeon.com.ass.base.service.customerUpdateService.CustomerUpdateService"
+		scope="prototype" />
+		
+	<bean name="customerResetPasswordService"
+	class="mm.aeon.com.ass.base.service.customerResetPasswordService.CustomerResetPasswordService"
+	scope="prototype" />
+	
+	<bean name="customerUpdateHistoryInsertService"
+	class="mm.aeon.com.ass.base.service.customerUpdateHistoryInsertService.CustomerUpdateHistoryInsertService"
+	scope="prototype" />
+
+	<bean name="smsRegisterService"
+		class="mm.aeon.com.ass.base.service.smsRegisterService.SMSRegisterService"
+		scope="prototype" />
+
+	<bean name="requestServiceInfoRepository"
+		class="mm.com.dat.presto.main.core.base.controller.RequestServiceInfoRepository">
+
+		<property name="serviceInfoRepository">
+			<map>
+				<!-- *************************************************************************** 
+					********************Configuration Service id and Service Bean************** 
+					*************************************************************************** -->
+
+				<entry key="USERINFOSI">
+					<ref bean="UserInfoRegisterService" />
+				</entry>
+
+				<entry key="USERINFOSU">
+					<ref bean="UserInfoUpdateService" />
+				</entry>
+				
+				<entry key="PASSWORDCHANGE">
+					<ref bean="PasswordInfoUpdateService" />
+				</entry>
+
+				<entry key="SECURITYSI">
+					<ref bean="SecurityRegisterService" />
+				</entry>
+
+				<entry key="SECURITYSU">
+					<ref bean="SecurityUpdateService" />
+				</entry>
+
+				<entry key="COMPANYINFOSI">
+					<ref bean="CompanyInfoRegisterService" />
+				</entry>
+
+				<entry key="COMPANYINFOSU">
+					<ref bean="CompanyInfoUpdateService" />
+				</entry>
+
+				<entry key="FAQINSERT">
+					<ref bean="faqInsertService" />
+				</entry>
+
+				<entry key="FAQUPDATE">
+					<ref bean="faqUpdateService" />
+				</entry>
+
+				<entry key="APPSETTINGINSERT">
+					<ref bean="appSettingUpdateService" />
+				</entry>
+
+				<entry key="STOREINSERT">
+					<ref bean="storeInsertService" />
+				</entry>
+
+				<entry key="BRANCHINSERT">
+					<ref bean="branchInsertService" />
+				</entry>
+
+				<entry key="STOREUPDATE">
+					<ref bean="storeUpdateService" />
+				</entry>
+				
+				<entry key="ADMINCUSTOMERROOMINSERT">
+					<ref bean="adminCustomerRoomInsertService" />
+				</entry>
+				
+				<entry key="FREEADMINCUSTOMERROOMINSERT">
+					<ref bean="freeAdminCustomerRoomInsertService" />
+				</entry>
+				
+				<entry key="ADMINCUSTOMERROOMSYNC">
+					<ref bean="adminCustomerRoomSyncService" />
+				</entry>
+				
+				<entry key="FREEADMINCUSTOMERROOMSYNC">
+					<ref bean="freeAdminCustomerRoomSyncService" />
+				</entry>
+
+				<entry key="BRANCHUPDATE">
+					<ref bean="branchUpdateService" />
+				</entry>
+				
+				<entry key="CATEGORYINFODELETE">
+					<ref bean="categoryInfoDeleteService" />
+				</entry>
+				
+				<entry key="CATEGORYINFOINSERT">
+					<ref bean="categoryInfoInsertService" />
+				</entry>
+				
+				<entry key="CATEGORYINFOUPDATE">
+					<ref bean="categoryInfoUpdateService" />
+				</entry>
+
+				<entry key="NEWSINFOINSERT">
+					<ref bean="newsInfoInsertService" />
+				</entry>
+
+				<entry key="NEWSINFODELETE">
+					<ref bean="newsInfoDeleteService" />
+				</entry>
+
+				<entry key="NEWSINFOUPDATE">
+					<ref bean="newsInfoUpdateService" />
+				</entry>
+				
+				<entry key="PROMOTIONSINFOINSERT">
+					<ref bean="promotionsInfoInsertService" />
+				</entry>
+				
+				<entry key="PROMOTIONSINFODELETE">
+					<ref bean="promotionsInfoDeleteService" />
+				</entry>
+				
+				<entry key="PROMOTIONSINFOUPDATE">
+					<ref bean="promotionsInfoUpdateService" />
+				</entry>
+
+				<entry key="COUPONINSERT">
+					<ref bean="couponInsertService" />
+				</entry>
+
+				<entry key="CUSCOUPONINSERT">
+					<ref bean="cusCouponInsertService" />
+				</entry>
+
+				<entry key="STORECOUPONUPDATE">
+					<ref bean="storeCouponUpdateService" />
+				</entry>
+
+				<entry key="STORECOUPONDELETE">
+					<ref bean="storeCouponDeleteService" />
+				</entry>
+
+				<entry key="COUPONU">
+					<ref bean="couponUpdateService" />
+				</entry>
+
+				<entry key="CUSCOUPONUPDATE">
+					<ref bean="cusCouponUpdateService" />
+				</entry>
+
+				<entry key="STORECOUPONINSERT">
+					<ref bean="storeCouponRegisterService" />
+				</entry>
+
+				<entry key="CUSTOMERCOUPONUPDATE">
+					<ref bean="customerCouponUpdateService" />
+				</entry>
+
+				<entry key="COUPONDE">
+					<ref bean="couponDeleteService" />
+				</entry>
+
+				<entry key="CUSCOUPONDE">
+					<ref bean="cusCouponDeleteService" />
+				</entry>
+
+				<entry key="CUSTOMERSU">
+					<ref bean="customerUpdateService" />
+				</entry>
+				
+				<entry key="CUSTOMERESETPASSWORD">
+					<ref bean="customerResetPasswordService" />
+				</entry>
+
+				<entry key="SMSSI">
+					<ref bean="smsRegisterService" />
+				</entry>
+				
+				<entry key="CUSTOMERUPDATEINFOINSERT">
+					<ref bean="customerUpdateHistoryInsertService" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean name="serviceInvoker"
+		class="mm.com.dat.presto.main.core.base.controller.ServiceInvoker"
+		scope="prototype">
+		<property name="requestServiceInfoRepository">
+			<ref bean="requestServiceInfoRepository" />
+		</property>
+	</bean>
+
+</beans>

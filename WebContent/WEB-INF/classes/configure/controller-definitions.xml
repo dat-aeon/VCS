@@ -1,0 +1,695 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+						http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop-3.1.xsd ">
+
+	<!-- ************************************************************************************** 
+		************************ Configuration of Flow Classes. ******************************* 
+		*************************************************************************************** -->
+
+	<bean name="loginController"
+		class="mm.aeon.com.ass.front.login.LoginController" scope="prototype" />
+
+	<bean name="adminSearchController"
+		class="mm.aeon.com.ass.front.adminList.AdminListSearchController"
+		scope="prototype" />
+
+	<bean name="adminRegisterController"
+		class="mm.aeon.com.ass.front.adminManagement.AdminManagementController"
+		scope="prototype" />
+
+	<bean name="adminDeleteController"
+		class="mm.aeon.com.ass.front.adminList.AdminDeleteController"
+		scope="prototype" />
+		
+	<bean name="passwordChangeController"
+		class="mm.aeon.com.ass.front.passwordChange.PasswordChangeController"
+		scope="prototype" />
+		
+	<bean name="firstTimePasswordChangeController"
+		class="mm.aeon.com.ass.front.passwordChange.FirstTimePasswordChangeController"
+		scope="prototype" />
+
+	<bean name="operatorSearchController"
+		class="mm.aeon.com.ass.front.operatorList.OperatorListController"
+		scope="prototype" />
+
+	<bean name="operatorManagementController"
+		class="mm.aeon.com.ass.front.operatorManagement.OperatorManagementController"
+		scope="prototype" />
+
+	<bean name="operatorDeleteController"
+		class="mm.aeon.com.ass.front.operatorList.OperatorDeleteController"
+		scope="prototype" />
+
+	<bean name="securitySearchController"
+		class="mm.aeon.com.ass.front.securityList.SecurityListSearchController"
+		scope="prototype" />
+
+	<bean name="securityRegisterController"
+		class="mm.aeon.com.ass.front.securityManagement.SecurityManagementController"
+		scope="prototype" />
+
+	<bean name="companyInfoSearchController"
+		class="mm.aeon.com.ass.front.companyInfoManagement.CompanyInfoSearchController"
+		scope="prototype" />
+
+	<bean name="companyInfoManagementController"
+		class="mm.aeon.com.ass.front.companyInfoManagement.CompanyInfoManagementController"
+		scope="prototype" />
+
+	<bean name="securitySearhValidStatusToggleController"
+		class="mm.aeon.com.ass.front.securityList.SecurityToggleValidController"
+		scope="prototype" />
+
+	<bean name="faqManagementController"
+		class="mm.aeon.com.ass.front.faqManagement.FaqManagementController"
+		scope="prototype" />
+
+	<bean name="faqManagementControllerForUpate"
+		class="mm.aeon.com.ass.front.faqManagement.FaqManagementController"
+		scope="prototype" />
+
+	<bean name="faqListSearchController"
+		class="mm.aeon.com.ass.front.faqList.FaqListSearchController"
+		scope="prototype" />
+
+	<bean name="faqToggleValidStatusChangeController"
+		class="mm.aeon.com.ass.front.faqList.FaqToggleValidController"
+		scope="prototype" />
+
+	<bean name="appSettingManagementController"
+		class="mm.aeon.com.ass.front.appSettingManagement.AppSettingManagementController"
+		scope="prototype" />
+
+	<bean name="appSettinguUpdateInitController"
+		class="mm.aeon.com.ass.front.appSettingManagement.AppSettinguUpdateInitController"
+		scope="prototype" />
+
+	<bean name="shopListSearchController"
+		class="mm.aeon.com.ass.front.storeList.StoreListSearchController"
+		scope="prototype" />
+
+	<bean name="shopListCouponSearchController"
+		class="mm.aeon.com.ass.front.storeList.ShopListCouponSearchController"
+		scope="prototype" />
+
+	<bean name="storeListDetailController"
+		class="mm.aeon.com.ass.front.storeList.StoreListDetailController"
+		scope="prototype" />
+
+	<bean name="storeManagementController"
+		class="mm.aeon.com.ass.front.storeManagement.StoreManagementController"
+		scope="prototype" />
+
+	<bean name="storeManagementControllerForUpdate"
+		class="mm.aeon.com.ass.front.storeManagement.StoreManagementController"
+		scope="prototype" />
+
+	<bean name="storeToggleValidStatusChangeController"
+		class="mm.aeon.com.ass.front.storeList.StoreToggleValidController"
+		scope="prototype" />
+
+	<bean name="storeManagementInitController"
+		class="mm.aeon.com.ass.front.storeManagement.StoreManagementInitController"
+		scope="prototype" />
+
+	<bean name="branchDeleteController"
+		class="mm.aeon.com.ass.front.storeList.BranchDeleteController"
+		scope="prototype" />
+
+	<bean name="applicationReportSearchController"
+		class="mm.aeon.com.ass.front.deviceUsageReport.ApplicationListSearchController"
+		scope="prototype" />
+
+	<bean name="newsInfoManagementController"
+		class="mm.aeon.com.ass.front.newsInfoManagement.NewsInfoManagementController"
+		scope="prototype" />
+
+	<bean name="newsInfoImageUploadController"
+		class="mm.aeon.com.ass.front.newsInfoManagement.NewsInfoImageUploadController"
+		scope="prototype" />
+
+	<bean name="promotionsInfoManagementController"
+		class="mm.aeon.com.ass.front.promotionsInfoManagement.PromotionsInfoManagementController"
+		scope="prototype" />
+
+	<bean name="promotionsInfoImageUploadController"
+		class="mm.aeon.com.ass.front.promotionsInfoManagement.PromotionsInfoImageUploadController"
+		scope="prototype" />
+
+	<bean name="couponManagementController"
+		class="mm.aeon.com.ass.front.cuponManagement.CouponManagementController"
+		scope="prototype" />
+
+	<bean name="storeCouponListSeachController"
+		class="mm.aeon.com.ass.front.cuponManagement.StoreCouponListSeachController"
+		scope="prototype" />
+
+	<bean name="couponImageUploadController"
+		class="mm.aeon.com.ass.front.cuponManagement.CouponImageUploadController"
+		scope="prototype" />
+
+	<bean name="customerFileUploadController"
+		class="mm.aeon.com.ass.front.cuponManagement.CustomerFileUploadController"
+		scope="prototype" />
+
+	<bean name="couponListSearchController"
+		class="mm.aeon.com.ass.front.couponList.CouponListSearchController"
+		scope="prototype" />
+
+	<bean name="storeListCouponListSeachController"
+		class="mm.aeon.com.ass.front.couponList.StoreListCouponListSeachController"
+		scope="prototype" />
+
+	<bean name="branchListCouponListSearchController"
+		class="mm.aeon.com.ass.front.couponList.BranchListCouponListSearchController"
+		scope="prototype" />
+
+	<bean name="shopListCouponListSearchController"
+		class="mm.aeon.com.ass.front.couponList.ShopListCouponListSearchController"
+		scope="prototype" />
+
+	<bean name="couponDeleteController"
+		class="mm.aeon.com.ass.front.couponList.CouponDeleteController"
+		scope="prototype" />
+
+	<bean name="newsInfoDeleteController"
+		class="mm.aeon.com.ass.front.newsInfoList.NewsInfoDeleteController"
+		scope="prototype" />
+
+	<bean name="promotionsInfoDeleteController"
+		class="mm.aeon.com.ass.front.promotionsInfoList.PromotionsInfoDeleteController"
+		scope="prototype" />
+
+	<bean name="customerListSeachController"
+		class="mm.aeon.com.ass.front.couponList.CustomerListSeachController"
+		scope="prototype" />
+		
+	<bean name="messagingHistoryListSearchController"
+		class="mm.aeon.com.ass.front.messagingHistoryList.MessagingHistoryListSearchController"
+		scope="prototype" />
+
+	<bean name="cusCustomerListSeachController"
+		class="mm.aeon.com.ass.front.couponList.CusCustomerListSeachController"
+		scope="prototype" />
+
+	<bean name="applicationReportListSearchController"
+		class="mm.aeon.com.ass.front.applicationUsageReport.ApplicationReportListSearchController"
+		scope="prototype" />
+		
+	<bean name="freeUsageReportSearchController"
+		class="mm.aeon.com.ass.front.freeUsageReport.FreeUsageReportSearchController"
+		scope="prototype" />
+
+	<bean name="applicationReportExportController"
+		class="mm.aeon.com.ass.front.applicationUsageReport.ApplicationReportExportController"
+		scope="prototype" />
+
+	<bean name="customerAccountLockController"
+		class="mm.aeon.com.ass.front.customerList.CustomerAccountLockController"
+		scope="prototype" />
+		
+	<bean name="operatorMessagingManagementController"
+		class="mm.aeon.com.ass.front.operatorList.OperatorMessagingManagementController"
+		scope="prototype" />
+		
+	<bean name="operatorFreeMessagingManagementController"
+		class="mm.aeon.com.ass.front.operatorList.OperatorFreeMessagingManagementController"
+		scope="prototype" />
+		
+	<bean name="operatorMessagingSyncManagementController"
+		class="mm.aeon.com.ass.front.operatorList.OperatorMessagingSyncManagementController"
+		scope="prototype" />
+		
+	<bean name="operatorFreeMessagingSyncManagementController"
+		class="mm.aeon.com.ass.front.operatorList.OperatorFreeMessagingSyncManagementController"
+		scope="prototype" />
+
+	<bean name="customerListController"
+		class="mm.aeon.com.ass.front.customerList.CustomerListController"
+		scope="prototype" />
+
+	<bean name="customerManagementController"
+		class="mm.aeon.com.ass.front.customerManagement.CustomerManagementController"
+		scope="prototype" />
+
+	<bean name="customerListInitController"
+		class="mm.aeon.com.ass.front.customerList.CustomerListInitController"
+		scope="prototype" />
+
+	<bean name="customerSecurityQuestionListController"
+		class="mm.aeon.com.ass.front.customerList.CustomerSecurityQuestionListController"
+		scope="prototype" />
+
+	<bean name="customerResetPasswordController"
+		class="mm.aeon.com.ass.front.customerList.CustomerResetPasswordController"
+		scope="prototype" />
+
+	<bean name="smsMessageSendRegisterController"
+		class="mm.aeon.com.ass.front.smsManagement.SMSMessageSendRegisterController"
+		scope="prototype" />
+
+	<bean name="importMemberListController"
+		class="mm.aeon.com.ass.front.importMemberList.ImportMemberListController"
+		scope="prototype" />
+
+	<bean name="newsInfoListSearchController"
+		class="mm.aeon.com.ass.front.newsInfoList.NewsInfoListSearchController"
+		scope="prototype" />
+
+	<bean name="promotionsInfoListSearchController"
+		class="mm.aeon.com.ass.front.promotionsInfoList.PromotionsInfoListSearchController"
+		scope="prototype" />
+		
+	<bean name="importCustomerAgreementListController"
+		class="mm.aeon.com.ass.front.importMemberList.ImportCustomerAgreementListController"
+		scope="prototype" />
+		
+	<bean name="categoryInfoListSearchController"
+		class="mm.aeon.com.ass.front.categoryInfoList.CategoryInfoListSearchController"
+		scope="prototype" />
+		
+	<bean name="categoryInfoToggleValidStatusController"
+	class="mm.aeon.com.ass.front.categoryInfoList.CategoryInfoToggleValidController"
+	scope="prototype" />
+	
+	<bean name="freeMessagingSearchController"
+		class="mm.aeon.com.ass.front.freeMessagingHistoryList.FreeMessagingHistorySearchController"
+		scope="prototype" />
+	<bean name="categoryInfoManagementController"
+		class="mm.aeon.com.ass.front.categoryInfoManagement.CategoryInfoManagementController"
+		scope="prototype" />
+		
+	<bean name="customerUpdateHistoryInfoListSearchController"
+		class="mm.aeon.com.ass.front.customerUpdateHistoryList.CustomerUpdateHistoryListSearchController"
+		scope="prototype" />
+	
+
+	<bean name="flowProcessInvokerInfoRepository"
+		class="mm.com.dat.presto.main.core.front.controller.FlowProcessInvokerInfoRepository">
+		<property name="flowProcessAccessor">
+			<map>
+				<!-- *************************************************************************** 
+					*****************Configuration Controller and Controller Bean************** 
+					*************************************************************************** -->
+				<entry key="mm.aeon.com.ass.front.login.LoginFormBean#login">
+					<ref bean="loginController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.adminList.AdminListFormBean#search">
+					<ref bean="adminSearchController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.adminManagement.AdminManagementFormBean#register">
+					<ref bean="adminRegisterController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.adminManagement.AdminSearchFormBean#update">
+					<ref bean="adminRegisterController" />
+				</entry>
+				
+				<entry
+					key="mm.aeon.com.ass.front.freeMessagingHistoryList.FreeMessagingHistoryFormBean#search">
+					<ref bean="freeMessagingSearchController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.adminList.AdminListFormBean#delete">
+					<ref bean="adminDeleteController" />
+				</entry>
+				
+				<entry
+					key="mm.aeon.com.ass.front.passwordChange.PasswordChangeFormBean#change">
+					<ref bean="passwordChangeController" />
+				</entry>
+				
+				<entry
+					key="mm.aeon.com.ass.front.passwordChange.FirstTimePasswordChangeFormBean#change">
+					<ref bean="firstTimePasswordChangeController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.operatorList.OperatorListFormBean#search">
+					<ref bean="operatorSearchController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.operatorManagement.OperatorManagementFormBean#register">
+					<ref bean="operatorManagementController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.operatorManagement.OperatorManagementFormBean#update">
+					<ref bean="operatorManagementController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.operatorList.OperatorListFormBean#delete">
+					<ref bean="operatorDeleteController" />
+				</entry>
+				
+				<entry
+					key="mm.aeon.com.ass.front.operatorList.OperatorListFormBean#allowMessaging">
+					<ref bean="operatorMessagingManagementController" />
+				</entry>
+				
+				<entry
+					key="mm.aeon.com.ass.front.operatorList.OperatorListFormBean#allowFreeMessaging">
+					<ref bean="operatorFreeMessagingManagementController" />
+				</entry>
+				
+				<entry
+					key="mm.aeon.com.ass.front.operatorList.OperatorListFormBean#sync">
+					<ref bean="operatorMessagingSyncManagementController" />
+				</entry>
+				
+				<entry
+					key="mm.aeon.com.ass.front.operatorList.OperatorListFormBean#syncFreeMessaging">
+					<ref bean="operatorFreeMessagingSyncManagementController" />
+				</entry>
+				
+				<entry
+					key="mm.aeon.com.ass.front.securityList.SecurityListFormBean#search">
+					<ref bean="securitySearchController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.securityManagement.SecurityManagementFormBean#register">
+					<ref bean="securityRegisterController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.securityManagement.SecuritySearchFormBean#update">
+					<ref bean="securityRegisterController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.companyInfoManagement.CompanyInfoManagementFormBean#init">
+					<ref bean="companyInfoSearchController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.companyInfoManagement.CompanyInfoManagementFormBean#update">
+					<ref bean="companyInfoManagementController" />
+				</entry>
+				<entry
+					key="mm.aeon.com.ass.front.securityList.SecurityListFormBean#toggleValidStatus">
+					<ref bean="securitySearhValidStatusToggleController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.faqManagement.FaqManagementFormBean#register">
+					<ref bean="faqManagementController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.faqList.FaqListFormBean#search">
+					<ref bean="faqListSearchController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.faqList.FaqListFormBean#toggleValidStatus">
+					<ref bean="faqToggleValidStatusChangeController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.faqManagement.FaqManagementFormBean#update">
+					<ref bean="faqManagementControllerForUpate" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.appSettingManagement.AppSettingManagementFormBean#update">
+					<ref bean="appSettingManagementController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.appSettingManagement.AppSettingManagementFormBean#updateInit">
+					<ref bean="appSettinguUpdateInitController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.storeList.StoreListFormBean#searchBranch">
+					<ref bean="storeListDetailController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.storeManagement.StoreManagementFormBean#register">
+					<ref bean="storeManagementController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.storeManagement.StoreManagementFormBean#update">
+					<ref bean="storeManagementControllerForUpdate" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.storeList.StoreListFormBean#toggleValidStatus">
+					<ref bean="storeToggleValidStatusChangeController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.storeManagement.StoreManagementFormBean#updateInit">
+					<ref bean="storeManagementInitController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.storeList.StoreListFormBean#search">
+					<ref bean="shopListSearchController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.storeManagement.StoreManagementFormBean#deleteBranch">
+					<ref bean="branchDeleteController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.deviceUsageReport.ApplicationListFormBean#search">
+					<ref bean="applicationReportSearchController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.newsInfoManagement.NewsInfoManagementFormBean#register">
+					<ref bean="newsInfoManagementController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.newsInfoManagement.NewsInfoManagementFormBean#importImage">
+					<ref bean="newsInfoImageUploadController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.newsInfoManagement.NewsInfoManagementFormBean#update">
+					<ref bean="newsInfoManagementController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.promotionsInfoManagement.PromotionsInfoManagementFormBean#register">
+					<ref bean="promotionsInfoManagementController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.promotionsInfoManagement.PromotionsInfoManagementFormBean#importImage">
+					<ref bean="promotionsInfoImageUploadController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.promotionsInfoManagement.PromotionsInfoManagementFormBean#update">
+					<ref bean="promotionsInfoManagementController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.cuponManagement.CouponManagementFormBean#register">
+					<ref bean="couponManagementController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.cuponManagement.CouponManagementFormBean#search">
+					<ref bean="shopListCouponSearchController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.cuponManagement.CouponManagementFormBean#selectStore">
+					<ref bean="storeCouponListSeachController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.cuponManagement.CouponManagementFormBean#importImage">
+					<ref bean="couponImageUploadController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.cuponManagement.CouponManagementFormBean#importCustomerFile">
+					<ref bean="customerFileUploadController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.couponList.CouponListFormBean#search">
+					<ref bean="couponListSearchController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.couponList.CouponListFormBean#store_search">
+					<ref bean="storeListCouponListSeachController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.cuponManagement.CouponManagementFormBean#update">
+					<ref bean="couponManagementController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.couponList.CouponListFormBean#prepareUpdate">
+					<ref bean="cusCustomerListSeachController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.couponList.CouponListFormBean#delete">
+					<ref bean="couponDeleteController" />
+				</entry>
+
+				<!-- <entry key="mm.aeon.com.ass.front.couponList.CouponListFormBean#select"> 
+					<ref bean="branchListCouponListSearchController" /> </entry> -->
+
+				<entry
+					key="mm.aeon.com.ass.front.couponList.CouponListFormBean#select">
+					<ref bean="shopListCouponListSearchController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.couponList.CouponListFormBean#detail">
+					<ref bean="cusCustomerListSeachController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.newsInfoList.NewsInfoListFormBean#search">
+					<ref bean="newsInfoListSearchController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.newsInfoList.NewsInfoListFormBean#delete">
+					<ref bean="newsInfoDeleteController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.promotionsInfoList.PromotionsInfoListFormBean#search">
+					<ref bean="promotionsInfoListSearchController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.promotionsInfoList.PromotionsInfoListFormBean#delete">
+					<ref bean="promotionsInfoDeleteController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.applicationUsageReport.ApplicationReportFormBean#search">
+					<ref bean="applicationReportListSearchController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.applicationUsageReport.ApplicationReportFormBean#export">
+					<ref bean="applicationReportExportController" />
+				</entry>
+				
+				<entry
+					key="mm.aeon.com.ass.front.freeUsageReport.FreeUsageReportFormBean#search">
+					<ref bean="freeUsageReportSearchController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.customerList.CustomerListFormBean#search">
+					<ref bean="customerListController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.customerList.CustomerListFormBean#init">
+					<ref bean="customerListInitController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.customerList.CustomerListFormBean#detail">
+					<ref bean="customerSecurityQuestionListController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.customerList.CustomerListFormBean#resetPassword">
+					<ref bean="customerResetPasswordController" />
+				</entry>
+				
+				<entry
+					key="mm.aeon.com.ass.front.customerList.CustomerListFormBean#lockAccount">
+					<ref bean="customerAccountLockController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.customerManagement.CustomerManagementFormBean#update">
+					<ref bean="customerManagementController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.smsManagement.SMSMessageSendFormBean#send">
+					<ref bean="smsMessageSendRegisterController" />
+				</entry>
+
+				<entry
+					key="mm.aeon.com.ass.front.importMemberList.ImportMemberListFormBean#search">
+					<ref bean="importMemberListController" />
+				</entry>
+				
+				<entry
+					key="mm.aeon.com.ass.front.importMemberList.ImportMemberListFormBean#importCustomerAgreementListDetail">
+					<ref bean="importCustomerAgreementListController" />
+				</entry>
+				
+				<entry
+					key="mm.aeon.com.ass.front.messagingHistoryList.MessagingHistoryListFormBean#search">
+					<ref bean="messagingHistoryListSearchController" />
+				</entry>
+				
+				<entry
+					key="mm.aeon.com.ass.front.categoryInfoList.CategoryInfoListFormBean#search">
+					<ref bean="categoryInfoListSearchController" />
+				</entry>
+				
+				<entry
+					key="mm.aeon.com.ass.front.categoryInfoList.CategoryInfoListFormBean#toggleValidStatus">
+					<ref bean="categoryInfoToggleValidStatusController" />
+				</entry>
+				
+				<entry
+					key="mm.aeon.com.ass.front.categoryInfoManagement.CategoryInfoManagementFormBean#register">
+					<ref bean="categoryInfoManagementController" />
+				</entry>
+				
+				<entry
+					key="mm.aeon.com.ass.front.categoryInfoManagement.CategoryInfoManagementFormBean#update">
+					<ref bean="categoryInfoManagementController" />
+				</entry>
+				
+				<entry
+					key="mm.aeon.com.ass.front.customerUpdateHistoryList.CustomerUpdateHistoryListFormBean#search">
+					<ref bean="customerUpdateHistoryInfoListSearchController" />
+				</entry>
+
+			</map>
+		</property>
+
+	</bean>
+
+	<bean name="controllerAccessor"
+		class="mm.com.dat.presto.main.core.front.controller.ControllerAccessor"
+		scope="prototype">
+		<property name="flowProcessInfoInvokerRepository"
+			ref="flowProcessInvokerInfoRepository" />
+		<property name="serviceInvoker" ref="serviceInvoker" />
+		<property name="daoServiceInvoker" ref="daoServiceInvoker" />
+	</bean>
+</beans>

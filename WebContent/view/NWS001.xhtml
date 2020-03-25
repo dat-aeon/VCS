@@ -1,0 +1,88 @@
+
+<!--***********************************************************************
+ * $Date: 2019-04-24$
+ * $Author: Htet Wai Yan Kyaw $
+ * $Rev:  $
+ * 2018 AEON Microfinance (Myanmar) Company	Limited. All Rights Reserved.
+ ***********************************************************************-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:rich="http://richfaces.org/rich"
+	xmlns:pt="http://presto.dat.com/tag" template="/layout/template.xhtml">
+	<ui:define name="title">
+		<title><h:outputText value="#{displayItemBean.getDisplayItemName('newsList')}" /></title>
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="newsInfoListForm">
+			<div class="ui-fluid">
+				<div class="ui-g">
+					<div class="ui-g-12" style="color: #302873; font-size: 10pt; text-align: center;">
+						<H1>
+							<p:outputLabel value="#{displayItemBean.getDisplayItemName('newsList')}" />
+						</H1>
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="ui-g-12" style="text-align: right;">
+						<p:commandButton action="#{newsInfoListFormBean.prepareRegister()}" value="#{displayItemBean.getDisplayItemName('createNews')}" styleClass="button"
+							style="width: 140px!important;height: auto;" />
+					</div>
+				</div>
+				<div class="ui-g">
+					<div style="width: 1650px; padding-left: 10px;" class="message-block">
+						<pt:messages />
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="ui-g-12">
+						<f:view encoding="utf-8">
+							<p:dataTable var="newsInfo" first="#{newsInfoListFormBean.pageFirst}" value="#{newsInfoListFormBean.newsInfoListLineBeanLazyModel}" rows="50" lazy="true" paginator="true"
+								rowIndexVar="rowIndex" paginatorPosition="both"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="50,100"
+								styleClass="resultTable" id="newsInfoListTable">
+								<p:column style="width:20px" styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('no')}">
+									<h:outputText value="#{rowIndex+1}" />
+								</p:column>
+								<p:column style="width:250px" sortBy="#{newsInfo.titleEng}" headerText="#{displayItemBean.getDisplayItemName('titleEng')}">
+									<h:outputText value="#{newsInfo.titleEng}" />
+								</p:column>
+								<p:column style="width:250px" sortBy="#{newsInfo.titleMyn}" headerText="#{displayItemBean.getDisplayItemName('titleMyn')}">
+									<h:outputText value="#{newsInfo.titleMyn}" />
+								</p:column>
+								<p:column style="width:150px" sortBy="#{newsInfo.publishedFromDate}" headerText="#{displayItemBean.getDisplayItemName('publishedFromDate')}">
+									<h:outputText value="#{newsInfo.publishedFromDate}">
+										<f:convertDateTime pattern="yyyy-MM-dd" />
+									</h:outputText>
+								</p:column>
+								<p:column style="width:150px" sortBy="#{newsInfo.publishedToDate}" headerText="#{displayItemBean.getDisplayItemName('publishedToDate')}">
+									<h:outputText value="#{newsInfo.publishedToDate}">
+										<f:convertDateTime pattern="yyyy-MM-dd" />
+									</h:outputText>
+								</p:column>
+								<p:column id="actions" styleClass="unsort-column" exportable="false" headerText="#{displayItemBean.getDisplayItemName('operation')}" style="width:200px">
+									<p:commandLink id="update" styleClass="management-link" action="#{newsInfoListFormBean.prepareUpdate(newsInfo)}" value="#{displayItemBean.getDisplayItemName('update')}">
+									</p:commandLink>
+									<p:commandLink id="delete" action="#{newsInfoListFormBean.delete()}" styleClass="management-link" value="#{displayItemBean.getDisplayItemName('delete')}">
+										<p:confirm header="Confirmation" message="Are you sure to delete?" icon="ui-icon-alert" />
+										<f:setPropertyActionListener value="#{newsInfo}" target="#{newsInfoListFormBean.newsInfoListLineBean}" />
+									</p:commandLink>
+									<p:commandLink id="detail" action="#{newsInfoListFormBean.detail(newsInfo)}" styleClass="management-link" value="#{displayItemBean.getDisplayItemName('detail')}">
+									</p:commandLink>
+								</p:column>
+							</p:dataTable>
+						</f:view>
+					</div>
+				</div>
+			</div>
+		</h:form>
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="confirmBox" closable="false" style="background-color:#302873">
+			<div class="ui-g-12">
+				<div class="ui-g-6">
+					<p:commandButton value="Yes" styleClass="ui-confirmdialog-yes button" icon="ui-icon-check" />
+				</div>
+				<div class="ui-g-6">
+					<p:commandButton value="No" styleClass="ui-confirmdialog-no button" icon="ui-icon-close" />
+				</div>
+			</div>
+		</p:confirmDialog>
+	</ui:define>
+</ui:composition>

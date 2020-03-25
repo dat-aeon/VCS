@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FreeAdminCustomerRoomSync">
+
+	<insert id="insert" parameterType="mm.aeon.com.ass.base.dto.freeAdminCustomerRoomSync.FreeAdminCustomerRoomSyncReqDto">
+    insert into free_admin_cust_room
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="adCustRoomId != null">
+        free_admin_cust_room_id,
+      </if>
+      <if test="custRoomId != null">
+        free_cust_room_info_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="finishFlag != null">
+        finish_flag,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="adCustRoomId != null">
+        #{adCustRoomId,jdbcType=INTEGER},
+      </if>
+      <if test="custRoomId != null">
+        #{custRoomId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="finishFlag != null">
+        #{finishFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+    ON CONFLICT (free_cust_room_info_id, user_id) DO NOTHING;
+  </insert>
+  
+</mapper>    
+    

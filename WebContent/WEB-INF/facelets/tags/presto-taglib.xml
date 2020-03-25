@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!DOCTYPE facelet-taglib PUBLIC
+  "-//Sun Microsystems, Inc.//DTD Facelet Taglib 1.0//EN"
+  "facelet-taglib_1_0.dtd">
+
+<facelet-taglib>
+
+	<namespace>http://presto.dat.com/tag</namespace>
+
+	<tag>
+		<tag-name>messages</tag-name>
+		<component>
+			<component-type>MessageComponent</component-type>
+			<renderer-type>MessageComponentRenderer</renderer-type>
+		</component>
+	</tag>
+
+	<tag>
+		<tag-name>message</tag-name>
+		<component>
+			<component-type>MessageComponent</component-type>
+			<renderer-type>MessageComponentRenderer</renderer-type>
+		</component>
+	</tag>
+
+	<tag>
+		<tag-name>inputText</tag-name>
+		<component>
+			<component-type>TextComponent</component-type>
+			<renderer-type>TextComponentRenderer</renderer-type>
+		</component>
+	</tag>
+	
+	<tag>
+		<tag-name>inputSecret</tag-name>
+		<component>
+			<component-type>PasswordComponent</component-type>
+			<renderer-type>PasswordComponentRenderer</renderer-type>
+		</component>
+	</tag>
+
+	<tag>
+		<tag-name>inputTextarea</tag-name>
+		<component>
+			<component-type>TextAreaComponent</component-type>
+			<renderer-type>TextAreaComponentRenderer</renderer-type>
+		</component>
+	</tag>
+	
+	<tag>
+		<tag-name>selectOneRadio</tag-name>
+		<component>
+			<component-type>RadioComponent</component-type>
+			<renderer-type>RadioComponentRenderer</renderer-type>
+		</component>
+	</tag>
+	
+	<tag>
+		<tag-name>selectOneMenu</tag-name>
+		<component>
+			<component-type>ComboBoxComponent</component-type>
+			<renderer-type>ComboBoxComponentRenderer</renderer-type>
+		</component>
+	</tag>
+	
+	<tag>
+		<tag-name>selectBooleanCheckbox</tag-name>
+		<component>
+			<component-type>BooleanCheckboxComponent</component-type>
+			<renderer-type>BooleanCheckboxComponentRenderer</renderer-type>
+		</component>
+	</tag>
+	
+</facelet-taglib>

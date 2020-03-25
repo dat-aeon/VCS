@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MessagingHistoryCount">
+    
+	<select id="count"
+		parameterType="mm.aeon.com.ass.base.dto.messagingHistorySearch.MessagingHistorySelectCountReqDto"
+		resultType="java.lang.Integer">
+		SELECT 
+			COUNT(*) 
+		From
+			(SELECT
+				MI.MESSAGE_ID,
+				MI.MESSAGE_CONTENT AS MESSAGE_DETAIL,
+				MI.SEND_TIME AS SENDING_TIME, 
+				CI.NAME AS SENDER_NAME, 
+				CI.NAME AS CUSTOMER_NAME  
+			FROM
+				message_info MI 
+			INNER JOIN 
+				message_room MR 
+			ON 
+				MI.MESSAGE_ID = MR.MESSAGE_ID 
+			INNER JOIN 
+				cust_room_info CRI 
+			ON 
+				MR.CUST_ROOM_ID = CRI.CUST_ROOM_ID 
+			INNER JOIN 
+				customer_info CI 
+			ON 
+				CI.CUSTOMER_ID::VARCHAR = MI.SENDER
+			WHERE 
+				MI.OP_SEND_FLAG = 0 
+			<if test="customerName != null and customerName != ''">
+				AND LOWER(CI.NAME) LIKE '%' || LOWER(#{customerName,jdbcType=VARCHAR})  || '%'
+			</if>
+			<if test="nrcNo != null and nrcNo != ''">
+				AND LOWER(CI.NRC_NO) LIKE '%' || LOWER(#{nrcNo,jdbcType=VARCHAR})  || '%'
+			</if>
+			<if test="fromDate != null">
+				AND TO_CHAR(MI.SEND_TIME::TIMESTAMP,'YYYYMMDDHH24MISS') <![CDATA[ >=  ]]> TO_CHAR(#{fromDate,jdbcType=TIMESTAMP}::TIMESTAMP,'YYYYMMDDHH24MISS')
+			</if>
+			<if test="toDate != null">
+				AND TO_CHAR(MI.SEND_TIME::TIMESTAMP,'YYYYMMDDHH24MISS') <![CDATA[ <= ]]> TO_CHAR(#{toDate,jdbcType=TIMESTAMP}::TIMESTAMP,'YYYYMMDDHH24MISS')
+			</if>
+			UNION
+			SELECT
+				MI.MESSAGE_ID, 
+				MI.MESSAGE_CONTENT AS MESSAGE_DETAIL, 
+				MI.SEND_TIME AS SENDING_TIME, 
+				UI.NAME AS SENDER_NAME, 
+				CI.NAME AS CUSTOMER_NAME 
+			FROM 
+				message_info MI 
+			INNER JOIN 
+				message_room MR 
+			ON 
+				MI.MESSAGE_ID = MR.MESSAGE_ID 
+			INNER JOIN 
+				cust_room_info CRI 
+			ON 
+				MR.CUST_ROOM_ID = CRI.CUST_ROOM_ID 
+			INNER JOIN 
+				customer_info CI 
+			ON 
+				CRI.CUSTOMER_ID = CI.CUSTOMER_ID 
+			INNER JOIN 
+				user_info UI 
+			ON 
+				UI.USER_ID::VARCHAR =  MI.SENDER
+			WHERE 
+				MI.OP_SEND_FLAG = 1 
+			<if test="customerName != null and customerName != ''">
+				AND LOWER(CI.NAME) LIKE '%' || LOWER(#{customerName,jdbcType=VARCHAR})  || '%'
+			</if>
+			<if test="nrcNo != null and nrcNo != ''">
+				AND LOWER(CI.NRC_NO) LIKE '%' || LOWER(#{nrcNo,jdbcType=VARCHAR})  || '%'
+			</if>
+			<if test="fromDate != null">
+				AND TO_CHAR(MI.SEND_TIME::TIMESTAMP,'YYYYMMDDHH24MISS') <![CDATA[ >= ]]> TO_CHAR(#{fromDate,jdbcType=TIMESTAMP}::TIMESTAMP,'YYYYMMDDHH24MISS')
+			</if>
+			<if test="toDate != null">
+				AND TO_CHAR(MI.SEND_TIME::TIMESTAMP,'YYYYMMDDHH24MISS') <![CDATA[ <= ]]> TO_CHAR(#{toDate,jdbcType=TIMESTAMP}::TIMESTAMP,'YYYYMMDDHH24MISS')
+			</if>
+			ORDER BY 
+				SENDING_TIME DESC) COUNT
+	</select>
+
+</mapper>    
+    

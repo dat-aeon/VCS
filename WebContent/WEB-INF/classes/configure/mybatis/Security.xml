@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="Security">
+	<!-- <select id="count" parameterType="mm.aeon.com.ass.base.dto.adminCount.AdminCountReqDto" 
+		resultType="int"> SELECT COUNT(*) FROM MANAGEMENT_USER_INFO WHERE ID = #{id} 
+		</select> -->
+
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.securitySearch.SecuritySearchReqDto"
+		resultMap="SecuritySearchResDto">
+		SELECT SEC_QUES_ID, QUESTION_MYAN, QUESTION_ENG, DEL_FLAG,
+		CREATED_BY,
+		CREATED_TIME, UPDATED_BY, UPDATED_TIME FROM
+		SECURITY_QUESTION
+		ORDER BY SEC_QUES_ID DESC
+	</select>
+
+	<resultMap id="SecuritySearchResDto"
+		type="mm.aeon.com.ass.base.dto.securitySearch.SecuritySearchResDto">
+		<result property="secId" column="SEC_QUES_ID" />
+		<result property="questionMyan" column="QUESTION_MYAN" />
+		<result property="questionEng" column="QUESTION_ENG" />
+		<result property="delFlag" column="DEL_FLAG" />
+		<result property="createdBy" column="CREATED_BY" />
+		<result property="createdTime" column="CREATED_TIME" />
+		<result property="updatedBy" column="UPDATED_BY" />
+		<result property="updatedTime" column="UPDATED_TIME" />
+	</resultMap>
+
+
+
+	<select id="selectForUpdate"
+		parameterType="mm.aeon.com.ass.base.dto.securitySelectForUpdate.SecuritySelectForUpdateReqDto"
+		resultMap="SecuritySelectForUpdateResDto">
+		SELECT SEC_QUES_ID,UPDATED_TIME
+		FROM SECURITY_QUESTION
+		<where>
+			<!-- <if test="secId != null and secId!= ''"> -->
+			SEC_QUES_ID = #{secId}
+			<!-- </if> -->
+		</where>
+	</select>
+
+	<resultMap id="SecuritySelectForUpdateResDto"
+		type="mm.aeon.com.ass.base.dto.securitySelectForUpdate.SecuritySelectForUpdateResDto">
+		<result property="secId" column="SEC_QUES_ID" />
+		<result property="updatedTime" column="UPDATED_TIME" />
+	</resultMap>
+
+	<insert id="insert"
+		parameterType="mm.aeon.com.ass.base.dto.securityRegister.SecurityRegisterReqDto">
+		INSERT INTO
+		SECURITY_QUESTION
+		<trim prefix="(" suffixOverrides="," suffix=")">
+			QUESTION_MYAN,
+			QUESTION_ENG,
+			DEL_FLAG,
+			CREATED_BY,
+			CREATED_TIME,
+		</trim>
+		VALUES
+		<trim prefix="(" suffixOverrides="," suffix=")">
+			#{questionMyan},
+			#{questionEng},
+			#{delFlag},
+			#{createdBy},
+			#{createdTime},
+		</trim>
+	</insert>
+
+	<update id="update"
+		parameterType="mm.aeon.com.ass.base.dto.securityUpdate.SecurityUpdateReqDto">
+		UPDATE SECURITY_QUESTION
+		<set>
+			<if test="questionMyan != null and questionMyan != ''">
+				QUESTION_MYAN = #{questionMyan},
+			</if>
+			<if test="questionEng != null and questionEng != ''">
+				QUESTION_ENG = #{questionEng},
+			</if>
+			<if test="updatedBy != null and updatedBy != ''">
+				UPDATED_BY = #{updatedBy},
+			</if>
+			<if test="updatedTime != null">
+				UPDATED_TIME = #{updatedTime},
+			</if>
+			DEL_FLAG = #{delFlag}
+		</set>
+		<where>
+			<if test="secId != null and secId !=''">
+				SEC_QUES_ID = #{secId}
+			</if>
+		</where>
+	</update>
+</mapper>

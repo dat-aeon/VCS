@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ImportCustomerAgreement">
+
+	<resultMap id="importCustomerAgreementResDto"
+		type="mm.aeon.com.ass.base.dto.importMemberSearch.ImportCustomerAgreementResDto">
+		<id column="CUST_AGREEMENT_ID" property="custAgreementId"  />
+		<result column="AGREEMENT_NO" property="agreementNo"  />
+		<result column="QR_SHOW" property="qrShow"  />
+		<result column="FINANCIAL_STATUS" property="financialStatus"  />
+		<result column="FINANCIAL_AMT" property="financialAmt"  />
+		<result column="FINANCIAL_TERM" property="financialTerm"  />
+	</resultMap>
+	
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.importMemberSearch.ImportCustomerAgreementReqDto"
+		resultMap="importCustomerAgreementResDto">
+		SELECT 
+			CGL.CUST_AGREEMENT_ID,
+			CGL.AGREEMENT_NO,
+			CASE 
+				WHEN CGL.QR_SHOW = 1 THEN 'No' 
+				WHEN CGL.QR_SHOW = 2 THEN 'Yes'
+				END AS QR_SHOW,
+			CASE
+				WHEN CGL.FINANCIAL_STATUS = 1 THEN 'Approved'
+				WHEN CGL.FINANCIAL_STATUS = 2 THEN 'Modified'
+				WHEN CGL.FINANCIAL_STATUS = 3 THEN 'Canceled'
+				WHEN CGL.FINANCIAL_STATUS = 4 THEN 'Payment Ongoing'
+				WHEN CGL.FINANCIAL_STATUS = 5 THEN 'Early Settled'
+				WHEN CGL.FINANCIAL_STATUS = 6 THEN 'Fully Paid'
+				WHEN CGL.FINANCIAL_STATUS = 7 THEN 'Guarantee'
+				WHEN CGL.FINANCIAL_STATUS = 8 THEN 'Written Off'
+				WHEN CGL.FINANCIAL_STATUS = 9 THEN 'Repossessed'
+				END AS FINANCIAL_STATUS,
+			CGL.FINANCIAL_AMT,
+			CGL.FINANCIAL_TERM
+		FROM
+			cust_agreement_list CGL
+		WHERE
+			CGL.DEL_FLAG = 0
+		AND
+			CGL.IMPORT_CUSTOMER_ID = #{importCustomerId,jdbcType=INTEGER}
+	</select>
+	
+</mapper>

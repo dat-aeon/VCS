@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CouponInfo">
+	
+	<insert id="insert"
+		parameterType="mm.aeon.com.ass.base.dto.couponRegister.CouponInsertReqDto">
+		INSERT INTO
+		COUPON_INFO
+		<trim prefix="(" suffixOverrides="," suffix=")">
+			
+			<if test="coupon_name != null and coupon_name != ''">
+				COUPON_NAME_EN,
+			</if>
+			<if test="couponNameMya != null and couponNameMya != ''">
+				COUPON_NAME_MM,
+			</if>
+			<if test="coupon_code != null and coupon_code != ''">
+				COUPON_CODE,
+			</if>
+			<if test="coupon_desc != null and coupon_desc != ''">
+				DESCRIPTION_EN,
+			</if>
+			<if test="couponDescriptionMya != null and couponDescriptionMya != ''">
+				DESCRIPTION_MM,
+			</if>
+			<if test="coupon_amount != null">
+				COUPON_AMOUNT,
+			</if>
+			<if test="startDate != null">
+				START_TIME,
+			</if>
+			<if test="expireDate != null">
+				EXPIRE_TIME,
+			</if>
+			<if test="discount_percent != null">
+				GOODS_PRICE,
+			</if>
+			<if test="unuse_image_path != null and unuse_image_path != ''">
+				UNUSE_IMAGE_PATH,
+			</if>
+			<if test="use_image_path != null and use_image_path != ''">
+				USE_IMAGE_PATH,
+			</if>
+			<if test="del_flag != null and del_flag != ''">
+				DEL_FLAG,
+			</if>
+			<if test="couponTlNo != null">
+				TOTAL_NO,
+			</if>
+			<if test="couponNoOfCus != null">
+				COUPON_NO_PER_CUST,
+			</if>
+			<if test="couponSpEvent != null and couponSpEvent != ''">
+				SPECIAL_EVENT_EN,
+			</if>
+			<if test="couponSpEventMya != null and couponSpEventMya != ''">
+				SPECIAL_EVENT_MM,
+			</if>
+			<if test="discount_unit != null and discount_unit != ''">
+				DISCOUNT_UNIT,
+			</if>
+			<if test="created_by != null and created_by != ''">
+				CREATED_BY,
+			</if>
+			<if test="updated_by != null and updated_by != ''">
+				UPDATED_BY,
+			</if>
+			<if test="created_time != null">
+				CREATED_TIME,
+			</if>
+			<if test="updated_time != null">
+				UPDATED_TIME,
+			</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffixOverrides="," suffix=")">
+			
+			<if test="coupon_name != null and coupon_name != ''">
+				#{coupon_name}, 
+			</if>
+			<if test="couponNameMya != null and couponNameMya != ''">
+				#{couponNameMya},
+			</if>
+			<if test="coupon_code != null and coupon_code != ''">
+				#{coupon_code},
+			</if>
+			<if test="coupon_desc != null and coupon_desc != ''">
+				#{coupon_desc},
+			</if>
+			<if test="couponDescriptionMya != null and couponDescriptionMya != ''">
+				#{couponDescriptionMya},
+			</if>
+			<if test="coupon_amount != null">
+				#{coupon_amount},
+			</if>
+			<if test="startDate != null">
+				#{startDate},
+			</if>
+			<if test="expireDate != null">
+				#{expireDate},
+			</if>
+			<if test="discount_percent != null">
+				#{discount_percent},
+			</if>
+			<if test="unuse_image_path != null and unuse_image_path != ''">
+				#{unuse_image_path},
+			</if>
+			<if test="use_image_path != null and use_image_path != ''">
+				#{use_image_path},
+			</if>
+			<if test="del_flag != null and del_flag != ''">
+				#{del_flag},
+			</if>
+			<if test="couponTlNo != null">
+				#{couponTlNo},
+			</if>
+			<if test="couponNoOfCus != null">
+				#{couponNoOfCus},
+			</if>
+			<if test="couponSpEvent != null and couponSpEvent != ''">
+				#{couponSpEvent},
+			</if>
+			<if test="couponSpEventMya != null and couponSpEventMya != ''">
+				#{couponSpEventMya},
+			</if>
+			<if test="discount_unit != null and discount_unit != ''">
+				#{discount_unit},
+			</if>
+			<if test="created_by != null and created_by != ''">
+				#{created_by},
+			</if>
+			<if test="updated_by != null and updated_by != ''">
+				#{updated_by},
+			</if>
+			<if test="created_time != null">
+				#{created_time},
+			</if>
+			<if test="updated_time != null">
+				#{updated_time},
+			</if>
+		</trim>
+	</insert>
+	
+	<update id="update"
+		parameterType="mm.aeon.com.ass.base.dto.couponUpdate.CouponUpdateReqDto">
+		UPDATE COUPON_INFO
+		<set>
+			<if test="coupon_name != null and coupon_name != ''">
+				COUPON_NAME_EN = #{coupon_name},
+			</if>
+			<if test="couponNameMya != null and couponNameMya != ''">
+				COUPON_NAME_MM = #{couponNameMya},
+			</if>
+			<if test="coupon_code != null and coupon_code != ''">
+				COUPON_CODE = #{coupon_code},
+			</if>
+			<if test="coupon_desc != null and coupon_desc != ''">
+				DESCRIPTION_EN = #{coupon_desc},
+			</if>
+			<if test="couponDescriptionMya != null and couponDescriptionMya != ''">
+				DESCRIPTION_MM = #{couponDescriptionMya},
+			</if>
+			<if test="coupon_amount != null">
+				COUPON_AMOUNT = #{coupon_amount},
+			</if>
+			<if test="startDate != null">
+				START_TIME = #{startDate},
+			</if>
+			<if test="expireDate != null">
+				EXPIRE_TIME = #{expireDate},
+			</if>
+			<if test="discount_percent != null">
+				GOODS_PRICE = #{discount_percent},
+			</if>
+			<if test="unuse_image_path != null and unuse_image_path != ''">
+				UNUSE_IMAGE_PATH = #{unuse_image_path},
+			</if>
+			<if test="use_image_path != null and use_image_path != ''">
+				USE_IMAGE_PATH = #{use_image_path},
+			</if>
+			<if test="del_flag != null and del_flag != ''">
+				DEL_FLAG = #{del_flag},
+			</if>
+			<if test="couponTlNo != null">
+				TOTAL_NO = #{couponTlNo},
+			</if>
+			<if test="couponNoOfCus != null">
+				COUPON_NO_PER_CUST = #{couponNoOfCus},
+			</if>
+			<if test="couponSpEvent != null and couponSpEvent != ''">
+				SPECIAL_EVENT_EN = #{couponSpEvent},
+			</if>
+			<if test="couponSpEventMya != null and couponSpEventMya != ''">
+				SPECIAL_EVENT_MM = #{couponSpEventMya},
+			</if>
+			<if test="discount_unit != null and discount_unit != ''">
+				DISCOUNT_UNIT = #{discount_unit},
+			</if>
+			<if test="created_by != null and created_by != ''">
+				CREATED_BY = #{created_by},
+			</if>
+			<if test="created_time != null">
+				CREATED_TIME = #{created_time},
+			</if>
+			<if test="updated_by != null and updated_by != ''">
+				UPDATED_BY = #{updated_by},
+			</if>
+			<if test="updated_time != null">
+				UPDATED_TIME = #{updated_time},
+			</if>
+			
+		</set>
+		<where>
+			<if test="coupon_id != null and coupon_id !=''">
+				COUPON_ID = #{coupon_id}
+			</if>
+		</where>
+	</update>
+	
+	<select id="refer"
+		parameterType="mm.aeon.com.ass.base.dto.customerSearchByCoupon.CustomerSearchByCouponReqDto"
+		resultMap="customerSearchByCouponResDto">
+		SELECT CUSTOMER_ID
+		FROM CUSTOMER_INFO
+		<where>
+			<if test="customer_id != null and customer_id != ''">
+				CUSTOMER_ID = #{customer_id}
+			</if>
+		</where>
+	</select>
+
+	<resultMap id="customerSearchByCouponResDto"
+		type="mm.aeon.com.ass.base.dto.customerSearchByCoupon.CustomerSearchByCouponResDto">
+		<result property="customer_id" column="customer_id" />
+	</resultMap>
+	
+	<select id="count"
+		parameterType="mm.aeon.com.ass.base.dto.couponCount.SearchCouponCodeReqDto"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM COUPON_INFO
+		<where>
+			<if test="coupon_code != null and coupon_code != ''">
+				COUPON_CODE = #{coupon_code}
+			</if>
+		</where>
+	</select>
+    
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.couponSearch.CouponSearchReqDto"
+		resultMap="couponSearchResDto">
+		SELECT 
+			DISTINCT(SC.COUPON_ID) AS CID,
+			CI.COUPON_CODE,
+			CI.COUPON_NAME_EN,
+			CI.COUPON_NAME_MM,
+			CI.COUPON_AMOUNT,
+			CI.GOODS_PRICE,
+			CI.DESCRIPTION_MM,
+			CI.SPECIAL_EVENT_MM,
+			CI.DESCRIPTION_EN,
+			CI.START_TIME,
+			CI.EXPIRE_TIME,
+			CI.TOTAL_NO,
+			CI.COUPON_NO_PER_CUST,
+			CI.SPECIAL_EVENT_EN,
+			CI.DEL_FLAG,
+			CI.UNUSE_IMAGE_PATH,
+			CI.USE_IMAGE_PATH,
+			CI.DISCOUNT_UNIT,
+			SI.SHOP_NAME 
+		FROM 
+			COUPON_INFO CI
+		INNER JOIN 
+			SHOP_COUPON SC
+		ON 
+			CI.COUPON_ID = SC.COUPON_ID 
+		INNER JOIN 
+			SHOP_INFO SI
+		ON
+			SC.SHOP_ID = SI.SHOP_ID
+		<where>
+			<if test="coupon_code != null and coupon_code != ''">
+				UPPER(CI.COUPON_CODE) LIKE UPPER(#{coupon_code})
+			</if>
+			<if test="coupon_name != null and coupon_name != ''">
+				AND UPPER(CI.COUPON_NAME_EN) LIKE UPPER(#{coupon_name})
+			</if>
+			<if test="coupon_amount != 0.0">
+				AND CI.COUPON_AMOUNT = #{coupon_amount}
+			</if>
+			<if test="store_name != null and store_name != ''">
+				AND UPPER(SI.SHOP_NAME) LIKE UPPER(#{store_name})
+			</if>
+			AND CI.DEL_FLAG != 1 
+		</where>
+		<if test="sortField != null and sortField != '' and sortField == 'coupon_code' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY CI.COUPON_CODE ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY CI.COUPON_CODE DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'couponName' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY CI.COUPON_NAME_EN ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY CI.COUPON_NAME_EN DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'storeName' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY SI.SHOP_NAME ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY SI.SHOP_NAME DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'coupon_amount' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY CI.COUPON_AMOUNT ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY CI.COUPON_AMOUNT DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'coupon_discount' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY CI.GOODS_PRICE ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY CI.GOODS_PRICE DESC
+			</if>
+		</if>
+		<if test="sortField == null or sortField == ''">
+			ORDER BY CID DESC
+		</if>
+		<if test="offset != null and limit != null">
+			OFFSET #{offset} LIMIT #{limit}
+		</if>
+	</select>
+	<resultMap id="couponSearchResDto"
+		type="mm.aeon.com.ass.base.dto.couponSearch.CouponSearchResDto">
+		<result property="coupon_code" column="COUPON_CODE" />
+		<result property="coupon_name" column="COUPON_NAME_EN" />
+		<result property="couponNameMya" column="COUPON_NAME_MM" />
+		<result property="coupon_amount" column="COUPON_AMOUNT" />
+		<result property="discount_percent" column="GOODS_PRICE" />
+		<result property="del_flag" column="DEL_FLAG" />
+		<result property="store_name" column="SHOP_NAME" />
+		<result property="coupon_desc" column="DESCRIPTION_EN" />
+		<result property="couponDescriptionMya" column="DESCRIPTION_MM" />
+		<result property="startDate" column="START_TIME" />
+		<result property="expireDate" column="EXPIRE_TIME" />
+		<result property="unuse_image_path" column="UNUSE_IMAGE_PATH" />
+		<result property="use_image_path" column="USE_IMAGE_PATH" />
+		<result property="cid" column="CID" />
+		<result property="discount_unit" column="DISCOUNT_UNIT" />
+		<result property="total_no" column="TOTAL_NO" />
+		<result property="cupon_no_per_cust" column="COUPON_NO_PER_CUST" />
+		<result property="special_event" column="SPECIAL_EVENT_EN" />
+		<result property="couponSpEventMya" column="SPECIAL_EVENT_MM" />
+	</resultMap>
+
+</mapper>    
+    

@@ -1,0 +1,276 @@
+<!--***********************************************************************
+ * $Date: 2018-06-20$
+ * $Author: Swe Hsu Mon $
+ * $Rev:  $
+ * 2018 AEON Microfinance (Myanmar) Company	Limited. All Rights Reserved.
+ ***********************************************************************-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:rich="http://richfaces.org/rich"
+	xmlns:o="http://omnifaces.org/ui" xmlns:pt="http://presto.dat.com/tag" template="/layout/template.xhtml">
+	<style>
+.resultTable {
+	table-layout: fixed; ! important;
+	word-wrap: break-word;
+	!
+	important;
+}
+</style>
+	<ui:define name="title">
+		<title><h:outputText value="#{displayItemBean.getDisplayItemName('importMember')}" /></title>
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="operatorSearchform">
+			<div class="ui-fluid">
+				<div class="ui-g">
+					<div class="ui-g-12" style="color: #302873; font-size: 10pt; text-align: center;">
+						<H1>
+							<p:outputLabel value="#{displayItemBean.getDisplayItemName('importMember')}" />
+						</H1>
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="ui-g-12">
+						<!-- <p:fieldset styleClass="import-fieldset"
+							legend="#{displayItemBean.getDisplayItemName('CUS001')}"> -->
+						<p:panelGrid styleClass="status-panel-grid" style="margin-top: 0%;">
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:110px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('customerNo')}" />
+								</p:column>
+								<p:column colspan="2" styleClass="status-panel-grid-column" style="width:320px;">
+									<p:inputText id="customerNo" style="width:100%;" value="#{importMemberListFormBean.searchHeaderBean.customerNo}">
+									</p:inputText>
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:110px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('customerName')}" />
+								</p:column>
+								<p:column colspan="2" styleClass="status-panel-grid-column" style="width:150px;">
+									<p:inputText id="name" style="width:100%;" value="#{importMemberListFormBean.searchHeaderBean.name}" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:110px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('township')}" />
+								</p:column>
+								<p:column colspan="2" styleClass="status-panel-grid-column" style="width:150px;">
+									<p:inputText id="loginId" style="width:100%;" value="#{importMemberListFormBean.searchHeaderBean.township}" />
+								</p:column>
+							</p:row>
+							<!-- <p:row>
+								<p:column styleClass="status-panel-grid-column tblSingleLabel"
+									style="width:110px;">
+									<h:outputText
+										value="#{displayItemBean.getDisplayItemName('salary')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column"
+									style="width:150px;">
+									<p:inputNumber id="salaryFrom" styleClass="inputNumber"
+										value="#{importMemberListFormBean.searchHeaderBean.salaryMin}"
+										placeholder="#{displayItemBean.getDisplayItemName('minimum')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column"
+									style="width:150px;">
+									<p:inputNumber id="salaryTo" styleClass="inputNumber"
+										value="#{importMemberListFormBean.searchHeaderBean.salaryMax}"
+										placeholder="#{displayItemBean.getDisplayItemName('maximum')}" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column styleClass="status-panel-grid-column tblSingleLabel"
+									style="width:110px;">
+									<h:outputText
+										value="#{displayItemBean.getDisplayItemName('age')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column"
+									style="width:150px;">
+									<p:inputNumber id="ageTo" styleClass="inputNumber"
+										decimalPlaces="0"
+										value="#{importMemberListFormBean.searchHeaderBean.ageTo}"
+										placeholder="#{displayItemBean.getDisplayItemName('minimum')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column"
+									style="width:150px;">
+									<p:inputNumber id="ageFrom" styleClass="inputNumber"
+										decimalPlaces="0"
+										value="#{importMemberListFormBean.searchHeaderBean.ageFrom}"
+										placeholder="#{displayItemBean.getDisplayItemName('maximum')}" />
+								</p:column>
+							</p:row> -->
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:110px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('phoneNo')}" />
+								</p:column>
+								<p:column colspan="2" styleClass="status-panel-grid-column" style="width:150px;">
+									<p:inputText id="phoneNo" style="width:100%;" value="#{importMemberListFormBean.searchHeaderBean.phoneNo}">
+									</p:inputText>
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:110px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('nrcNo')}" />
+								</p:column>
+								<p:column colspan="2" styleClass="status-panel-grid-column" style="width:150px;">
+									<p:inputText id="nrcNo" style="width:100%;" value="#{importMemberListFormBean.searchHeaderBean.nrcNo}">
+									</p:inputText>
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:110px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('membercardId')}" />
+								</p:column>
+								<p:column colspan="2" styleClass="status-panel-grid-column" style="width:150px;">
+									<p:inputText id="memberCardId" style="width:100%;" value="#{importMemberListFormBean.searchHeaderBean.memberCardId}">
+									</p:inputText>
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:110px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('membercardStatus')}" />
+								</p:column>
+								<p:column colspan="2" styleClass="status-panel-grid-column">
+									<p:selectOneMenu id="customerType" value="#{importMemberListFormBean.searchHeaderBean.membercardStatus}">
+										<f:selectItem itemLabel="All" itemValue="#{null}" />
+							            <f:selectItem itemLabel="Active" itemValue="0" />
+							            <f:selectItem itemLabel="Inactive" itemValue="1" />
+									</p:selectOneMenu>
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:110px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('createdDate')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column">
+									<p:calendar id="createdDateFrom" style="width:350px;" pattern="yyyy-MM-dd" mask="true" value="#{importMemberListFormBean.searchHeaderBean.createdDateFrom}" placeholder="#{displayItemBean.getDisplayItemName('from')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column">
+									<p:calendar id="createdDateTo" style="width:350px;" pattern="yyyy-MM-dd" mask="true" value="#{importMemberListFormBean.searchHeaderBean.createdDateTo}" placeholder="#{displayItemBean.getDisplayItemName('to')}" />
+								</p:column>
+							</p:row>
+							
+							<p:row style="border: none;">
+								<p:column colspan="3" style="border: none;background:#f4f7fc;">
+									<p:commandButton id="searchButton" styleClass="button" value="#{displayItemBean.getDisplayItemName('search')}" style="margin: 3px 0px 0px -10px;" ajax="false"
+										action="#{importMemberListFormBean.search()}" />
+									<p:commandButton id="clearButton" styleClass="button" value="#{displayItemBean.getDisplayItemName('clear')}" style="margin: 3px 0px 0px 5px;" ajax="false"
+										action="#{importMemberListFormBean.reset()}" />
+									<p:commandButton value="#{displayItemBean.getDisplayItemName('back')}" action="#{importMemberListFormBean.back()}" id="backButton" style="margin: 3px 0px 0px 5px;"
+										styleClass="button" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="ui-g-12">
+						<div class="message-block ui-g-6">
+							<pt:messages />
+						</div>
+						<div class="ui-g-6" style="text-align: right;">
+							<p:commandButton styleClass="button" ajax="false" rendered="#{importMemberListFormBean.lazyModel != null}" style="margin: 3px 0px 0px 10px;"
+								value="#{displayItemBean.getDisplayItemName('export')}">
+								<p:dataExporter type="csv" target="importMemberResultTable" fileName="ImportedMemberTable">
+								</p:dataExporter>
+							</p:commandButton>
+						</div>
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="ui-g-12">
+						<f:view encoding="utf-8">
+							<p:dataTable var="lineBean" first="#{importMemberListFormBean.pageFirst}" value="#{importMemberListFormBean.lazyModel}" rows="50" paginator="true" rowIndexVar="rowIndex"
+								paginatorPosition="both" lazy="true"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="50,100"
+								styleClass="resultTable" id="importMemberResultTable">
+								<p:column styleClass="unsort-column" style="width:20px;" exportable="false" headerText="#{displayItemBean.getDisplayItemName('no')}">
+									<h:outputText value="#{rowIndex+1}" />
+								</p:column>
+								<p:column sortBy="#{lineBean.customerNo}" headerText="#{displayItemBean.getDisplayItemName('customerNo')}">
+									<h:outputText value="#{lineBean.customerNo}" />
+								</p:column>
+								<p:column sortBy="#{lineBean.phoneNo}" headerText="#{displayItemBean.getDisplayItemName('phoneNo')}">
+									<h:outputText value="#{lineBean.phoneNo}" />
+								</p:column>
+								<p:column sortBy="#{lineBean.membercardId}" headerText="#{displayItemBean.getDisplayItemName('membercardId')}">
+									<h:outputText value="#{lineBean.membercardId}" />
+								</p:column>
+								<p:column sortBy="#{lineBean.membercardStatus}" headerText="#{displayItemBean.getDisplayItemName('membercardStatus')}">
+									<h:outputText value="#{lineBean.membercardStatusStr}" />
+								</p:column>
+								<p:column sortBy="#{lineBean.name}" headerText="#{displayItemBean.getDisplayItemName('name')}">
+									<h:outputText value="#{lineBean.name}" />
+								</p:column>
+								<p:column sortBy="#{lineBean.salary}" headerText="#{displayItemBean.getDisplayItemName('salary')}">
+									<h:outputText value="#{lineBean.salary}">
+										<o:converter converterId="CurrencyConverter" pattern="###,##0.00" />
+									</h:outputText>
+								</p:column>
+								<p:column sortBy="#{lineBean.dob}" headerText="#{displayItemBean.getDisplayItemName('dob')}">
+									<h:outputText value="#{lineBean.dob}">
+										<f:convertDateTime pattern="yyyy-MM-dd" />
+									</h:outputText>
+								</p:column>
+								<p:column style="width:50px" sortBy="#{lineBean.gender}" headerText="#{displayItemBean.getDisplayItemName('gender')}">
+									<h:outputText value="#{lineBean.gender}" />
+								</p:column>
+								<p:column sortBy="#{lineBean.companyName}" headerText="#{displayItemBean.getDisplayItemName('companyName')}">
+									<h:outputText value="#{lineBean.companyName}" />
+								</p:column>
+								<p:column style="width:150px" sortBy="#{lineBean.nrcNo}" headerText="#{displayItemBean.getDisplayItemName('nrcNo')}">
+									<h:outputText value="#{lineBean.nrcNo}" />
+								</p:column>
+								<p:column sortBy="#{lineBean.township}" headerText="#{displayItemBean.getDisplayItemName('township')}">
+									<h:outputText value="#{lineBean.township}" />
+								</p:column>
+								<p:column style="width:70px" sortBy="#{lineBean.createdDate}" headerText="#{displayItemBean.getDisplayItemName('createdDate')}">
+									<h:outputText value="#{lineBean.createdDate}">
+										<f:convertDateTime pattern="yyyy-MM-dd" />
+									</h:outputText>
+								</p:column>
+								<p:column id="actions" style="width:100px" styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('operation')}" exportable="false">
+									<p:commandLink id="detail" styleClass="management-link" style="width:auto !important" action="#{importMemberListFormBean.importCustomerAgreementListDetail()}"
+										value="#{displayItemBean.getDisplayItemName('agreementList')}">
+										<f:setPropertyActionListener value="#{lineBean.importCustomerId}" target="#{importMemberListFormBean.importCustomerId}" />
+									</p:commandLink>
+								</p:column>
+							</p:dataTable>
+						</f:view>
+					</div>
+				</div>
+			</div>
+		</h:form>
+		<h:form id="importCustomerAgreementListForm">
+			<p:dialog modal="true" resizable="false" header="#{displayItemBean.getDisplayItemName('agreementList')}" appendToBody="true" widgetVar="importCustomerAgreementListDialog"
+				showEffect="explode" hideEffect="explode" id="importCustomerAgreementListDialog" closable="true" width="60%" height="300">
+				<div class="ui-g">
+					<div class="ui-g-12">
+						<f:view encoding="utf-8">
+							<p:dataTable var="lineBean" value="#{importMemberListFormBean.importCustomerAgreementListLineBeanList}" rowIndexVar="rowIndex" styleClass="resultTable"
+								id="customerResultTable">
+								<p:column styleClass="unsort-column" style="width:20px" exportable="false" headerText="#{displayItemBean.getDisplayItemName('no')}">
+									<h:outputText value="#{rowIndex+1}" />
+								</p:column>
+								<p:column styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('agreementNo')}">
+									<h:outputText value="#{lineBean.agreementNo}" />
+								</p:column>
+								<p:column styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('financialAmount')}">
+									<h:outputText value="#{lineBean.financialAmt}" />
+								</p:column>
+								<p:column styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('financialTerm')}">
+									<h:outputText value="#{lineBean.financialTerm}" />
+								</p:column>
+								<p:column styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('financialStatus')}">
+									<h:outputText value="#{lineBean.financialStatus}" />
+								</p:column>
+								<p:column styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('qrShow')}">
+									<h:outputText value="#{lineBean.qrShow}" />
+								</p:column>
+							</p:dataTable>
+						</f:view>
+					</div>
+				</div>
+			</p:dialog>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,112 @@
+
+<!--***********************************************************************
+ * $Date: 2019-04-24$
+ * $Author: Htet Wai Yan Kyaw $
+ * $Rev:  $
+ * 2018 AEON Microfinance (Myanmar) Company	Limited. All Rights Reserved.
+ ***********************************************************************-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:rich="http://richfaces.org/rich"
+	xmlns:pt="http://presto.dat.com/tag" template="/layout/template.xhtml">
+	<ui:define name="title">
+		<title><h:outputText value="#{displayItemBean.getDisplayItemName('freeMessagingHistory')}" /></title>
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="messagingHistoryListForm">
+			<p:defaultCommand target="searchButton" />
+			<div class="ui-fluid">
+				<div class="ui-g">
+					<div class="ui-g-12" style="color: #302873; font-size: 10pt; text-align: center;">
+						<H1>
+							<p:outputLabel value="#{displayItemBean.getDisplayItemName('freeMessagingHistory')}" />
+						</H1>
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="ui-g-12">
+						<p:panelGrid styleClass="status-panel-grid" id="critieaPanel" style="margin-top: 0%;">
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('customerPhoneNo')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:220px;">
+									<p:inputText id="customerName" maxlength="32" autocomplete="off" value="#{freeMessagingHistoryFormBean.headerBean.phoneNo}" style="width:350px;" />
+								</p:column>
+							</p:row>
+					
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('messageSendTimeFrom')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:220px;">
+									<p:calendar id="messageSendTimeFrom" style="width:350px;" autocomplete="off" pattern="yyyy-MM-dd HH:mm:ss" mask="true"
+										value="#{freeMessagingHistoryFormBean.headerBean.fromDate}" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('messageSendTimeTo')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:220px;">
+									<p:calendar id="messageSendTimeTo" style="width:350px;" autocomplete="off" pattern="yyyy-MM-dd HH:mm:ss" mask="true"
+										value="#{freeMessagingHistoryFormBean.headerBean.toDate}" />
+								</p:column>
+							</p:row>
+							<p:row style="border: none;">
+								<p:column style="border: none;background:#f4f7fc;" colspan="3">
+									<p:commandButton id="searchButton" action="#{freeMessagingHistoryFormBean.search()}" value="#{displayItemBean.getDisplayItemName('search')}" styleClass="button"
+										style="margin: 3px 0px 0px -10px;float : left;" ajax="false" />
+									<p:commandButton id="clearButton" styleClass="button" value="#{displayItemBean.getDisplayItemName('clear')}" style="margin: 3px 0px 0px 10px;" ajax="false"
+										action="#{freeMessagingHistoryFormBean.reset()}" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="ui-g-12">
+						<div class="message-block ui-g-6">
+							<pt:messages />
+						</div>
+						<div class="ui-g-6" style="text-align: right;">
+							<p:commandButton styleClass="button" ajax="false" rendered="#{freeMessagingHistoryFormBean.lazyModel != null}" style="margin: 3px 0px 0px 10px;"
+								value="#{displayItemBean.getDisplayItemName('export')}">
+								<p:dataExporter type="csv" target="freeMessagingHistoryListTable" fileName="FreeMessagingHistory">
+								</p:dataExporter>
+							</p:commandButton>
+						</div>
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="ui-g-12">
+						<f:view encoding="utf-8">
+							<p:dataTable var="freeMessagingHistory" first="#{freeMessagingHistoryFormBean.pageFirst}" value="#{freeMessagingHistoryFormBean.lazyModel}" rows="50"
+								lazy="true" paginator="true" rowIndexVar="rowIndex" paginatorPosition="both"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="50,100"
+								styleClass="resultTable" id="freeMessagingHistoryListTable">
+								<p:column style="width:20px" styleClass="unsort-column" exportable="false" headerText="#{displayItemBean.getDisplayItemName('no')}">
+									<h:outputText value="#{rowIndex+1}" />
+								</p:column>
+								<p:column style="width:100px" styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('customerPhoneNo')}">
+									<h:outputText value="#{freeMessagingHistory.customerName}" />
+								</p:column>
+				
+								<p:column style="width:100px" styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('messageSender')}">
+									<h:outputText value="#{freeMessagingHistory.senderName}" />
+								</p:column>
+								<p:column style="width:100px" sortBy="#{freeMessagingHistory.sendingTime}" headerText="#{displayItemBean.getDisplayItemName('messageSendTime')}">
+									<h:outputText value="#{freeMessagingHistory.sendingTime}">
+										<f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" />
+									</h:outputText>
+								</p:column>
+								<p:column style="width:200px; text-align: left !important" styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('messageDetail')}">
+									<h:outputText value="#{freeMessagingHistory.messageDetail}" />
+								</p:column>
+							</p:dataTable>
+						</f:view>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

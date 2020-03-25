@@ -1,0 +1,187 @@
+<!--***********************************************************************
+ * $Date: 2019-02-06$
+ * $Author: Ye Lin Thu$
+ * $Rev:  $
+ * 2019 AEON Microfinance (Myanmar) Company	Limited. All Rights Reserved.
+ ***********************************************************************-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:rich="http://richfaces.org/rich"
+	xmlns:pt="http://presto.dat.com/tag" template="/layout/template.xhtml">
+	<ui:define name="title">
+		<title><h:outputText value="#{displayItemBean.getDisplayItemName('couponList')}" /></title>
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="couponSearchform">
+			<p:defaultCommand target="searchButton" />
+			<div class="ui-fluid">
+				<div class="ui-g">
+					<div class="ui-g-12" style="color: #302873; font-size: 10pt; text-align: center;">
+						<H1>
+							<p:outputLabel value="#{displayItemBean.getDisplayItemName('couponList')}" />
+						</H1>
+					</div>
+				</div>
+				<!-- <div class="ui-g">
+					<div class="message-block">
+					</div>
+					<div>
+						<p:commandButton action="#{couponListFormBean.prepareRegister()}" value="Create New Coupon" styleClass="button" style="width: 140px!important;height: auto!important;left:1050px;" />
+					</div>
+				</div> -->
+				<div class="ui-g">
+					<div class="ui-g-6">
+						<p:panelGrid styleClass="status-panel-grid" id="critieaPanel" style="margin-top: 0%;">
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:100px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('couponCode')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:220px;">
+									<p:inputText id="couponCode" maxlength="32" value="#{couponListFormBean.searchHeaderBean.coupon_code}" style="width:350px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('couponName')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:220px;">
+									<p:inputText id="couponName" maxlength="32" value="#{couponListFormBean.searchHeaderBean.coupon_name}" style="width:350px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:100px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('shopName')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:220px;">
+									<p:inputText id="storeName" maxlength="32" disabled="true" value="#{couponListFormBean.searchHeaderBean.store_name}" style="width:350px;" />
+								</p:column>
+								<p:column>
+									<p:commandButton style="margin-top: 2%;" value="#{displayItemBean.getDisplayItemName('selectShop')}" styleClass="button" update="searchForm"
+										action="#{couponListFormBean.store_search()}" oncomplete="PF('searchDialog').show()" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:100px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('couponAmount')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:220px;">
+									<p:inputNumber id="couponAmount" maxlength="32" onblur="setDefaultValue();" value="#{couponListFormBean.searchHeaderBean.amount}" style="width:350px;" />
+									<script type="text/javascript">
+															function setDefaultValue()
+																{
+																if (document..getElementById("couponSearchform:couponAmount_input").value == "" | document..getElementById("couponSearchform:couponAmount_input").value == null) {
+																	document..getElementById("couponSearchform:couponAmount_input").value == "0.00"
+																}
+															}
+											</script>
+								</p:column>
+							</p:row>
+							<p:row style="border: none;">
+								<p:column style="border: none;background:#f4f7fc;" colspan="3">
+									<p:commandButton id="searchButton" action="#{couponListFormBean.search()}" value="#{displayItemBean.getDisplayItemName('search')}" styleClass="button"
+										style="margin: 3px 0px 0px -10px;float : left;" ajax="false" />
+									<p:commandButton id="clearButton" styleClass="button" value="#{displayItemBean.getDisplayItemName('clear')}" style="margin: 3px 0px 0px 10px;" ajax="false"
+										action="#{couponListFormBean.reset()}" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</div>
+					<div class="ui-g-6" style="text-align: right;">
+						<p:commandButton action="#{couponListFormBean.prepareRegister()}" value="Create New Coupon" styleClass="button" style="width: 140px!important;height: auto!important;" />
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="ui-g-12">
+						<div class="message-block ui-g-6">
+							<pt:messages />
+						</div>
+						<div class="ui-g-6" style="text-align: right;">
+							<p:commandButton value="#{displayItemBean.getDisplayItemName('exportCSV')}" rendered="#{couponListFormBean.lazyModel != null}" styleClass="button" ajax="false"
+								style="margin: 3px 0px 0px 10px;">
+								<p:dataExporter type="csv" target="couponResultTable" fileName="CouponList" />
+							</p:commandButton>
+						</div>
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="ui-g-12">
+						<!-- <p:commandButton
+								value="#{displayItemBean.getDisplayItemName('exportCSV')}"
+								styleClass="button" ajax="false" style="left:88%;">
+								<p:dataExporter type="csv" target="couponResultTable"
+									fileName="CouponList" />
+							</p:commandButton> -->
+						<f:view encoding="utf-8">
+							<p:dataTable var="lineBean" first="#{couponListFormBean.pageFirst}" value="#{couponListFormBean.lazyModel}" rows="50" lazy="true" paginator="true" rowIndexVar="rowIndex"
+								paginatorPosition="both" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="50,100" styleClass="resultTable" id="couponResultTable">
+								<p:column style="width:20px" styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('no')}">
+									<h:outputText value="#{rowIndex+1}" />
+								</p:column>
+								<p:column style="width:150px" sortBy="#{lineBean.coupon_code}" headerText="#{displayItemBean.getDisplayItemName('couponCode')}">
+									<h:outputText value="#{lineBean.coupon_code}" />
+								</p:column>
+								<p:column style="width:150px" sortBy="#{lineBean.couponName}" headerText="#{displayItemBean.getDisplayItemName('couponName')}">
+									<h:outputText value="#{lineBean.couponName}" />
+								</p:column>
+								<p:column style="width:200px" sortBy="#{lineBean.storeName}" headerText="#{displayItemBean.getDisplayItemName('shopName')}">
+									<h:outputText value="#{lineBean.storeName}" />
+								</p:column>
+								<p:column style="width:150px" sortBy="#{lineBean.coupon_amount}" headerText="#{displayItemBean.getDisplayItemName('couponAmount')}">
+									<h:outputText value="#{lineBean.coupon_amount}" />
+								</p:column>
+								<p:column style="width:150px" sortBy="#{lineBean.coupon_discount}" headerText="#{displayItemBean.getDisplayItemName('couponDiscount')}">
+									<h:outputText value="#{lineBean.coupon_discount}" />
+								</p:column>
+								<p:column id="actions" styleClass="unsort-column" exportable="false" headerText="#{displayItemBean.getDisplayItemName('operation')}" style="width:100px">
+									<p:commandLink id="update" styleClass="management-link" ajax="false" action="#{couponListFormBean.prepareUpdate(lineBean)}"
+										value="#{displayItemBean.getDisplayItemName('update')}">
+										<f:setPropertyActionListener value="#{lineBean}" target="#{couponListFormBean.lineBean}" />
+									</p:commandLink>
+									<p:commandLink id="delete" action="#{couponListFormBean.delete()}" update="couponResultTable" styleClass="management-link"
+										value="#{displayItemBean.getDisplayItemName('delete')}">
+										<p:confirm header="Confirmation" message="Are you sure to delete?" icon="ui-icon-alert" />
+										<f:setPropertyActionListener value="#{lineBean}" target="#{couponListFormBean.lineBean}" />
+									</p:commandLink>
+									<p:commandLink id="detail" action="#{couponListFormBean.detail(lineBean)}" update="couponResultTable" styleClass="management-link"
+										value="#{displayItemBean.getDisplayItemName('detail')}">
+										<f:setPropertyActionListener value="#{lineBean}" target="#{couponListFormBean.lineBean}" />
+									</p:commandLink>
+								</p:column>
+							</p:dataTable>
+						</f:view>
+					</div>
+				</div>
+			</div>
+		</h:form>
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="confirmBox" closable="false" style="background-color:#302873">
+			<div class="ui-g-12">
+				<div class="ui-g-6">
+					<p:commandButton value="Yes" styleClass="ui-confirmdialog-yes button" icon="ui-icon-check" />
+				</div>
+				<div class="ui-g-6">
+					<p:commandButton value="No" styleClass="ui-confirmdialog-no button" icon="ui-icon-close" />
+				</div>
+			</div>
+		</p:confirmDialog>
+		<p:dialog header="Store Search" widgetVar="searchDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="320" exportable="false">
+			<h:form id="searchForm">
+				<f:view encoding="utf-8">
+					<p:dataTable var="storeBean" first="#{couponListFormBean.storepageFirst}" value="#{couponListFormBean.storelazyModel}" rows="10"
+						lazy="true" paginator="true" rowIndexVar="rowIndex" paginatorPosition="top"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="10,20"
+						styleClass="dialogTable" id="storeResultTable">
+						<p:column id="actions" styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('shopCode')}" style="width: 20%;">
+							<p:commandLink id="selectButton1" styleClass="button" process="@this" update="couponSearchform:storeName" value="#{storeBean.storeCode}"
+								action="#{couponListFormBean.select()}" oncomplete="PF('searchDialog').hide()">
+								<f:setPropertyActionListener value="#{storeBean}" target="#{couponListFormBean.storelineBean}" />
+							</p:commandLink>
+						</p:column>
+						<p:column styleClass="unsort-column" style="width: 40%;" headerText="#{displayItemBean.getDisplayItemName('shopName')}">
+							<h:outputText value="#{storeBean.storeName}" />
+						</p:column>
+					</p:dataTable>
+				</f:view>
+			</h:form>
+		</p:dialog>
+	</ui:define>
+</ui:composition>

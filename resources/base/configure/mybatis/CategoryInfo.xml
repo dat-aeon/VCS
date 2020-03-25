@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CategoryInfo">
+
+	<resultMap id="categoryInfoResultMap"
+		type="mm.aeon.com.ass.base.dto.categoryInfoSearch.CategoryInfoSearchResDto">
+		<id column="CATEGORY_ID" jdbcType="INTEGER" property="categoryId" />
+		<result column="CATEGORY" jdbcType="VARCHAR" property="categoryEng" />
+		<result column="CATEGORY_MYN" jdbcType="VARCHAR" property="categoryMyn" />
+		<result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+		<result property="delFlag" column="DEL_FLAG" />
+		<result property="createdBy" column="CREATED_BY" />
+		<result property="updatedBy" column="UPDATED_BY" />
+		<result property="createdTime" column="CREATED_TIME" />
+		<result property="updatedTime" column="UPDATED_TIME" />
+	</resultMap>
+
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.categoryInfoSearch.CategoryInfoSearchReqDto"
+		resultMap="categoryInfoResultMap">
+		SELECT
+		CATEGORY_ID,
+		CATEGORY,
+		CATEGORY_MYN,
+		DESCRIPTION,
+		DEL_FLAG,
+		CREATED_BY,
+		UPDATED_BY,
+		CREATED_TIME,
+		UPDATED_TIME
+		FROM
+		FAQ_CATEGORY
+		<if test="sortField != null and sortField != '' and sortField == 'categoryEng' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY CATEGORY ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY CATEGORY DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'categoryMyn' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY CATEGORY_MYN ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY CATEGORY_MYN DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'description' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY DESCRIPTION ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY DESCRIPTION DESC
+			</if>
+		</if>
+		<if test="sortField == null or sortField == ''">
+			ORDER BY CATEGORY_ID DESC
+		</if>
+		<if test="offset != null and limit != null">
+			OFFSET #{offset} LIMIT #{limit}
+		</if>
+	</select>
+
+	<update id="delete"
+		parameterType="mm.aeon.com.ass.base.dto.categoryInfoDelete.CategoryInfoDeleteReqDto">
+		UPDATE
+		FAQ_CATEGORY
+		<set>
+			<if test="delFlag != null">
+				DEL_FLAG = #{delFlag},
+			</if>
+			<if test="updatedBy != null and updatedBy != ''">
+				UPDATED_BY = #{updatedBy},
+			</if>
+			<if test="updatedTime != null">
+				UPDATED_TIME = #{updatedTime},
+			</if>
+		</set>
+		<where>
+			<if test="categoryId != null and categoryId !=''">
+				CATEGORY_ID = #{categoryId}
+			</if>
+		</where>
+	</update>
+
+	<insert id="insert"
+		parameterType="mm.aeon.com.ass.base.dto.categoryInfoRegister.CategoryInfoInsertReqDto">
+		insert into faq_category
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="categoryId != null">
+				CATEGORY_ID,
+			</if>
+			<if test="categoryEng != null">
+				CATEGORY,
+			</if>
+			<if test="categoryMyn != null">
+				CATEGORY_MYN,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="createdTime != null">
+				created_time,
+			</if>
+			<if test="createdBy != null">
+				created_by,
+			</if>
+			<if test="updatedTime != null">
+				updated_time,
+			</if>
+			<if test="updatedBy != null">
+				updated_by,
+			</if>
+			<if test="delFlag != null">
+				del_flag,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="categoryId != null">
+				#{categoryId,jdbcType=INTEGER},
+			</if>
+			<if test="categoryEng != null">
+				#{categoryEng,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryMyn != null">
+				#{categoryMyn,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="createdTime != null">
+				#{createdTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createdBy != null">
+				#{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updatedTime != null">
+				#{updatedTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatedBy != null">
+				#{updatedBy,jdbcType=VARCHAR},
+			</if>
+			<if test="delFlag != null">
+				#{delFlag,jdbcType=SMALLINT},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="update"
+		parameterType="mm.aeon.com.ass.base.dto.categoryInfoUpdate.CategoryInfoUpdateReqDto">
+		update faq_category
+		<set>
+			<if test="categoryEng != null">
+				category = #{categoryEng,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryMyn != null">
+				category_myn = #{categoryMyn,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				description = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="createdTime != null">
+				created_time = #{createdTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createdBy != null">
+				created_by = #{createdBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updatedTime != null">
+				updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatedBy != null">
+				updated_by = #{updatedBy,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where category_id = #{categoryId,jdbcType=INTEGER}
+	</update>
+
+
+</mapper>    
+    

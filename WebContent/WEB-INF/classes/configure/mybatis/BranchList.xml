@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="BranchList">
+	
+	<select id="count"
+		parameterType="mm.aeon.com.ass.base.dto.storeCount.BranchCountReqDto"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM SHOP_BRANCH
+		
+		<where>
+			<if test="shop_id != null and shop_id != ''">
+				SHOP_ID = #{shop_id}
+			</if>
+		</where>
+		
+	</select>
+	
+	<select id="refer"
+		parameterType="mm.aeon.com.ass.base.dto.storeCount.BranchMaxReqDto"
+		resultMap="branchMaxResDto">
+		SELECT MAX(BRANCH_ID) AS MAX_ID
+		FROM SHOP_BRANCH
+		
+		<where>
+			<if test="shop_id != null and shop_id != ''">
+				SHOP_ID = #{shop_id}
+			</if>
+		</where>
+		
+	</select>
+    
+    <resultMap id="branchMaxResDto"
+		type="mm.aeon.com.ass.base.dto.storeCount.BranchMaxResDto">
+		<result property="max_id" column="max_id" />
+	</resultMap>
+	
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.storeSearch.BranchSearchReqDto"
+		resultMap="storeSearchResDto">
+		SELECT SB.BRANCH_ID,SB.BRANCH_CODE,SB.BRANCH_NAME,SB.ADDRESS
+		FROM SHOP_INFO AS SI
+		INNER JOIN SHOP_BRANCH  AS SB
+		ON SI.SHOP_ID = SB.SHOP_ID
+		<where>
+			<if test="storeId != null and storeId != ''">
+				SB.SHOP_ID = #{storeId}
+			</if>
+			AND SB.DEL_FLAG != 1
+		</where>
+		ORDER BY SI.SHOP_ID
+	</select>
+	<resultMap id="storeSearchResDto"
+		type="mm.aeon.com.ass.base.dto.storeSearch.StoreSearchResDto">
+		<result property="branchId" column="BRANCH_ID" />
+		<result property="branchCode" column="BRANCH_CODE" />
+		<result property="branchName" column="BRANCH_NAME" />
+		<result property="branchAddress" column="ADDRESS" />
+	</resultMap>
+	
+	
+	<insert id="insert"
+		parameterType="mm.aeon.com.ass.base.dto.storeRegister.BranchInsertReqDto">
+		INSERT INTO
+		SHOP_BRANCH
+		<trim prefix="(" suffixOverrides="," suffix=")">
+
+			<if test="storeId != null">
+				SHOP_ID,
+			</if>
+			<!-- <if test="branchId != null">
+				BRANCH_ID,
+			</if> -->
+			<if test="branchCode != null and branchCode != ''">
+				BRANCH_CODE,
+			</if>
+			
+			<if test="branchName != null and branchName != ''">
+				BRANCH_NAME,
+			</if>
+			
+			<if test="branchAddress != null and branchAddress != ''">
+				ADDRESS,
+			</if>
+			<if test="delFlag != null">
+				DEL_FLAG,
+			</if>
+			<if test="createdBy != null and createdBy != ''">
+				UPDATED_BY,
+			</if>
+		
+			<if test="createdDate != null">
+				UPDATED_TIME,
+			</if>
+			
+		</trim>
+		VALUES
+		<trim prefix="(" suffixOverrides="," suffix=")">
+			
+			<if test="storeId != null">
+				#{storeId},
+			</if>
+			<!-- <if test="branchId != null">
+				,#{branchId}, 
+			</if> -->
+			<if test="branchCode != null and branchCode != ''">
+				#{branchCode},
+			</if>
+			<if test="branchName != null">
+				#{branchName},
+			</if>
+			<if test="branchAddress != null and branchAddress != ''">
+				#{branchAddress},
+			</if>
+			<if test="delFlag != null">
+				#{delFlag},
+			</if>
+			<if test="createdBy != null and createdBy != ''">
+				#{createdBy},
+			</if>
+			<if test="createdDate != null">
+				#{createdDate},
+			</if>
+			
+		</trim>
+	</insert>
+	
+	<update id="update"
+		parameterType="mm.aeon.com.ass.base.dto.storeUpdate.BranchUpdateReqDto">
+		UPDATE 
+		SHOP_BRANCH
+			<set>
+				<if test="branchCode != null">
+					BRANCH_CODE = #{branchCode},
+				</if>
+				<if test="branchName != null and branchName != ''">
+					BRANCH_NAME = #{branchName},
+				</if>
+				<if test="branchAddress != null and branchAddress != ''">
+					ADDRESS = #{branchAddress},
+				</if>
+				<if test="del_flag != null">
+					DEL_FLAG = #{del_flag},
+				</if>
+				<if test="updatedDate != null">
+					UPDATED_BY = #{updatedBy},
+				</if>
+				<if test="updatedDate != null">
+					UPDATED_TIME = #{updatedDate},
+				</if>
+			</set>
+		<where>
+			<if test="branchId != null and branchId !=''">
+				BRANCH_ID   = #{branchId}
+			</if>
+		</where>
+	</update>
+	
+	<select id="selectForUpdate"
+		parameterType="mm.aeon.com.ass.base.dto.storeSelectUpdate.StoreSelectAllForUpdateReqDto"
+		resultMap="storeSelectAllForUpdateResDto">
+			SELECT SB.BRANCH_ID,SB.BRANCH_CODE,SB.BRANCH_NAME,SB.ADDRESS,
+				SI.SHOP_ID,SI.SHOP_NAME,SI.SHOP_CODE,SI.PRODUCT_NAME,
+				SI.ADDRESS,SI.DEL_FLAG,SI.UPDATED_BY,SI.CREATED_TIME,
+				SI.UPDATED_TIME
+			FROM SHOP_INFO AS SI
+			INNER JOIN SHOP_BRANCH  AS SB
+			ON SI.SHOP_ID = SB.SHOP_ID
+		<where>
+			<if test="storeId != null and storeId != ''">
+				SI.SHOP_ID = #{storeId}
+			</if>
+		</where>
+	</select>
+	
+	<resultMap id="storeSelectAllForUpdateResDto"
+		type="mm.aeon.com.ass.base.dto.storeSelectUpdate.StoreSelectAllForUpdateResDto">
+		<result property="branchId" column="BRANCH_ID" />
+		<result property="branchCode" column="BRANCH_CODE" />
+		<result property="branchName" column="BRANCH_NAME" />
+		<result property="branchAddress" column="ADDRESS" />
+		<result property="storeId" column="SHOP_ID" />
+		<result property="storeName" column="SHOP_NAME" />
+		<result property="storeCode" column="SHOP_CODE" />
+		<result property="productName" column="PRODUCT_NAME" />
+		<result property="storeAddress" column="ADDRESS" />
+		<result property="delFlag" column="DEL_FLAG" />
+		<result property="updatedBy" column="UPDATED_BY" />
+		<result property="createdTime" column="CREATED_TIME" />
+		<result property="updatedTime" column="UPDATED_TIME" />
+		
+	</resultMap>
+</mapper>

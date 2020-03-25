@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="FaqInfo">
+	
+	<select id="count"
+		parameterType="mm.aeon.com.ass.base.dto.faqCount.FaqCountReqDto"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM FAQ_INFO
+	</select>
+	
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.faqSearch.FaqSearchReqDto"
+		resultMap="faqSearchResDto">
+		SELECT FI.FAQ_ID,FI.QUESTION_MYAN,FI.QUESTION_ENG,FI.ANSWER_MYAN,FI.ANSWER_ENG,
+		FI.CATEGORY_ID,FI.CREATED_BY,FI.UPDATED_BY,FI.CREATED_TIME,FI.UPDATED_TIME,FI.DEL_FLAG,CA.CATEGORY
+		FROM FAQ_INFO AS FI
+		INNER JOIN FAQ_CATEGORY AS CA
+		ON CA.CATEGORY_ID = FI.CATEGORY_ID
+		
+		ORDER BY FI.FAQ_ID DESC
+	</select>
+	<resultMap id="faqSearchResDto"
+		type="mm.aeon.com.ass.base.dto.faqSearch.FaqSearchResDto">
+		<result property="faqId" column="FAQ_ID" />
+		<result property="questionMyan" column="QUESTION_MYAN" />
+		<result property="questionEng" column="QUESTION_ENG" />
+		<result property="answerMyan" column="ANSWER_MYAN" />
+		<result property="answerEng" column="ANSWER_ENG" />
+		<result property="categoryId" column="CATEGORY_ID" />
+		<result property="categoryName" column="CATEGORY" />
+		<result property="createdBy" column="CREATED_BY" />
+		<result property="updatedBy" column="UPDATED_BY" />
+		<result property="createdTime" column="CREATED_TIME" />
+		<result property="updatedTime" column="UPDATED_TIME" />
+		<result property="delFlag" column="DEL_FLAG" />
+	</resultMap>
+	
+	<insert id="insert"
+		parameterType="mm.aeon.com.ass.base.dto.faqRegister.FaqInsertReqDto">
+		INSERT INTO
+		FAQ_INFO
+		<trim prefix="(" suffixOverrides="," suffix=")">
+
+			<if test="faqId != null">
+				FAQ_ID,
+			</if>
+			<if test="questionMyan != null and questionMyan != ''">
+				QUESTION_MYAN,
+			</if>
+			<if test="questionEng != null and questionEng != ''">
+				QUESTION_ENG,
+			</if>
+			<if test="answerMyan != null">
+				ANSWER_MYAN,
+			</if>
+			<if test="answerEng != null">
+				ANSWER_ENG,
+			</if>
+			<if test="categoryId != null">
+				CATEGORY_ID,
+			</if>
+			<if test="delFlag != null">
+				DEL_FLAG,
+			</if>
+			<if test="createdBy != null and createdBy != ''">
+				CREATED_BY,
+			</if>
+			<if test="createdTime != null">
+				CREATED_TIME,
+			</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffixOverrides="," suffix=")">
+			
+			<if test="faqId != null">
+				#{faqId},
+			</if>
+			<if test="questionMyan != null and questionMyan != ''">
+				#{questionMyan}, 
+			</if>
+			<if test="questionEng != null and questionEng != ''">
+				#{questionEng},
+			</if>
+			<if test="answerMyan != null">
+				#{answerMyan},
+			</if>
+			<if test="answerEng != null">
+				#{answerEng},
+			</if>
+			<if test="categoryId != 0">
+				#{categoryId},
+			</if>
+			<if test="delFlag != null">
+				#{delFlag},
+			</if>
+			<if test="createdBy != null and createdBy != ''">
+				#{createdBy},
+			</if>
+			<if test="createdTime != null">
+				#{createdTime},
+			</if>
+		</trim>
+	</insert>
+	
+	<select id="selectForUpdate"
+		parameterType="mm.aeon.com.ass.base.dto.faqSelectUpdate.FaqSelectForUpdateReqDto"
+		resultMap="FaqSelectForUpdateResDto">
+		SELECT FAQ_ID,UPDATED_TIME
+		FROM FAQ_INFO
+		<where>
+			<if test="faqId != null">
+				FAQ_ID = #{faqId}
+			</if>
+		</where>
+	</select>
+	
+	<resultMap id="FaqSelectForUpdateResDto"
+		type="mm.aeon.com.ass.base.dto.faqSelectUpdate.FaqSelectForUpdateResDto">
+		<result property="faqId" column="FAQ_ID" />
+		<result property="updatedDate" column="UPDATED_TIME" />
+	</resultMap>
+	
+	<update id="update"
+		parameterType="mm.aeon.com.ass.base.dto.faqUpdate.FaqUpdateReqDto">
+		UPDATE 
+		FAQ_INFO
+			<set>
+				<if test="questionMyan != null and questionMyan != ''">
+					QUESTION_MYAN = #{questionMyan},
+				</if>
+				<if test="questionEng != null and questionEng != ''">
+					QUESTION_ENG = #{questionEng},
+				</if>
+				<if test="answerMyan != null">
+					ANSWER_MYAN = #{answerMyan},
+				</if>
+				<if test="answerEng != null">
+					ANSWER_ENG = #{answerEng},
+				</if>
+				<if test="categoryId != 0">
+					CATEGORY_ID = #{categoryId},
+				</if>
+				<if test="updatedBy != null and updatedBy != ''">
+					UPDATED_BY = #{updatedBy},
+				</if>
+			
+				<if test="updatedTime != null">
+					UPDATED_TIME = #{updatedTime},
+				</if>
+				<if test="delFlag != null">
+					DEL_FLAG = #{delFlag},
+				</if>
+			</set>
+		<where>
+			<if test="faqId != 0">
+				FAQ_ID = #{faqId}
+			</if>
+		</where>
+	</update>
+
+</mapper>

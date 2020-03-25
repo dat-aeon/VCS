@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CusCouponInfo">
+	
+	<resultMap id="customerSearchResDto"
+		type="mm.aeon.com.ass.base.dto.cusCouponSearch.CustomerSearchResDto">
+		<result column="CUSTOMER_NO" property="cusotmer_no"  />
+		<result column="NAME" property="cusotmer_name"  />
+		<result column="CUSTOMER_ID" property="customer_id"  />
+		<result column="DOB" property="dob"  />
+		<result column="PHONE_NO" property="phoneNo"  />
+		<result column="NRC_NO" property="nrcNo"  />
+		<result column="ADDRESS" property="township"  />
+	</resultMap>
+	
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.cusCouponSearch.CustomerSearchReqDto"
+		resultMap="customerSearchResDto">
+		SELECT
+			CI.CUSTOMER_NO,
+			CI.NAME,
+			CI.CUSTOMER_ID,
+			CI.DOB,
+			CI.PHONE_NO,
+			CI.NRC_NO,
+			CI.ADDRESS
+		FROM 
+			CUSTOMER_INFO CI
+		INNER JOIN 
+			CUSTOMER_COUPON CC
+		ON 
+			CI.CUSTOMER_ID = CC.CUSTOMER_ID
+		<where>
+			<if test="coupon_id != null and coupon_id != ''">
+				CC.COUPON_ID = #{coupon_id}
+			</if>
+		</where>
+		<if test="sortField != null and sortField != '' and sortField == 'cusotmer_no' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY CI.CUSTOMER_NO ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY CI.CUSTOMER_NO DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'cusotmer_name' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY CI.NAME ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY CI.NAME DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'nrcNo' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY CI.NRC_NO ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY CI.NRC_NO DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'dob' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY CI.DOB ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY CI.DOB DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'phoneNo' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY CI.PHONE_NO ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY CI.PHONE_NO DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'township' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY CI.ADDRESS ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY CI.ADDRESS DESC
+			</if>
+		</if>
+		<if test="sortField == null or sortField == ''">
+			ORDER BY CI.CUSTOMER_ID DESC
+		</if>
+		<if test="offset != null and limit != null">
+			OFFSET #{offset} LIMIT #{limit}
+		</if>
+	</select>
+	
+	<select id="count"
+		parameterType="mm.aeon.com.ass.base.dto.cusCouponSearch.CustomerSelectCountReqDto"
+		resultType="java.lang.Integer">
+		SELECT
+			COUNT(*)
+		FROM CUSTOMER_INFO
+		INNER JOIN CUSTOMER_COUPON
+		ON CUSTOMER_INFO.CUSTOMER_ID = CUSTOMER_COUPON.CUSTOMER_ID
+		<where>
+			<if test="coupon_id != null and coupon_id != ''">
+				COUPON_ID = #{coupon_id}
+			</if>
+		</where>
+	</select>
+	
+	<insert id="insert"
+		parameterType="mm.aeon.com.ass.base.dto.couponRegister.CusCouponInsertReqDto">
+		INSERT INTO
+		CUSTOMER_COUPON
+		<trim prefix="(" suffixOverrides="," suffix=")">
+
+			<if test="coupon_id != null and coupon_id != ''">
+				COUPON_ID,
+			</if>
+			<if test="customer_id != null and customer_id != ''">
+				CUSTOMER_ID,
+			</if>
+			<if test="status != null and status != ''">
+				STATUS,
+			</if>
+			<if test="updated_by != null and updated_by != ''">
+				UPDATED_BY,
+			</if>
+			<if test="updated_time != null">
+				UPDATED_TIME,
+			</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffixOverrides="," suffix=")">
+
+			<if test="coupon_id != null and coupon_id != ''">
+				#{coupon_id},
+			</if>
+			<if test="customer_id != null and customer_id != ''">
+				#{customer_id},
+			</if>
+			<if test="status != null and status != ''">
+				#{status},
+			</if>
+			<if test="updated_by != null and updated_by != ''">
+				#{updated_by},
+			</if>
+			<if test="updated_time != null">
+				#{updated_time},
+			</if>
+
+		</trim>
+	</insert>
+
+	<update id="update"
+		parameterType="mm.aeon.com.ass.base.dto.couponUpdate.CusCouponUpdateReqDto">
+		UPDATE CUSTOMER_COUPON
+		<set>
+			<!-- <if test="created_by != null and created_by != ''"> CREATED_BY = 
+				#{created_by} </if> <if test="created_time != null"> ,CREATED_TIME = #{created_time} 
+				</if> -->
+			<if test="updated_by != null and updated_by != ''">
+				UPDATED_BY = #{updated_by},
+			</if>
+			<if test="updated_time != null">
+				UPDATED_TIME = #{updated_time},
+			</if>
+
+		</set>
+		<where>
+			<if test="customer_id != null and customer_id != ''">
+				CUSTOMER_ID = #{customer_id}
+			</if>
+			<if test="coupon_id != null and coupon_id !=''">
+				AND COUPON_ID = #{coupon_id}
+			</if>
+		</where>
+	</update>
+
+	<select id="refer"
+		parameterType="mm.aeon.com.ass.base.dto.customerSearchByCoupon.CustomerReferReqDto"
+		resultMap="customerReferResDto">
+		SELECT CUSTOMER_ID
+		FROM CUSTOMER_COUPON
+		<where>
+			<if test="customer_id != null and customer_id != ''">
+				CUSTOMER_ID = #{customer_id}
+			</if>
+			<if test="coupon_id != null and coupon_id !=''">
+				AND COUPON_ID = #{coupon_id}
+			</if>
+		</where>
+	</select>
+
+	<resultMap id="customerReferResDto"
+		type="mm.aeon.com.ass.base.dto.customerSearchByCoupon.CustomerReferResDto">
+		<result property="customer_id" column="customer_id" />
+	</resultMap>
+
+	<delete id="delete" parameterType="mm.aeon.com.ass.base.dto.couponDelete.CusCouponDeleteReqDto">
+		<!-- WARNING - @mbg.generated This element is automatically generated by 
+			MyBatis Generator, do not modify. -->
+		DELETE 
+		FROM
+			customer_coupon
+		WHERE
+			COUPON_ID = #{coupon_id}
+		AND
+			CUSTOMER_ID = #{customer_id}
+	</delete>
+
+</mapper>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<settings>
+		<setting name="logImpl" value="LOG4J" />
+	</settings>
+
+	<mappers>
+		<mapper resource="configure/mybatis/ActualAppUsageCount.xml" />
+		<mapper resource="configure/mybatis/ActualAppUsageRpt2.xml" />
+		<mapper resource="configure/mybatis/AdminCustomerRoom.xml" />
+		<mapper resource="configure/mybatis/AdminCustomerRoomSync.xml" />
+		<mapper resource="configure/mybatis/AppConfig.xml" />
+		<mapper resource="configure/mybatis/AppReport.xml" />
+		<mapper resource="configure/mybatis/AppReportCount.xml" />
+		<mapper resource="configure/mybatis/BranchList.xml" />
+		<mapper resource="configure/mybatis/CategoryList.xml" />
+		<mapper resource="configure/mybatis/CompanyInfo.xml" />
+		<mapper resource="configure/mybatis/Coupon.xml" />
+		<mapper resource="configure/mybatis/CouponInfo.xml" />
+		<mapper resource="configure/mybatis/CouponInfoCount.xml" />
+		<mapper resource="configure/mybatis/CusCouponInfo.xml" />
+		<mapper resource="configure/mybatis/CustomerRoomInfo.xml" />
+		<mapper resource="configure/mybatis/Customer.xml" />
+		<mapper resource="configure/mybatis/CustomerType.xml" />
+		<mapper resource="configure/mybatis/CustomerSecurityQuestion.xml" />
+		<mapper resource="configure/mybatis/CustSecQuestion.xml" />
+		<mapper resource="configure/mybatis/FaqInfo.xml" />
+		<mapper resource="configure/mybatis/FaqInfoCount.xml" />
+		<mapper resource="configure/mybatis/FreeAdminCustomerRoom.xml" />
+		<mapper resource="configure/mybatis/FreeCustomerRoomInfo.xml" />
+		<mapper resource="configure/mybatis/FreeAdminCustomerRoomSync.xml" />
+		<mapper resource="configure/mybatis/FreeUsageReport.xml" />
+		<mapper resource="configure/mybatis/ImportCustomerAgreement.xml" />
+		<mapper resource="configure/mybatis/ImportMember.xml" />
+		<mapper resource="configure/mybatis/LoginInfo.xml" />
+		<mapper resource="configure/mybatis/MessagingHistory.xml" />
+		<mapper resource="configure/mybatis/MessagingHistoryCount.xml" />
+		<mapper resource="configure/mybatis/NewsInfo.xml" />
+		<mapper resource="configure/mybatis/NewsInfoCount.xml" />
+		<mapper resource="configure/mybatis/PromotionsInfo.xml" />
+		<mapper resource="configure/mybatis/PromotionsInfoCount.xml" />
+		<mapper resource="configure/mybatis/PasswordInfo.xml" />
+		<mapper resource="configure/mybatis/Security.xml" />
+		<mapper resource="configure/mybatis/StoreListInfo.xml" />
+		<mapper resource="configure/mybatis/StoreListForUpdate.xml" />
+		<mapper resource="configure/mybatis/ShopBranch.xml" />
+		<mapper resource="configure/mybatis/StoreInfo.xml" />
+		<mapper resource="configure/mybatis/StoreCoupon.xml" />
+		<mapper resource="configure/mybatis/ShopForCoupon.xml" />
+		<mapper resource="configure/mybatis/SMSMessage.xml" />
+		<mapper resource="configure/mybatis/UserInfo.xml" />
+		<mapper resource="configure/mybatis/CategoryInfo.xml" />
+		<mapper resource="configure/mybatis/CategoryInfoCount.xml" />
+		<mapper resource="configure/mybatis/CustomerInfoUpdateHistory.xml" />
+			<mapper resource="configure/mybatis/FreeMessagingHistory.xml" />
+	</mappers>
+</configuration>
+

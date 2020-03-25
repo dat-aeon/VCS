@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="UserInfo">
+
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.userInfoSelectList.UserInfoSelectListReqDto"
+		resultMap="UserInfoSelectListResDto">
+		SELECT 
+			UI.USER_ID, 
+			UI.LOGIN_ID, 
+			UI.NAME, 
+			UI.UPDATED_TIME,
+			UI.ALLOW_MESSAGING_FLAG,
+			UI.ALLOW_FREE_MESSAGING_FLAG
+		FROM user_info UI
+		<where>
+			UI.DEL_FLAG = 0
+			<if test="userTypeId != null">
+				AND UI.USER_TYPE_ID = #{userTypeId}
+			</if>
+			<if test="name != null and name != ''">
+				AND LOWER(UI.NAME) LIKE LOWER('%' || #{name} || '%')
+			</if>
+			<if test="loginId != null and loginId != ''">
+				AND LOWER(UI.LOGIN_ID) LIKE LOWER('%' || #{loginId} || '%')
+			</if>
+		</where>
+		<if test="sortField != null and sortField != '' and sortField == 'userName' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY UI.NAME ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY UI.NAME DESC
+			</if>
+		</if>
+		<if test="sortField != null and sortField != '' and sortField == 'userLoginId' ">
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'ASCENDING' ">
+				ORDER BY UI.LOGIN_ID ASC
+			</if>
+			<if test="sortOrder != null and sortOrder != '' and sortOrder == 'DESCENDING' ">
+				ORDER BY UI.LOGIN_ID DESC
+			</if>
+		</if>
+		<if test="sortField == null or sortField == ''">
+			ORDER BY UI.LOGIN_ID DESC
+		</if>
+		<if test="offset != null and limit != null">
+			OFFSET #{offset} LIMIT #{limit}
+		</if>
+	</select>
+
+	<resultMap id="UserInfoSelectListResDto"
+		type="mm.aeon.com.ass.base.dto.userInfoSelectList.UserInfoSelectListResDto">
+		<result column="USER_ID" property="userId"  />
+		<result column="LOGIN_ID" property="loginId"  />
+		<result column="NAME" property="name"  />
+		<result column="UPDATED_TIME" property="updatedTime"  />
+		<result column="ALLOW_MESSAGING_FLAG" property="allowMessagingFlag"  />
+		<result column="ALLOW_FREE_MESSAGING_FLAG" property="allowFreeMessagingFlag"  />
+	</resultMap>
+
+
+	<insert id="insert" useGeneratedKeys="true" keyColumn="user_id"
+		keyProperty="userId"
+		parameterType="mm.aeon.com.ass.base.dto.userInfoRegister.UserInfoRegisterReqDto">
+		INSERT INTO USER_INFO
+		<trim prefix="(" suffixOverrides="," suffix=")">
+			<if test="loginId != null and loginId != ''">
+				LOGIN_ID,
+			</if>
+			<if test="userTypeId != null">
+				USER_TYPE_ID,
+			</if>
+			<if test="name != null and name != ''">
+				NAME,
+			</if>
+			<if test="delFlag != null">
+				DEL_FLAG,
+			</if>
+			<if test="createdBy != null and createdBy != ''">
+				CREATED_BY,
+			</if>
+			<if test="createdTime != null">
+				CREATED_TIME,
+			</if>
+			<if test="allowMessagingFlag != null">
+				allow_messaging_flag,
+			</if>
+			<if test="allowFreeMessagingFlag != null">
+				allow_free_messaging_flag,
+			</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffixOverrides="," suffix=")">
+			<if test="loginId != null and loginId != ''">
+				#{loginId},
+			</if>
+			<if test="userTypeId != null">
+				#{userTypeId},
+			</if>
+			<if test="name != null and name != ''">
+				#{name},
+			</if>
+			<if test="delFlag != null">
+				#{delFlag},
+			</if>
+			<if test="createdBy != null and createdBy != ''">
+				#{createdBy},
+			</if>
+			<if test="createdTime != null">
+				#{createdTime},
+			</if>
+			<if test="allowMessagingFlag != null">
+				#{allowMessagingFlag},
+			</if>
+			<if test="allowFreeMessagingFlag != null">
+				#{allowFreeMessagingFlag},
+			</if>
+		</trim>
+	</insert>
+
+	<select id="selectForUpdate"
+		parameterType="mm.aeon.com.ass.base.dto.userInfoSelectForUpdate.UserInfoSelectForUpdateReqDto"
+		resultMap="UserInfoSelectForUpdateResDto">
+		SELECT USER_ID, UPDATED_TIME
+		FROM USER_INFO
+		<where>
+			DEL_FLAG = 0
+			<if test="userId != null">
+				AND USER_ID = #{userId}
+			</if>
+		</where>
+	</select>
+
+	<resultMap id="UserInfoSelectForUpdateResDto"
+		type="mm.aeon.com.ass.base.dto.userInfoSelectForUpdate.UserInfoSelectForUpdateResDto">
+		<result property="userId" column="USER_ID" />
+		<result property="updatedTime" column="UPDATED_TIME" />
+	</resultMap>
+
+	<update id="update"
+		parameterType="mm.aeon.com.ass.base.dto.userInfoUpdate.UserInfoUpdateReqDto">
+		UPDATE USER_INFO
+		<set>
+			<if test="name != null and name !=''">
+				NAME = #{name},
+			</if>
+			<if test="loginId != null and loginId !=''">
+				LOGIN_ID = #{loginId},
+			</if>
+			<if test="delFlag != null">
+				DEL_FLAG = #{delFlag},
+			</if>
+			<if test="updatedBy != null and updatedBy !=''">
+				UPDATED_BY = #{updatedBy},
+			</if>
+			<if test="updatedTime != null">
+				UPDATED_TIME = #{updatedTime},
+			</if>
+			<if test="allowMessagingFlag != null">
+				allow_messaging_flag = #{allowMessagingFlag},
+			</if>
+			<if test="allowFreeMessagingFlag != null">
+				allow_free_messaging_flag = #{allowFreeMessagingFlag},
+			</if>
+		</set>
+		<where>
+			USER_ID = #{userId}
+		</where>
+	</update>
+	
+	<select id="refer"
+		parameterType="mm.aeon.com.ass.base.dto.userInfoRefer.UserInfoReferReqDto"
+		resultMap="userInfoReferResDto">
+		SELECT NAME FROM USER_INFO
+		
+		<where>
+			<if test="user_id != null">
+				AND USER_ID = #{user_id}
+			</if>
+			<if test="user_type_id != null">
+				AND USER_TYPE_ID = #{user_type_id}
+			</if>
+		</where>
+		
+	</select>
+    
+    <resultMap id="userInfoReferResDto"
+		type="mm.aeon.com.ass.base.dto.userInfoRefer.UserInfoReferResDto">
+		<result property="user_name" column="NAME" />
+	</resultMap>
+	
+	<select id="count"
+		parameterType="mm.aeon.com.ass.base.dto.userInfoSelectList.UserInfoSelectListReqDto"
+		resultType="java.lang.Integer">
+		SELECT 
+			COUNT(*)
+		FROM user_info UI
+		<where>
+			UI.DEL_FLAG = 0
+			<if test="userTypeId != null">
+				AND UI.USER_TYPE_ID = #{userTypeId}
+			</if>
+			<if test="name != null and name != ''">
+				AND LOWER(UI.NAME) LIKE LOWER('%' || #{name} || '%')
+			</if>
+			<if test="loginId != null and loginId != ''">
+				AND LOWER(UI.LOGIN_ID) LIKE LOWER('%' || #{loginId} || '%')
+			</if>
+		</where>
+	</select>
+
+</mapper>

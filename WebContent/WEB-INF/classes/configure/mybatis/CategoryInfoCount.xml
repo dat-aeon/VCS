@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CategoryInfoCount">
+    
+	<select id="count"
+		parameterType="mm.aeon.com.ass.base.dto.categoryInfoSearch.CategoryInfoSelectCountReqDto"
+		resultType="java.lang.Integer">
+		SELECT 
+			COUNT(*)
+		FROM 
+			faq_category 
+		WHERE 
+			DEL_FLAG = 0
+	</select>
+	
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.categoryCount.FaqSearchByCategoryReqDto"
+		resultMap="faqSearchByCategoryResDto">
+		SELECT FAQ_INFO.DEL_FLAG FROM FAQ_INFO
+		INNER JOIN FAQ_CATEGORY 
+		ON FAQ_INFO.CATEGORY_ID = FAQ_CATEGORY.CATEGORY_ID 
+		<where>
+			<if test="categoryId != null and categoryId != ''">
+				FAQ_CATEGORY.CATEGORY_ID = #{categoryId}
+			</if>
+		</where>
+	</select>
+	
+	<resultMap id="faqSearchByCategoryResDto"
+		type="mm.aeon.com.ass.base.dto.categoryCount.FaqSearchByCategoryResDto">
+		<result property="del_flag" column="DEL_FLAG" />
+	</resultMap>
+</mapper>    
+    

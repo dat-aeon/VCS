@@ -1,0 +1,117 @@
+<!--***********************************************************************
+ * $Date: 2019-07-23$
+ * $Author: Thiha Htet Zaw$
+ * $Rev:  $
+ * 2019 AEON Microfinance (Myanmar) Company	Limited. All Rights Reserved.
+ ***********************************************************************-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:rich="http://richfaces.org/rich"
+	xmlns:pt="http://presto.dat.com/tag" template="/layout/template.xhtml">
+	<ui:define name="title">
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="customerUpdateHistoryInfoSearchform">
+			<p:defaultCommand target="searchButton" />
+			<div class="ui-fluid">
+				<div class="ui-g" style="padding-left: 1%;">
+					<div class="ui-g-12" style="padding-left: 45%; color: #302873; font-size: 10pt;">
+						<H1>
+							<p:outputLabel value="#{displayItemBean.getDisplayItemName('customerInfoUpdateHistory')}" />
+						</H1>
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="ui-g-6">
+						<p:panelGrid styleClass="status-panel-grid" style="margin-top: 0%;">
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:100px;font-weight: bold;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('cusotmerNo')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:100px;font-weight: bold;">
+									<p:inputText id="customerno" maxlength="32" value="#{customerUpdateHistoryInfoListFormBean.searchHeaderBean.customerNo}" style="width:270px;" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:100px;font-weight: bold;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('customer_name')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:300px;">
+									<p:inputText id="customername" maxlength="32" value="#{customerUpdateHistoryInfoListFormBean.searchHeaderBean.customerName}" style="width:270px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:100px;font-weight: bold;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('updatedTimeFrom')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:300px;">
+									<p:calendar id="updatedTimeFrom" navigator="true" style="height:22px;" pattern="yyyy-MM-dd HH:mm" mask="true"
+										value="#{customerUpdateHistoryInfoListFormBean.searchHeaderBean.updatedTimeFrom}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:125px;font-weight: bold;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('updatedTimeTo')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" style="width:300px;">
+									<p:calendar id="updatedTimeTo" navigator="true" style="height:22px;" pattern="yyyy-MM-dd HH:mm" mask="true"
+										value="#{customerUpdateHistoryInfoListFormBean.searchHeaderBean.updatedTimeTo}" />
+								</p:column>
+							</p:row>
+							<p:row style="border:0px">
+								<p:column colspan="4" style="width:45%;background:#f4f7fc;border:0px;padding-left:0%;">
+									<p:commandButton id="searchButton" styleClass="button" action="#{customerUpdateHistoryInfoListFormBean.search()}"
+										value="#{displayItemBean.getDisplayItemName('btnSearch')}" />
+									<p:commandButton id="clearButton" styleClass="button" value="#{displayItemBean.getDisplayItemName('clear')}" ajax="false"
+										action="#{customerUpdateHistoryInfoListFormBean.reset()}" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="ui-g-12">
+						<div class="message-block ui-g-6">
+							<pt:messages />
+						</div>
+						<div class="ui-g-6" style="text-align: right;">
+							<p:commandButton value="#{displayItemBean.getDisplayItemName('exportCSV')}"
+								rendered="#{customerUpdateHistoryInfoListFormBean.customerUpdateHistoryListLineBeanLazyModel != null}" styleClass="button" ajax="false">
+								<p:dataExporter type="csv" target="customerUpdateHistoryResultTable" fileName="customerUpdateHistoryReport" />
+							</p:commandButton>
+						</div>
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="space-block"></div>
+					<div class="ui-g" style="width: 100%;">
+						<div class="ui-g-12">
+							<f:view encoding="utf-8">
+								<p:dataTable var="lineBean" first="#{customerUpdateHistoryInfoListFormBean.pageFirst}"
+									value="#{customerUpdateHistoryInfoListFormBean.customerUpdateHistoryListLineBeanLazyModel}" rows="50" lazy="true" paginator="true" rowIndexVar="rowIndex"
+									paginatorPosition="both" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="50,100" styleClass="resultTable" style="margin-left: 10px;" id="customerUpdateHistoryResultTable">
+									<p:column style="width:10%;" styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('no')}">
+										<h:outputText value="#{rowIndex+1}" />
+									</p:column>
+									<p:column style="width:15%;" sortBy="#{lineBean.updatedBy}" headerText="#{displayItemBean.getDisplayItemName('customerName')}">
+										<h:outputText value="#{lineBean.name}" />
+									</p:column>
+									<p:column style="width:15%;" sortBy="#{lineBean.updatedBy}" headerText="#{displayItemBean.getDisplayItemName('customerNo')}">
+										<h:outputText value="#{lineBean.customerNo}" />
+									</p:column>
+									<p:column style="width:30%;" sortBy="#{lineBean.description}" headerText="#{displayItemBean.getDisplayItemName('editedPoint')}">
+										<h:outputText value="#{lineBean.description}" style="float: left; text-align: left;" escape="false" />
+									</p:column>
+									<p:column style="width:15%;" sortBy="#{lineBean.updatedBy}" headerText="#{displayItemBean.getDisplayItemName('updatedBy')}">
+										<h:outputText value="#{lineBean.updatedBy}" />
+									</p:column>
+									<p:column style="width:15%;" sortBy="#{lineBean.updatedTime}" headerText="#{displayItemBean.getDisplayItemName('updatedTime')}">
+										<h:outputText value="#{lineBean.updatedTime}">
+											<f:convertDateTime pattern="dd-MM-yyyy hh:mm:ss a" />
+										</h:outputText>
+									</p:column>
+								</p:dataTable>
+							</f:view>
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

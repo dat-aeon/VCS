@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="AppConfig">
+
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.appSettingSearch.AppSettingSelectReqDto"
+		resultMap="sppSettingSelectResDto">
+		SELECT
+		APP_CONFIG_ID,NUM_OF_SECURITY_QUESTION,NUM_OF_ANSWER_CHARACTER
+		FROM
+		APP_CONFIG
+		ORDER BY APP_CONFIG_ID DESC
+	</select>
+	<resultMap id="sppSettingSelectResDto"
+		type="mm.aeon.com.ass.base.dto.appSettingSearch.AppSettingSelectResDto">
+		<result property="appSettingId" column="APP_CONFIG_ID" />
+		<result property="noOfsecurityQuestion" column="NUM_OF_SECURITY_QUESTION" />
+		<result property="noOfcharacterAnswer" column="NUM_OF_ANSWER_CHARACTER" />
+	</resultMap>
+
+	<update id="update"
+		parameterType="mm.aeon.com.ass.base.dto.appSettingUpdate.AppSettingUpdateReqDto">
+		UPDATE
+		APP_CONFIG
+		<set>
+			<if test="noOfsecurityQuestion != null and noOfsecurityQuestion != ''">
+				NUM_OF_SECURITY_QUESTION = #{noOfsecurityQuestion}
+			</if>
+			<if test="noOfcharacterAnswer != null and noOfcharacterAnswer !=''">
+				,NUM_OF_ANSWER_CHARACTER = #{noOfcharacterAnswer}
+			</if>
+		</set>
+		<where>
+			<if test="appSettingId != null and appSettingId !=''">
+				APP_CONFIG_ID = #{appSettingId}
+			</if>
+		</where>
+	</update>
+	
+	<select id="count"
+		parameterType="mm.aeon.com.ass.base.dto.secQuestionCount.SecurityQuestionCountReqDto"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM SECURITY_QUESTION
+		<where>
+				DEL_FLAG != 1
+		</where>		
+	</select>
+	
+	<select id="refer"
+		parameterType="mm.aeon.com.ass.base.dto.userInfoRefer.CustomerIdReferReqDto"
+		resultMap="customerIdReferResDto">
+		SELECT CU.CUSTOMER_ID,U.USER_TYPE_ID,CU.NAME
+		FROM USER_TYPE U
+		INNER JOIN CUSTOMER_INFO CU ON U.USER_TYPE_ID = CU.USER_TYPE_ID
+		
+		<where>
+			U.DEL_FLAG = 0
+			<if test="customer_id != null">
+				AND CU.CUSTOMER_ID = #{customer_id}
+			</if>
+		</where>
+		
+	</select>
+
+	<resultMap id="customerIdReferResDto"
+		type="mm.aeon.com.ass.base.dto.userInfoRefer.CustomerIdReferResDto">
+		<result property="customer_id" column="CUSTOMER_ID" />
+		<result property="userTypeId" column="USER_TYPE_ID" />
+		<result property="name" column="NAME" />
+	</resultMap>
+	
+</mapper>

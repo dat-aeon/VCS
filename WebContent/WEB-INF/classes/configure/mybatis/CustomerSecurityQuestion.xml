@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CustomerSecurityQuestion">
+
+	<resultMap id="customerSecurityQuestionResultMap"
+		type="mm.aeon.com.ass.base.dto.customerSearch.CustomerSecurityQuestionResDto">
+		<id column="CUST_SEC_QUES_ID" jdbcType="INTEGER" property="custSecQuesId" />
+	    <result column="SEC_QUES_ID" jdbcType="INTEGER" property="secQuesId" />
+	    <result column="QUESTION_MYAN" jdbcType="VARCHAR" property="questionMyan" />
+	    <result column="QUESTION_ENG" jdbcType="VARCHAR" property="questionEng" />
+	</resultMap>
+
+	<select id="selectList"
+		parameterType="mm.aeon.com.ass.base.dto.customerSearch.CustomerSecurityQuestionReqDto"
+		resultMap="customerSecurityQuestionResultMap">
+		SELECT
+			CSQ.CUST_SEC_QUES_ID,
+			CSQ.SEC_QUES_ID,
+			SQ.QUESTION_MYAN,
+			SQ.QUESTION_ENG
+		FROM
+			cust_sec_question CSQ
+		LEFT JOIN
+			security_question SQ
+		ON
+			CSQ.SEC_QUES_ID = SQ.SEC_QUES_ID
+		WHERE
+			SQ.DEL_FLAG = 0
+		AND
+			CSQ.DEL_FLAG = 0
+		AND
+			CSQ.CUSTOMER_ID = #{customerId,jdbcType=INTEGER}
+	</select>
+	
+</mapper>    
+    

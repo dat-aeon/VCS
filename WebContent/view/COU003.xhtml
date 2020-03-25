@@ -1,0 +1,238 @@
+<!--***********************************************************************
+ * $Date: 2019-01-30$
+ * $Author: Ye Lin Thu $
+ * $Rev:  $
+ * 2018 AEON Microfinance (Myanmar) Company	Limited. All Rights Reserved.
+ ***********************************************************************-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:rich="http://richfaces.org/rich"
+	xmlns:pt="http://presto.dat.com/tag" template="/layout/template.xhtml">
+	<ui:define name="title">
+		<title><h:outputText value="#{displayItemBean.getDisplayItemName('couponDetail')}" /></title>
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="couponDetailForm">
+			<div class="ui-fluid" style="margin-left: 15%;">
+				<div class="ui-g">
+					<div class="ui-g-12" style="color: #302873; font-size: 10pt; text-align: center; margin-left: -100px;">
+						<H1>
+							<p:outputLabel value="#{displayItemBean.getDisplayItemName('couponDetail')}" />
+						</H1>
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="ui-g-12" style="width: 1000px !important; padding-left: 13%;">
+						<!-- <p:fieldset styleClass="import-fieldset"
+							style="width: 800px !important;"
+							legend="#{displayItemBean.getDisplayItemName('couponDetail')}"> -->
+						<span class="message-style">
+							<pt:messages />
+						</span>
+						<p:panelGrid styleClass="status-panel-grid" style="margin-top: 0%;">
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('couponCode')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:300px;">
+									<h:outputText id="couponCode" value="#{couponListFormBean.lineBean.coupon_code}" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('couponName')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:220px;">
+									<h:outputText id="couponName" maxlength="32" value="#{couponListFormBean.lineBean.couponName}" style="width:350px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('couponNameMya')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:220px;">
+									<h:outputText id="couponNameMya" maxlength="25" value="#{couponListFormBean.lineBean.couponNameMya}" style="width:350px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('couponDescription')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:300px;">
+									<h:outputText id="couponDescription" maxlength="32" value="#{couponListFormBean.lineBean.couponDescription}" style="width:350px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('couponDescriptionMya')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:300px;">
+									<h:outputText id="couponDescriptionMya" maxlength="50" value="#{couponListFormBean.lineBean.couponDescriptionMya}" style="width:350px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('shopName')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:300px;">
+									<h:outputText id="storeName" style="width:350px;" disabled="true" value="#{couponListFormBean.lineBean.storeName}" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('couponStrDate')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:300px;">
+									<h:outputText id="couponStrDate" value="#{couponListFormBean.lineBean.couponStrDate}" >
+									<f:convertDateTime pattern="yyyy-MM-dd" />
+									</h:outputText>
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('couponExpDate')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:300px;">
+									<h:outputText id="couponExpDate" value="#{couponListFormBean.lineBean.couponExpDate}" >
+									<f:convertDateTime pattern="yyyy-MM-dd" />
+									</h:outputText>
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('couponDiscount')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:300px;">
+									<h:outputText id="couponDiscount" value="#{couponListFormBean.lineBean.coupon_discount}" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('couponAmount')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:300px;">
+									<h:outputText id="couponAmount" value="#{couponListFormBean.lineBean.coupon_amount}" style="width:350px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('discountUnit')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:300px;">
+									<h:outputText id="discountUnit" value="#{couponListFormBean.lineBean.discount_unit}" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('couponSpEventEng')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:300px;">
+									<h:outputText id="couponSpEventEng" value="#{couponListFormBean.lineBean.special_event}" style="width:300px;" />
+								</p:column>
+							</p:row>
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('couponSpEventMya')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:300px;">
+									<h:outputText id="couponSpEventMya" maxlength="50" value="#{couponListFormBean.lineBean.couponSpEventMya}" style="width:300px;" />
+								</p:column>
+							</p:row>
+							<!-- <p:row styleClass="status-panel-grid-row">
+									<p:column styleClass="status-panel-grid-column tblSingleLabel"
+										style="width:200px;">
+										<h:outputText
+											value="#{displayItemBean.getDisplayItemName('couponTlNo')}" />
+									</p:column>
+									<p:column styleClass="status-panel-grid-column" colspan="2"
+										style="width:300px;">
+										<h:outputText id="couponTlNo"
+											value="#{couponListFormBean.lineBean.total_no}"
+											style="width:350px;" />
+									</p:column>
+								</p:row> -->
+							<p:row styleClass="status-panel-grid-row">
+								<p:column styleClass="status-panel-grid-column tblSingleLabel" style="width:200px;">
+									<h:outputText value="#{displayItemBean.getDisplayItemName('couponNoOfCus')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:300px;">
+									<h:outputText id="couponNoOfCus" value="#{couponListFormBean.lineBean.cupon_no_per_cust}" style="width:350px;" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column styleClass="tblSingleLabel">
+									<h:outputLabel id="attckmentImage" value="#{displayItemBean.getDisplayItemName('couponImage')}" />
+								</p:column>
+								<p:column styleClass="status-panel-grid-column" colspan="2" style="width:300px;">
+									<p:graphicImage id="imageUpload" url="#{couponListFormBean.tempUploadImageFilePath}" style="width:50px;height:auto;" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+						<!-- </p:fieldset> -->
+					</div>
+				</div>
+				<div class="ui-g" style="padding-left: 150px;">
+					<div class="ui-g-12" style="width: 800px !important;">
+						<p:fieldset styleClass="import-fieldset" style="width: 800px !important;" legend="#{displayItemBean.getDisplayItemName('cus-existCustomer')}">
+							<f:view encoding="utf-8">
+								<p:dataTable var="customerBean" value="#{couponListFormBean.customerDataBeanLazyModel}" rowIndexVar="rowIndex" scrollHeight="200" scrollable="true" lazy="true"
+									rendered="#{couponListFormBean.customerDataBeanLazyModel != null}" styleClass="resultTable" id="customerResultTable" paginator="true" paginatorPosition="top" rows="50"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="50,100">
+									<p:column style="width:20px" styleClass="unsort-column" headerText="#{displayItemBean.getDisplayItemName('no')}">
+										<h:outputText value="#{rowIndex+1}" />
+									</p:column>
+									<p:column style="width: 320px;" sortBy="#{customerBean.cusotmer_no}" headerText="#{displayItemBean.getDisplayItemName('cusotmerNo')}">
+										<h:outputText value="#{customerBean.cusotmer_no}" />
+									</p:column>
+									<p:column style="width: 150px;" sortBy="#{customerBean.cusotmer_name}" headerText="#{displayItemBean.getDisplayItemName('customer_name')}">
+										<h:outputText value="#{customerBean.cusotmer_name}" />
+									</p:column>
+									<p:column style="width: 150px;" sortBy="#{customerBean.nrcNo}" headerText="#{displayItemBean.getDisplayItemName('nrcNo')}">
+										<h:outputText value="#{customerBean.nrcNo}" />
+									</p:column>
+									<p:column style="width:110px;" sortBy="#{customerBean.dob}" headerText="#{displayItemBean.getDisplayItemName('dob')}">
+										<h:outputText value="#{customerBean.dob}">
+											<f:convertDateTime pattern="yyyy-MM-dd" />
+										</h:outputText>
+									</p:column>
+									<p:column style="width: 150px;" sortBy="#{customerBean.phoneNo}" headerText="#{displayItemBean.getDisplayItemName('phoneNo')}">
+										<h:outputText value="#{customerBean.phoneNo}" />
+									</p:column>
+									<p:column style="width: 150px;" sortBy="#{customerBean.township}" headerText="#{displayItemBean.getDisplayItemName('township')}">
+										<h:outputText value="#{customerBean.township}" />
+									</p:column>
+								</p:dataTable>
+							</f:view>
+						</p:fieldset>
+					</div>
+				</div>
+				<div class="ui-g" style="padding-left: 150px;">
+					<div class="ui-g-12" style="width: 800px !important;">
+						<p:fieldset styleClass="import-fieldset" id="shopBranchList" style="width: 800px !important;" legend="#{displayItemBean.getDisplayItemName('shopBranchList')}">
+							<f:view encoding="utf-8">
+								<p:dataTable var="branchBean" value="#{couponListFormBean.storeCouponBranchList}" styleClass="resultTable" id="branchResultTable">
+									<p:column sortBy="#{branchBean.branch_code}" headerText="#{displayItemBean.getDisplayItemName('branchCode')}">
+										<h:outputText value="#{branchBean.branch_code}" />
+									</p:column>
+									<p:column sortBy="#{branchBean.branch_name}" headerText="#{displayItemBean.getDisplayItemName('branchName')}">
+										<h:outputText value="#{branchBean.branch_name}" />
+									</p:column>
+								</p:dataTable>
+							</f:view>
+						</p:fieldset>
+					</div>
+				</div>
+				<div class="ui-g">
+					<div class="ui-g-12" style="width: 1000px !important; padding-left: 13%;">
+						<p:panelGrid styleClass="status-panel-grid" style="margin-top: 0%;">
+							<p:row style="border: none;">
+								<p:column style="background:#f4f7fc;border: none;padding-left:0%;" colspan="2">
+									<p:commandButton value="#{displayItemBean.getDisplayItemName('back')}" action="#{couponListFormBean.back()}" id="backButton" ajax="false" styleClass="button" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

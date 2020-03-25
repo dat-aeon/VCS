@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AppReportCount">
+
+	<select id="count"
+		parameterType="mm.aeon.com.ass.base.dto.ApplicationReportSearch.ApplicationSelectCountReqDto"
+		resultType="java.lang.Integer">
+		SELECT
+			COUNT(*)
+		FROM (
+			SELECT
+			DISTINCT(CUSTOMER_INFO.CUSTOMER_NO),MAX(APP_USAGE_DETAIL.END_USAGE_DATE_TIME)
+			As LAST_DATE,
+			COUNT(APP_USAGE_DETAIL.START_USAGE_DATE_TIME) As TOTAL_OF_LOGIN,
+			CUSTOMER_INFO.NAME,
+			APP_USAGE_INFO.OS_TYPE,APP_USAGE_INFO.REGISTRATION_DATE_TIME,APP_USAGE_INFO.APP_USAGE_ID
+			FROM APP_USAGE_INFO
+			INNER JOIN CUSTOMER_INFO ON
+			APP_USAGE_INFO.CUSTOMER_ID = CUSTOMER_INFO.CUSTOMER_ID
+			INNER JOIN APP_USAGE_DETAIL
+			ON APP_USAGE_INFO.APP_USAGE_ID =
+			APP_USAGE_DETAIL.APP_USAGE_ID
+		<where>
+			<if test="customer_no != null and customer_no != ''">
+				CUSTOMER_INFO.CUSTOMER_NO LIKE #{customer_no}
+			</if>
+			<if test="name != null and name != ''">
+				AND LOWER(CUSTOMER_INFO.NAME) LIKE '%' || LOWER(#{name}) || '%'
+			</if>
+			<if test="rptStrFrom != null">
+				AND APP_USAGE_INFO.REGISTRATION_DATE_TIME >=
+				#{rptStrFrom}
+			</if>
+			<if test="rptStrTo != null">
+				AND APP_USAGE_INFO.REGISTRATION_DATE_TIME &lt;=
+				#{rptStrTo}
+			</if>
+			<if test="lstUseFrom != null">
+				AND APP_USAGE_DETAIL.END_USAGE_DATE_TIME >= #{lstUseFrom}
+			</if>
+			<if test="lstUseTo != null">
+				AND APP_USAGE_DETAIL.END_USAGE_DATE_TIME &lt;=
+				#{lstUseTo}
+			</if>
+			<if test="osType != null and osType != ''">
+				AND APP_USAGE_INFO.OS_TYPE LIKE #{osType}
+			</if>
+		</where>
+		GROUP BY
+		CUSTOMER_INFO.CUSTOMER_NO,CUSTOMER_INFO.NAME,APP_USAGE_INFO.OS_TYPE,APP_USAGE_INFO.REGISTRATION_DATE_TIME,APP_USAGE_INFO.APP_USAGE_ID
+		ORDER BY CUSTOMER_INFO.CUSTOMER_NO DESC
+		) count;
+	</select>
+
+</mapper>
